@@ -4,8 +4,8 @@ function App() {
   return (
     <div className="App">
 
-      <p>Kath</p>
-      <p>Hola</p>
+      <p>Pato</p>
+      <p>Andy</p>
 
     </div>
   );
