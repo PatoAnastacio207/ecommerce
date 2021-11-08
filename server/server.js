@@ -1,18 +1,18 @@
 const express = require('express')
 const app = express()
-const { User, Product, Category } = require('./models')
 
+// db setup
+const { User, Product, Category } = require('./models')
 const db = require('./config/db')
 
-const skate = {
-    name: "skate longboard",
-    price: 299.99,
-    description: "Skateboard but long",
-    imgUrl: "http://localhost:3001/static/imgs/skate_longboard",
-    inventory: 15
-}
+// middleware setup
+app.use(express.json())
 
-db.sync({force: true}).then(() => {
+// routes
+const { productsRouter } = require('./routes')
+app.use('/api/products', productsRouter)
+
+db.sync({force: false}).then(() => {
     app.listen(3001, () => {
         console.log("Listening...")
     })
