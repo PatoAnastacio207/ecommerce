@@ -12,8 +12,8 @@ app.use(express.json())
 const { productsRouter } = require('./routes')
 app.use('/api/products', productsRouter)
 
-db.sync({force: false}).then(() => {
-    app.listen(3001, () => {
-        console.log("Listening...")
-    })
+
+
+app.listen(3001, () => {
+    console.log("Listening...")
 })
