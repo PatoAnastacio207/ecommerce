@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
+const bcrypt = require("bcrypt")
 
 const userSchema = new mongoose.Schema({
     firstName: { type: String },
     lastName: { type: String },
     email: { type: String },
-    password: { type: String }
+    password: { type: String },
+    salt: { type: String }
 }, { versionKey: false })
 
 // Para añadir metodos de instancia
@@ -13,13 +15,19 @@ userSchema.methods.instanceMethodExample = function () {
 }
 
 // Para añadir metodos de clase
-userSchema.static('staticMethodExample', function () {
-    console.log("this method is static")
+userSchema.static('hash', function (password, salt) {
+    return bcrypt.hash(password, salt)
 })
 
 // Para añadir virtuals
 userSchema.virtual('fullName').get(function () {
     return this.firstName + " " + this.lastName
+})
+
+// Before create
+userSchema.pre('save', function(next) {
+    // Crear el salt
+    next()
 })
 
 const User = mongoose.model('User', userSchema)
