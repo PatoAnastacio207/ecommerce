@@ -1,39 +1,16 @@
 const express = require("express");
 const passport = require("passport");
-const User = require("../models/User");
 const router = express.Router();
+const UsersController = require("../controllers/users.controller")
+const { adminAuthoritation } = require('../middleware/auth')
 
-// router.post("/register", (req, res) => {
-//   User.create(req.body).then((user) => {
-//     res.status(201).send(user);
-//   });
-// });
-
-// router.post("/login", passport.authenticate("local"), (req, res) => {
-//   res.send(req.user);
-// });
-
-// router.post("/logout", (req, res) => {
-//   req.logOut();
-//   res.sendStatus(200);
-// });
-
-// router.put("/:id", (req, res) => {
-//   User.update(req.body, {
-//     where: { id: req.params.id },
-//     returning: true,
-//     plain: true,
-//   })
-//     .then((result) => {
-//       const user = result[1];
-//       res.json({
-//         message: "Updated successfully",
-//         user,
-//       });
-//     })
-//     .catch((err) => {
-//       res.sendStatus(500);
-//     });
-// });
+router.post("/register", UsersController.register)
+router.post("/login", passport.authenticate("local"), UsersController.login)
+router.post("/logout", UsersController.logout)
+router.get("/logged", UsersController.getLogged)
+router.put("/:id", UsersController.editUser)
+router.put("/admin/:id", adminAuthoritation, UsersController.createAdmin)
+router.delete("/admin/:id", adminAuthoritation, UsersController.deleteUser)
+router.get("/admin", adminAuthoritation, UsersController.getAllUsers)
 
 module.exports = router;
