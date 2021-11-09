@@ -1,3 +1,31 @@
+const mongoose = require('mongoose')
+
+const userSchema = new mongoose.Schema({
+    firstName: { type: String },
+    lastName: { type: String },
+    email: { type: String },
+    password: { type: String }
+}, { versionKey: false })
+
+// Para añadir metodos de instancia
+userSchema.methods.instanceMethodExample = function () {
+    console.log(this)
+}
+
+// Para añadir metodos de clase
+userSchema.static('staticMethodExample', function () {
+    console.log("this method is static")
+})
+
+// Para añadir virtuals
+userSchema.virtual('fullName').get(function () {
+    return this.firstName + " " + this.lastName
+})
+
+const User = mongoose.model('User', userSchema)
+
+module.exports = User
+/*
 const Sequelize = require('sequelize')
 const sequelize = require('../config/db')
 const bcrypt = require("bcrypt");
@@ -29,17 +57,4 @@ User.init({
     timestamps: false,
     modelName: "user", 
 })
-
-User.beforeCreate((user) => {
-    return bcrypt
-      .genSalt(16)
-      .then((salt) => {
-        user.salt = salt;
-        return user.hash(user.password, salt);
-      })
-      .then((hash) => {
-        user.password = hash;
-      });
-});
-
-module.exports = User
+*/

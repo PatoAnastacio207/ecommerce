@@ -21,7 +21,7 @@ const data = [
         name: "producto5",
         price: 60
     },
-] 
+]
 
 data.forEach(async item => {
     await Product.create(item)

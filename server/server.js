@@ -44,6 +44,11 @@ passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
+<<<<<<< HEAD
+app.listen(3001, () => {
+    console.log("Listening...")
+})
+=======
 passport.deserializeUser(function (id, done) {
   User.findByPk(id)
     .then((user) => {
@@ -61,3 +66,4 @@ db.sync({ force: false }).then(() => {
     console.log("Listening...");
   });
 });
+>>>>>>> origin/backend-passport
