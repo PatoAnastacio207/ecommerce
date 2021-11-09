@@ -28,8 +28,13 @@ module.exports = User
 /*
 const Sequelize = require('sequelize')
 const sequelize = require('../config/db')
+const bcrypt = require("bcrypt");
 
-class User extends Sequelize.Model {}
+class User extends Sequelize.Model {
+    hash(password, salt) {
+        return bcrypt.hash(password, salt);
+    }
+}
 
 User.init({
     firstName: {
@@ -44,6 +49,9 @@ User.init({
     password: {
         type: Sequelize.STRING
     },
+    salt: {
+        type: Sequelize.STRING
+    }
 
 }, { sequelize, 
     timestamps: false,
