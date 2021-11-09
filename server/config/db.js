@@ -1,7 +1,7 @@
-const { username, password } = require('../../untracked/dbConfigs.json')
+//const { username, password } = require('../../untracked/dbConfigs.json')
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize('sk8', username, password, {
+const sequelize = new Sequelize('sk8', null, null, {
     host: "localhost",
     port: 5432,
     dialect: "postgres",
