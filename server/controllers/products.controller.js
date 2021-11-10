@@ -1,4 +1,4 @@
-const { Product } = require('../models')
+const Product = require('../models/Product')
 
 class ProductsController {
     static async getAllProducts (req, res, next) {
@@ -40,6 +40,33 @@ class ProductsController {
             await Product.deleteOne({ _id: req.params.id })
             res.sendStatus(204)
         } catch {
+            res.sendStatus(500)
+        }
+    }
+    static async getProductByCategoryName (req, res, next) {
+        try {
+            const products = await Product.find({ "category.name": req.params.name })
+            res.json(products)
+        }
+        catch {
+            res.sendStatus(500)
+        }
+    }
+    static async getProductByCategoryType (req, res, next) {
+        try {
+            const products = await Product.find({ "category.name": req.params.name, "category.type": req.params.type })
+            res.json(products)
+        }
+        catch {
+            res.sendStatus(500)
+        }
+    }
+    static async searchProducts (req, res, next) {
+        try {
+            const products = await Product.find({ "name": { $regex: req.params.name }})
+            res.json(products)
+        }
+        catch {
             res.sendStatus(500)
         }
     }

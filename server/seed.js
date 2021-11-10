@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/sk8', { useNewUrlParser: true, useUnifiedTopology: true })
 
-const { User, Product, Category } = require('./models')
+const User = require('./models/User')
+const Product = require('./models/Product')
 
 const users = [
     {
@@ -35,29 +36,55 @@ const users = [
 const data = [
     {
         name: "producto1",
-        price: 23
+        price: 23,
+        category: {
+            name: "skate",
+            type: "calle"
+        }
     },
     {
         name: "producto2",
-        price: 50
+        price: 50,
+        category: {
+            name: "skate",
+            type: "calle"
+        }
     },
     {
         name: "producto3",
-        price: 17
+        price: 17,
+        category: {
+            name: "skate",
+            type: "longboard"
+        }
     },
     {
         name: "producto4",
-        price: 45
+        price: 45,
+        category: {
+            name: "skate",
+            type: "longboard"
+        }
     },
     {
         name: "producto5",
-        price: 60
+        price: 60,
+        category: {
+            name: "ropa",
+            type: "gorra"
+        }
     },
 ]
 
-users.forEach(async usuario => {
-    var nuevoUsuario = new User(usuario)
-    await nuevoUsuario.save()
-    const creado = await User.findOne({ email: usuario.email })
-    await creado.switchAdmin
+data.forEach(async product => {
+    var nuevoProducto = new Product(product)
+    await nuevoProducto.save()
+    console.log(nuevoProducto)
 })
+
+// users.forEach(async usuario => {
+//     var nuevoUsuario = new User(usuario)
+//     await nuevoUsuario.save()
+//     const creado = await User.findOne({ email: usuario.email })
+//     await creado.switchAdmin
+// })

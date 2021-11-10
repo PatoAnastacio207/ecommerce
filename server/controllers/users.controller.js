@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const User = require("../models/User");
 
 class UsersController {
     static async register (req, res, next) {
@@ -15,7 +15,7 @@ class UsersController {
     }
     static async getLogged (req, res, next) {
         if (req.user) res.send(req.user)
-        else res.send("not logged")
+        else res.sendStatus(401)
     }
     static async editUser (req, res, next) {
         await User.updateOne({ _id: req.params.id }, req.body)
