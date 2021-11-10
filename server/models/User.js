@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String },
     email: { type: String },
     password: { type: String },
-    salt: { type: String },
+    salt: { type: String, default: "" },
+    type: { type: String, default: "default"},
     isAdmin: { type: Boolean, default: false }
 }, { versionKey: false })
 
@@ -17,16 +18,14 @@ userSchema.methods.switchAdmin = async function (password, salt) {
 
 // Para añadir metodos de clase
 userSchema.static('hash', function (password, salt) {
+    if(!salt === "") return null
     return bcrypt.hash(password, salt)
-})
-
-// Para añadir virtuals
-userSchema.virtual('fullName').get(function () {
-    return this.firstName + " " + this.lastName
 })
 
 // Before create
 userSchema.pre('save', async function(next) {
+    // Checkear si es usuario default
+    if(!(this.type === "default")) return next()
     // Prevenir que se cree un usuario admin
     this.isAdmin = false
     // Crear el salt
