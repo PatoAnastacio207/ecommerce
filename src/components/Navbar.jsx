@@ -1,158 +1,197 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from "../features/userSlice";
+import { RiAliensFill } from "react-icons/ri";
+import axios from "axios";
 
 const Navbar = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
+  const handleLogout = () => {
+    console.log("logout attempt...")
+    axios
+    .post("/api/users/logout")
+    .then((res) => dispatch(logout(res.data)))
+    .then(() => {
+      console.log("logged out")
+    })
+    .catch ((err) => console.log(err))
+    }
+
+  useEffect(() => {
+    console.log(`fetching user...`);
+    axios
+      .get("/api/users/logged")
+      .then((res) => dispatch(login(res.data)))
+      .then((user) => {
+        console.log(`found user ${user.payload.email}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div>
-      <section class="header-main border-bottom">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-3 col-sm-4 col-md-4 col-5">
-              <a href="http://bootstrap-ecommerce.com" class="brand-wrap mb-0">
-                <img
-                  class="logo"
-                  src="bootstrap-ecommerce-html/images/logo.png"
-                />
-              </a>
-            </div>
-            <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
-              <form action="#" class="search">
-                <div class="input-group w-100">
-                  <input
-                    type="text"
-                    class="form-control"
-                    style={{ width: "55%" }}
-                    placeholder="Search"
-                  />
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
-              <div class="d-flex justify-content-end">
-                <a href="#" class="widget-header mr-3">
-                  <div class="icon">
-                    <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
-                    <span class="notify">0</span>
-                  </div>
-                </a>
-                <a href="#" class="widget-header mr-3">
-                  <div class="icon">
-                    <i class="icon-sm rounded-circle border fa fa-heart"></i>
-                  </div>
-                </a>
-
-                <div class="widget-header dropdown">
-                  <a
-                    href="#"
-                    data-toggle="dropdown"
-                    class="dropdown-toggle"
-                    data-offset="20,10"
-                  >
-                    <div class="icon icon-sm rounded-circle border ">
-                      <i class="fa fa-user"></i>
-                    </div>
-                    <span class="sr-only">Profile actions</span>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">
-                      Profile setting
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      My orders
-                    </a>
-                    <hr class="dropdown-divider" />
-                    <a class="dropdown-item" href="#">
-                      Log out
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <nav class="navbar navbar-expand-md navbar-main border-bottom">
-        <div class="container">
-          <form class="d-md-none my-2">
-            <div class="input-group">
-              <input
-                type="search"
-                name="search"
-                class="form-control"
-                placeholder="Search"
-                required=""
-              />
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">
-                  {" "}
-                  <i class="fas fa-search"></i>{" "}
-                </button>
-              </div>
-            </div>
-          </form>
-
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
           <button
             class="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#dropdown6"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <i class="fas fa-bars"></i>
           </button>
 
-          <div class="collapse navbar-collapse" id="dropdown6">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="http://example.com"
-                  data-toggle="dropdown"
-                >
-                  {" "}
-                  All categories
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-lg-0" href="/">
+              <RiAliensFill />
+            </a>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Dashboard
                 </a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="page-category.html">
-                    Smartphones
-                  </a>
-                  <a class="dropdown-item" href="page-category.html">
-                    Digital products
-                  </a>
-                </div>
               </li>
               <li class="nav-item">
-                {" "}
-                <a class="nav-link" href="page-deal.html">
-                  Hot deals
-                </a>{" "}
+                <a class="nav-link" href="#">
+                  Team
+                </a>
               </li>
               <li class="nav-item">
-                {" "}
-                <a class="nav-link" href="page-blog.html">
-                  Markets
-                </a>{" "}
-              </li>
-              <li class="nav-item">
-                {" "}
-                <a class="nav-link" href="page-blog.html">
-                  Blog
-                </a>{" "}
+                <a class="nav-link" href="#">
+                  Projects
+                </a>
               </li>
             </ul>
+          </div>
 
-            <ul class="navbar-nav">
+          <div class="d-flex align-items-center">
+            <a class="text-reset me-3" href="#">
+              <i class="fas fa-shopping-cart text-white"></i>
+            </a>
+
+            {user?.email ? (
+              <a class="text-reset me-3" href="#">
+                <i class="fas fa-heart text-white"></i>
+              </a>
+            ) : (
+              <span></span>
+            )}
+
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user-alt text-white"></i>
+            </a>
+            {!user?.email ? (
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <Link class="dropdown-item" to="/register">
+                    Register
+                  </Link>
+                </li>
+                <li>
+                  <Link class="dropdown-item" to="/login">
+                    Login
+                  </Link>
+                </li>
+              </ul>
+            ) : user.isAdmin ? (
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <Link class="dropdown-item" to='/' onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </li>
+                <li>
+                  <Link class="dropdown-item" to='/admin'>
+                    <strong>
+                    Admin
+
+                    </strong>
+                  </Link>
+                </li>
+              </ul>
+            ) : ( <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li>
+                <Link class="dropdown-item" to='/' onClick={handleLogout}>
+                  Logout
+                </Link>
+              </li></ul>)}
+          </div>
+        </div>
+      </nav>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid justify-content-around">
+          <div class="d-flex">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  My items
+                <a class="nav-link" href="#">
+                  Skates
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="btn btn-primary ml-md-4">
-                  <i class="fa fa-plus"></i> Post item{" "}
+                <a class="nav-link" href="#">
+                  Longboards
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Clothes
+                </a>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/allproducts">
+                  All Products
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex align-items-center">
+            <form class="d-flex input-group form-control-lg w-auto">
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="search-addon"
+              />
+              <span
+                class="input-group-text text-white border-0"
+                id="search-addon"
+              >
+                <i class="fas fa-search"></i>
+              </span>
+            </form>
+          </div>
+          <div class="d-flex align-items-center">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Link
                 </a>
               </li>
             </ul>
