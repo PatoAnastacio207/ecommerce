@@ -1,4 +1,36 @@
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost:27017/sk8', { useNewUrlParser: true, useUnifiedTopology: true })
+
 const { User, Product, Category } = require('./models')
+
+const users = [
+    {
+        firstName: "kath",
+        email: "kath@mail.com",
+        password: "kath"
+    },
+    {
+        firstName: "pato",
+        email: "pato@mail.com",
+        password: "pato"
+    },
+    {
+        firstName: "ger",
+        email: "ger@mail.com",
+        password: "ger"
+    },
+    {
+        firstName: "andres",
+        email: "andres@mail.com",
+        password: "andres"
+    },
+    {
+        firstName: "escobar",
+        email: "escobar@mail.com",
+        password: "escobar"
+    }
+]
 
 const data = [
     {
@@ -23,6 +55,9 @@ const data = [
     },
 ]
 
-data.forEach(async item => {
-    await Product.create(item)
+users.forEach(async usuario => {
+    var nuevoUsuario = new User(usuario)
+    await nuevoUsuario.save()
+    const creado = await User.findOne({ email: usuario.email })
+    await creado.switchAdmin
 })

@@ -9,7 +9,7 @@ router.post("/login", passport.authenticate("local"), UsersController.login)
 router.post("/logout", UsersController.logout)
 router.get("/logged", UsersController.getLogged)
 router.put("/:id", UsersController.editUser)
-router.put("/admin/:id", adminAuthoritation, UsersController.createAdmin)
+router.put("/admin/:id", adminAuthoritation, UsersController.switchAdmin)
 router.delete("/admin/:id", adminAuthoritation, UsersController.deleteUser)
 router.get("/admin", adminAuthoritation, UsersController.getAllUsers)
 

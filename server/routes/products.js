@@ -1,16 +1,17 @@
 const express = require('express')
 const ProductsController = require('../controllers/products.controller')
+const { adminAuthoritation } = require('../middleware/auth')
 const router = express.Router()
 
-// Ruta que devuelva todos los productos
+// Devuelve todos los productos
 router.get('/', ProductsController.getAllProducts)
-// Ruta que devuelva un producto específico (id)
+// Devuelve un producto específico (id)
 router.get('/id/:id', ProductsController.getProductById)
-// Ruta para agregar un producto
-router.post('/', ProductsController.createProduct)
-// Ruta para modificar un producto (id)
-router.put('/id/:id', ProductsController.updateProduct)
-// Ruta para eliminar un producto (id)
-router.delete('/id/:id', ProductsController.deleteProduct)
+// Agregar un producto
+router.post('/', adminAuthoritation, ProductsController.createProduct)
+// Modificar un producto (id)
+router.put('/id/:id', adminAuthoritation, ProductsController.updateProduct)
+// Eliminar un producto (id)
+router.delete('/id/:id', adminAuthoritation, ProductsController.deleteProduct)
 
 module.exports = router

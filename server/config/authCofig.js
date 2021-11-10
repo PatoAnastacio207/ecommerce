@@ -12,10 +12,8 @@ passport.use(
     async (email, password, done) => {
       const user = await User.findOne({ email });
       if (!user) return done(null, false);
-
       const hash = await User.hash(password, user.salt);
       if (hash !== user.password) return done(null, false);
-
       return done(null, user);
     }
   )

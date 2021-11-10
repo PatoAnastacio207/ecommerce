@@ -22,7 +22,7 @@ class UsersController {
         const userUpdated = await User.findOne({ _id: req.params.id})
         res.json(userUpdated)
     }
-    static async createAdmin (req, res, next) {
+    static async switchAdmin (req, res, next) {
         let user = await User.findOne({ _id: req.params.id })
         user.switchAdmin()
         user = await User.findOne({ _id: req.params.id })
