@@ -45,7 +45,7 @@ const AllProducts = function () {
               products.map((data) => (<div class="col">
                   <figure class="card card-product-grid card-lg">
                     <a href="#" class="img-wrap">
-                      <img src="bootstrap-ecommerce-html/images/items/10.jpg" />
+                      <img src={data.imgUrl} />
                     </a>
                     <figcaption class="info-wrap">
                       <p>
