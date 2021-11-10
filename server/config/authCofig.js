@@ -45,7 +45,6 @@ passport.use(new GoogleStrategy(
       salt: ""
     })
     await user.save()
-    console.log("done")
     return done(null, user);
   }
 ));

@@ -8,6 +8,15 @@ const userSchema = new mongoose.Schema({
     password: { type: String },
     salt: { type: String, default: "" },
     type: { type: String, default: "default"},
+    history: [
+        {
+            name: { type: String },
+            imgUrl: { type: String },
+            price: { type: Number },
+            quantity: { type: Number },
+            date: { type: Date }
+        }
+    ],
     isAdmin: { type: Boolean, default: false }
 }, { versionKey: false })
 

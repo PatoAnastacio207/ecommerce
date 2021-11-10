@@ -19,4 +19,5 @@ router.post('/', adminAuthoritation, ProductsController.createProduct)
 router.put('/id/:id', adminAuthoritation, ProductsController.updateProduct)
 // Eliminar un producto (id)
 router.delete('/id/:id', adminAuthoritation, ProductsController.deleteProduct)
+
 module.exports = router
