@@ -6,7 +6,7 @@ function ProductCard ({ product }) {
     const urlRedirect = `/product/${product._id}`
     return (
         <div className="col">
-                  <div className="card">
+                  <div className="card"  style={{fontFamily:"Bebas Neue"}}>
                   <Link to={urlRedirect}>
                       {console.log(product.imgUrl)}
                     <div className="bg-image hover-overlay ripple">
@@ -23,8 +23,8 @@ function ProductCard ({ product }) {
                       <p className="card-text text-muted">{product.category.name} / {product.category.type}</p>
                         <div className="d-flex justify-content-evenly">
                             {priceFormat.format(product.price)}                       
-                            <a className="btn btn-dark">
-                                Add to cart
+                            <a className="btn btn-warning shadow-0">
+                               <i className="fas fa-shopping-cart"></i> 
                             </a>
                         </div>
                       

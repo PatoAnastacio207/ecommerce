@@ -36,9 +36,9 @@ const Footer = () => {
   
 
   
-  <div class="text-center p-3" style={{backgroundColor: 'rgba(125, 88, 202)'}}>
-    © 2020 Copyright:
-    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  <div class="text-center p-3 bg-light text-black">
+    © 2021 Copyright:
+    <a class="text-black"> SK8 4 DOOMIES</a>
   </div>
  
 </footer>

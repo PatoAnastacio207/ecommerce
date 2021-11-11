@@ -1,4 +1,11 @@
-
+.titleNoMain{
+        
+    font-family: 'Rock Salt', cursive;
+    font-size: 300%;
+    text-align: center;
+    color: rgb(236,88,43);
+    margin: 1em;
+}
 
 .titleBottoms{
     
@@ -25,6 +32,17 @@
     font-weight: 900;
     font-size: 30px;
     border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+}
+
+.buyButton {
+    /*font-family: 'Rock Salt', cursive;*/
+    background: #4cc7bf;
+    color: white;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 25px;
     border-radius: 0.4em;
     box-shadow: 0.1em 0.1em;
 }

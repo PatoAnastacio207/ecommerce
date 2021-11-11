@@ -19,7 +19,7 @@ const SingleProduct = () => {
     <div>
     {product ?
       (
-        <div className="d-flex justify-content-evenly" style={{margin: "5rem", marginBottom: "0", padding: "2rem"}}>
+        <div className="d-flex justify-content-evenly" style={{margin: "5rem", marginBottom: "0", padding: "2rem", fontFamily:"Bebas Neue"}}>
           <div style={{border: " 1px solid #000"}} style={{ maxWidth: "50%", height: "auto"}}>
             <img src={product.imgUrl} alt={product.name}/>
           </div>

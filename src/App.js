@@ -13,7 +13,7 @@ import Register from "./components/Register";
 import AdminView from "./components/AdminView";
 import ShoppingCart from "./components/ShoppingCart";
 import GoogleTest from "./components/GoogleTest";
-
+import Category from "./components/Category"
 
 function App() {
   return (
@@ -43,11 +43,9 @@ function App() {
 
         <Route exact path="/google" component={GoogleTest} />
 
-        {/*FOR ALL CATEGORIES */}
-        {/* <Route path={"/:categorias"} component={} /> */}
 
         {/*FOR CATEGORY */}
-        <Route path={"/:categoria/productos"} component={AllProducts} />
+        <Route path={"/category/:name"} component={Category} />
 
         {/* FOR ALL PRODUCTS */}
         <Route path={"/allproducts"} component={AllProducts} />
@@ -66,7 +64,7 @@ function App() {
       </Switch>
         </div>
       {/* For FOOTER --> All the pages */}
-      {/* <Footer /> */}
+      <Footer />
       </div>
     </>
   );
