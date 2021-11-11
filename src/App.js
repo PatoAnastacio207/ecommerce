@@ -10,6 +10,7 @@ import Contact from "./components/Contact"
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AdminView from "./components/AdminView";
+import ShoppingCart from "./components/ShoppingCart";
 
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
         <Route path="/register" component={Register} />
         <Route exact path="/" component={Home} />
         <Route exact path="/admin" component={AdminView} />
+
+        {/* SHOPPING CART */}
+        <Route exact path="/cart" component={ShoppingCart} />
 
         {/*FOR ALL CATEGORIES */}
         {/* <Route path={"/:categorias"} component={} /> */}
