@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "axios"
+import React, {useEffect, useState} from "react"
+import { useParams } from "react-router-dom"
 import ProductCard from "./ProductCard";
 
-const AllProducts = function () {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("/api/products")
-      .then((res) => res.data)
-      .then((product) => {
-        setProducts(product);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
-  return (
-    <main>
+const Category = () =>{
+    const {name} = useParams()
+    const [products,setProducts]=useState()
+    useEffect(()=>{
+        axios.get(`/api/products/category/${name}`)
+        .then(all=>setProducts(all.data))
+    },[name])
+    console.log(products)
+    return(
+        <main>
       <section class="py-5 text-center container">
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light titleNoMain">Our dummie products</h1>
+            <h1 class="fw-light titleNoMain">Our dummie {name}</h1>
             <p class="lead text-muted">
               
             </p>
@@ -40,7 +36,6 @@ const AllProducts = function () {
         </div>
       </div>
     </main>
-  );
-};
-
-export default AllProducts;
+    )
+}
+export default Category
