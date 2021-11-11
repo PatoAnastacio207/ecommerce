@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer class="bg-dark text-center text-white fixed-bottom">
+    <footer class="text-center text-white " style={{backgroundColor: 'rgba(0, 0, 0,0.82)'}}>
 
   <div class="container p-4 pb-0">
    
@@ -36,7 +36,7 @@ const Footer = () => {
   
 
   
-  <div class="text-center p-3" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
+  <div class="text-center p-3" style={{backgroundColor: 'rgba(125, 88, 202)'}}>
     © 2020 Copyright:
     <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
   </div>
