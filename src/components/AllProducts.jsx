@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ProductCard from "./ProductCard";
 
 const AllProducts = function () {
   const [products, setProducts] = useState([]);
@@ -34,28 +35,7 @@ const AllProducts = function () {
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             {products ? (
-              products.map((data) => (
-                <div class="col">
-                  <div class="card">
-                    <div class="bg-image hover-overlay ripple">
-                      <img src={data.imgUrl} class="img-fluid" />
-                      <a href="/">
-                        <div
-                          class="mask"
-                          
-                        ></div>
-                      </a>
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title">{data.name}</h5>
-                      <p class="card-text">{data.description}</p>
-                      <a href="/" class="btn btn-primary">
-                        {data.price}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))
+              products.map((data) => <ProductCard key={data._id} product={data} />)
             ) : (
               <span></span>
             )}

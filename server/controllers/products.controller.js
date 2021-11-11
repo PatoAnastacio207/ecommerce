@@ -19,7 +19,7 @@ class ProductsController {
     }
     static async getProductById (req, res, next) {
         try {
-            const product = await Product.find({ _id: req.params.id })
+            const product = await Product.findOne({ _id: req.params.id })
             res.json(product)
         } catch {
             res.sendStatus(500)

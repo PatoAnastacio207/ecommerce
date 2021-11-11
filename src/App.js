@@ -53,7 +53,7 @@ function App() {
         <Route path={"/allproducts"} component={AllProducts} />
 
         {/*FOR EACH BY ID */}
-        <Route path={"/:categoria/productos/:id"} component={SingleProduct} />
+        <Route path={"/product/:id"} component={SingleProduct} />
 
         {/*FOR BUILD YOUR OWN*/}
         {/* <Route path={"/buildyourown"} component={} /> */}
