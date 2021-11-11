@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "../features/userSlice";
-import { RiAliensFill } from "react-icons/ri";
+import { GiSkateboard } from "react-icons/gi";
 import axios from "axios";
 
 const Navbar = () => {
@@ -38,8 +38,8 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style={{fontFamily: "Rock Salt"}}>
+        <div class="container">
           <button
             class="navbar-toggler"
             type="button"
@@ -54,28 +54,41 @@ const Navbar = () => {
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <a class="navbar-brand mt-2 mt-lg-0" href="/">
-              <RiAliensFill />
+              <GiSkateboard />
             </a>
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  Dashboard
+                 sk8 4 dummies
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  Team
+                  our story
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Projects
-                </a>
-              </li>
+        
             </ul>
           </div>
-
+          <div class="d-flex align-items-center">
+            <form class="d-flex input-group form-control-lg w-auto" >
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="search-addon"
+               
+              />
+              <span
+                class="input-group-text text-white border-0"
+                id="search-addon"
+              >
+                <i class="fas fa-search"></i>
+              </span>
+            </form>
+          </div>
           <div class="d-flex align-items-center">
             <Link class="text-reset me-3" to="/cart">
               <i class="fas fa-shopping-cart text-white"></i>
@@ -146,49 +159,33 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style={{ fontFamily: "Rock Salt"}}>
         <div class="container-fluid justify-content-around">
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link text-black" to="/skates"  >
                   Skates
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link text-black" to="/longboards">
                   Longboards
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <Link class="nav-link text-black" to="/clothes">
                   Clothes
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="/allproducts">
+                <Link class="nav-link text-black" to="/allproducts">
                   All Products
                 </Link>
               </li>
             </ul>
           </div>
-          <div class="d-flex align-items-center">
-            <form class="d-flex input-group form-control-lg w-auto">
-              <input
-                type="search"
-                class="form-control rounded"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="search-addon"
-              />
-              <span
-                class="input-group-text text-white border-0"
-                id="search-addon"
-              >
-                <i class="fas fa-search"></i>
-              </span>
-            </form>
-          </div>
+          
           <div class="d-flex align-items-center">
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item">
