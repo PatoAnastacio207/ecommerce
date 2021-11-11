@@ -19,7 +19,8 @@ const Register = () => {
   const handleGoogle = (e) => {
     e.preventDefault();
     console.log("register attempt...");
-    axios.get("/api/auth/google").then(() => {
+    axios.post("/api/auth/google").then(() => {
+
       
       Swal.fire({
         icon: "success",

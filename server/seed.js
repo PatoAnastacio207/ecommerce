@@ -82,9 +82,9 @@ data.forEach(async product => {
     console.log(nuevoProducto)
 })
 
-// users.forEach(async usuario => {
-//     var nuevoUsuario = new User(usuario)
-//     await nuevoUsuario.save()
-//     const creado = await User.findOne({ email: usuario.email })
-//     await creado.switchAdmin
-// })
+ users.forEach(async usuario => {
+     var nuevoUsuario = new User(usuario)
+     await nuevoUsuario.save()
+     const creado = await User.findOne({ email: usuario.email })
+     await creado.switchAdmin
+ })

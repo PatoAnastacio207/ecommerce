@@ -34,6 +34,8 @@ const Navbar = () => {
       });
   }, []);
 
+  console.log(user)
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -75,9 +77,9 @@ const Navbar = () => {
           </div>
 
           <div class="d-flex align-items-center">
-            <a class="text-reset me-3" href="#">
+            <Link class="text-reset me-3" to="/cart">
               <i class="fas fa-shopping-cart text-white"></i>
-            </a>
+            </Link>
 
             {user?.email ? (
               <a class="text-reset me-3" href="#">

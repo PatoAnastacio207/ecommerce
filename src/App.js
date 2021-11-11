@@ -11,6 +11,7 @@ import Contact from "./components/Contact"
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AdminView from "./components/AdminView";
+import ShoppingCart from "./components/ShoppingCart";
 import GoogleTest from "./components/GoogleTest";
 
 
@@ -34,7 +35,14 @@ function App() {
         <Route path="/register" component={Register} />
         <Route exact path="/" component={Home} />
         <Route exact path="/admin" component={AdminView} />
+
+
+        {/* SHOPPING CART */}
+        <Route exact path="/cart" component={ShoppingCart} />
+
+
         <Route exact path="/google" component={GoogleTest} />
+
         {/*FOR ALL CATEGORIES */}
         {/* <Route path={"/:categorias"} component={} /> */}
 

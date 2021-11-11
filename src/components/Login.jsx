@@ -20,7 +20,8 @@ const Login = () => {
     e.preventDefault();
     console.log("login attempt...")
     axios
-      .get("/api/auth/google")
+      .post("/api/auth/google")
+
       .then(res => {
         dispatch(login(res.data))
         Swal.fire({

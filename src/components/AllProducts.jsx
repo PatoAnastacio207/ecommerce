@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import axios from "axios";
 
 const AllProducts = function () {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
-      .get('/api/products')
+      .get("/api/products")
       .then((res) => res.data)
       .then((product) => {
         setProducts(product);
-        
       })
       .catch((error) => console.log(error));
   }, []);
@@ -22,17 +21,10 @@ const AllProducts = function () {
           <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">Album example</h1>
             <p class="lead text-muted">
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don’t simply skip over it entirely.
-            </p>
-            <p>
-              <a href="#" class="btn btn-primary my-2">
-                Main call to action
-              </a>
-              <a href="#" class="btn btn-secondary my-2">
-                Secondary action
-              </a>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
+              soluta aut distinctio sequi sunt iure alias at. Id, recusandae
+              quia. Rerum est nulla doloremque voluptatem sint quia incidunt
+              quidem labore?
             </p>
           </div>
         </div>
@@ -42,45 +34,28 @@ const AllProducts = function () {
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             {products ? (
-              products.map((data) => (<div class="col">
-                  <figure class="card card-product-grid card-lg">
-                    <a href="#" class="img-wrap">
-                      <img src={data.imgUrl} />
-                    </a>
-                    <figcaption class="info-wrap">
-                      <p>
-                        <a href="#" class="title">
-                          {data.name}
-                        </a>
-                      </p>
-                      <span class="tag">32 GB</span>{" "}
-                      <span class="tag">Brand new</span>
-                      <span class="tag">256 px</span>
-                      <span class="tag">Water proof</span>
-                    </figcaption>
-                    <div class="bottom-wrap d-flex align-items-center">
-                      <div class="mr-3">
-                        {" "}
-                        <span class="price h5">{data.price}</span>{" "}
-                      </div>
-                      <div class="ml-auto form-inline">
-                        <select class="form-control mr-2">
-                          <option>Size</option>
-                          <option>XL</option>
-                          <option>XS</option>
-                        </select>
-                        <select class="form-control mr-2">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                        </select>
-                        <a href="#" class="btn btn-primary">
-                          <i class="fa fa-shopping-cart"></i>
-                        </a>
-                      </div>
+              products.map((data) => (
+                <div class="col">
+                  <div class="card">
+                    <div class="bg-image hover-overlay ripple">
+                      <img src={data.imgUrl} class="img-fluid" />
+                      <a href="/">
+                        <div
+                          class="mask"
+                          
+                        ></div>
+                      </a>
                     </div>
-                  </figure>
-                </div>))
+                    <div class="card-body">
+                      <h5 class="card-title">{data.name}</h5>
+                      <p class="card-text">{data.description}</p>
+                      <a href="/" class="btn btn-primary">
+                        {data.price}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))
             ) : (
               <span></span>
             )}
