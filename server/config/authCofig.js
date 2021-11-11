@@ -1,11 +1,30 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const GoogleStrategy = require("passport-google-oauth2").Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require("../models/User");
+const app = require("../app")
 
 const GOOGLE_CLIENT_ID =
   "853910693747-q00iaamotqqnprgqeju02cjqnkb7rtcl.apps.googleusercontent.com";
 const GOOGLE_CLIENT_SECRET = "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";
+
+console.log(app)
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Crea la cookie
+passport.serializeUser(function (user, done) {
+  console.log("SERIALIZE", user);
+  done(null, user._id || user.id);
+});
+
+// Transforma la cookie en un user
+passport.deserializeUser(async function (id, done) {
+  console.log("DESERIALIZE");
+  const user = await User.findOne({ _id: id });
+  done(null, user);
+});
 
 // Passport normal
 passport.use(
@@ -25,63 +44,29 @@ passport.use(
 );
 
 // Passport google
-
-const GoogleRegister = new LocalStrategy(
-  {
-    passReqToCallback: true,
-    usernameField: "email",
-    passwordField: "googleId",
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3001/api/auth/google/callback"
   },
-
-  function (req, email, password, done) {
-    User.findOne({ email: req.body.email }).exec((err, user) => {
-      console.log("STRATEGY", user);
-
-      if (err) {
-        return done(err, null);
-      }
-      // Si no existe el user crearlo y logearlo
-      if (!user) {
-        let newUser = new User({
-          email: req.body.email,
-          firstName: req.body.given_name,
-          lastName: req.body.family_name,
-          type: "google",
-          salt: "",
-        });
-
-        newUser.save((error, inserted) => {
-          if (error) {
-            return done(error, null);
-          }
-
-          return done(null, inserted);
-        });
-      }
-      // Si ya existe logearlo
-      if (user) {
-        req.logIn(user, function (error, data) {
-          if (error) {
-            return done(error, null)
-          }
-          return done(null, user);
-        });
-      }
-    });
+  async function (accessToken, refreshToken, profile, done) {
+    let user = await User.findOne({ email: profile.email })
+    console.log(user)
+    if(user) console.log("ya existe")
+    else {
+      user = new User({
+        type: "google",
+        email: profile.email,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        salt: ""
+      })
+      await user.save()
+    }
+    user = await User.find({ email: profile.email })
+    return done (null, user)
   }
-);
+));
 
-passport.use("google-signup", GoogleRegister);
-
-passport.serializeUser(function (user, done) {
-  console.log("SERIALIZE", user);
-  done(null, user._id || user.id);
-});
-
-passport.deserializeUser(async function (id, done) {
-  console.log("DESERIALIZE");
-  const user = await User.findOne({ _id: id });
-  done(null, user);
-});
 
 module.exports = passport;

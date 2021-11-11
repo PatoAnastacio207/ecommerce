@@ -20,10 +20,7 @@ app.use(sessions({
     }
 }))
 
-
-const passport = require('./config/authCofig')
-
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 module.exports = app
