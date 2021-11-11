@@ -42,6 +42,7 @@ const Footer = () => {
   </div>
  
 </footer>
+
   );
 };
 

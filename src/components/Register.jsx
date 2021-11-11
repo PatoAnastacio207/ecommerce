@@ -19,7 +19,8 @@ const Register = () => {
   const handleGoogle = (e) => {
     e.preventDefault();
     console.log("register attempt...");
-    axios.post("/api/users/auth/google").then(() => {
+    axios.post("/api/auth/google").then(() => {
+
       
       Swal.fire({
         icon: "success",
@@ -35,7 +36,7 @@ const Register = () => {
     e.preventDefault();
     console.log("Register attempt...");
     axios
-      .post("/api/users/register", {
+      .post("/api/auth/register", {
         firstName: firstName.value,
         lastName: lastName.value,
         email: email.value,
