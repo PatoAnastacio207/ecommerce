@@ -1,10 +1,11 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
-const User = require("../models/User")
+const User = require("../models/User");
 
-const GOOGLE_CLIENT_ID = "853910693747-q00iaamotqqnprgqeju02cjqnkb7rtcl.apps.googleusercontent.com"
-const GOOGLE_CLIENT_SECRET = "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"
+const GOOGLE_CLIENT_ID =
+  "853910693747-q00iaamotqqnprgqeju02cjqnkb7rtcl.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
 
 // Passport normal
 passport.use(
@@ -24,36 +25,61 @@ passport.use(
 );
 
 // Passport google
-passport.use(new GoogleStrategy(
+
+const GoogleRegister = new LocalStrategy(
   {
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3001/api/auth/google/callback",
-    passReqToCallback: true
+    passReqToCallback: true,
+    usernameField: "email",
+    passwordField: "googleId",
   },
-  async function(request, accessToken, refreshToken, profile, done) {
-    // Checkear si existe
-    let user = await User.findOne({ email: profile.email })
-    // Si existe retornarlo
-    if (user) return done(null, user);
-    // Si no existe crear uno nuevo
-    user = new User({
-      email: profile.email,
-      firstName: profile.given_name,
-      lastName: profile.family_name,
-      type: "google",
-      salt: ""
-    })
-    await user.save()
-    return done(null, user);
+
+  function (req, email, password, done) {
+    User.findOne({ email: req.body.email }).exec((err, user) => {
+      console.log("STRATEGY", user);
+
+      if (err) {
+        return done(err, null);
+      }
+      // Si no existe el user crearlo y logearlo
+      if (!user) {
+        let newUser = new User({
+          email: req.body.email,
+          firstName: req.body.given_name,
+          lastName: req.body.family_name,
+          type: "google",
+          salt: "",
+        });
+
+        newUser.save((error, inserted) => {
+          if (error) {
+            return done(error, null);
+          }
+
+          return done(null, inserted);
+        });
+      }
+      // Si ya existe logearlo
+      if (user) {
+        req.logIn(user, function (error, data) {
+          if (error) {
+            return done(error, null)
+          }
+          return done(null, user);
+        });
+      }
+    });
   }
-));
+);
+
+passport.use("google-signup", GoogleRegister);
 
 passport.serializeUser(function (user, done) {
+  console.log("SERIALIZE", user);
   done(null, user._id || user.id);
 });
 
 passport.deserializeUser(async function (id, done) {
+  console.log("DESERIALIZE");
   const user = await User.findOne({ _id: id });
   done(null, user);
 });

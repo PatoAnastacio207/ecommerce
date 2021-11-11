@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react"
 import { Route, Switch } from "react-router-dom";
 // import "./App.css";
@@ -10,6 +11,7 @@ import Contact from "./components/Contact"
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AdminView from "./components/AdminView";
+import GoogleTest from "./components/GoogleTest";
 
 
 function App() {
@@ -32,7 +34,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route exact path="/" component={Home} />
         <Route exact path="/admin" component={AdminView} />
-
+        <Route exact path="/google" component={GoogleTest} />
         {/*FOR ALL CATEGORIES */}
         {/* <Route path={"/:categorias"} component={} /> */}
 
@@ -56,7 +58,7 @@ function App() {
       </Switch>
         </div>
       {/* For FOOTER --> All the pages */}
-      <Footer />
+      {/* <Footer /> */}
       </div>
     </>
   );
