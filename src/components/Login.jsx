@@ -21,10 +21,10 @@ const Login = () => {
     console.log("login attempt...")
     axios
       .post("/api/auth/google")
+
       .then(res => {
         dispatch(login(res.data))
         Swal.fire({
-          
           icon: 'success',
           title: 'Login success',
           showConfirmButton: false,

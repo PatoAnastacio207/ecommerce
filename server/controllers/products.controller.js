@@ -9,6 +9,14 @@ class ProductsController {
             res.sendStatus(500)
         }
     }
+    static async getProductsArray (req, res, next) {
+        try {
+            const products = await Product.find({ _id: { $in: req.body.IDarray }})
+            res.json(products)
+        } catch (err) {
+            res.sendStatus(500)
+        }
+    }
     static async getProductById (req, res, next) {
         try {
             const product = await Product.find({ _id: req.params.id })

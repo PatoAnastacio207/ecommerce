@@ -20,6 +20,7 @@ const Register = () => {
     e.preventDefault();
     console.log("register attempt...");
     axios.post("/api/auth/google").then(() => {
+
       
       Swal.fire({
         icon: "success",

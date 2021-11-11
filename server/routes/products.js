@@ -5,6 +5,8 @@ const router = express.Router()
 
 // Devuelve todos los productos
 router.get('/', ProductsController.getAllProducts)
+// Devuelve un array de productos por id
+router.post('/array', ProductsController.getProductsArray)
 // Devuelve un array de productos que coinciden con la busqueda
 router.get('/search/:name', ProductsController.searchProducts)
 // Get por categoria
