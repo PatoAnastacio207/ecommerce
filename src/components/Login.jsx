@@ -20,11 +20,10 @@ const Login = () => {
     e.preventDefault();
     console.log("login attempt...")
     axios
-      .post("/api/users/auth/google")
+      .get("/api/auth/google")
       .then(res => {
         dispatch(login(res.data))
         Swal.fire({
-          
           icon: 'success',
           title: 'Login success',
           showConfirmButton: false,
@@ -37,7 +36,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("login attempt...")
-    axios.post("/api/users/login", {
+    axios.post("/api/auth/login", {
         email: email.value,
         password: password.value,
       })

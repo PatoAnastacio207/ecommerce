@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = () => {
     console.log("logout attempt...")
     axios
-    .post("/api/users/logout")
+    .post("/api/auth/logout")
     .then((res) => dispatch(logout(res.data)))
     .then(() => {
       console.log("logged out")
@@ -24,7 +24,7 @@ const Navbar = () => {
   useEffect(() => {
     console.log(`fetching user...`);
     axios
-      .get("/api/users/logged")
+      .get("/api/auth/logged")
       .then((res) => dispatch(login(res.data)))
       .then((user) => {
         console.log(`found user ${user.payload.email}`);
