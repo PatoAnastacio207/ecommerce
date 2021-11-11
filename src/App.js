@@ -66,7 +66,7 @@ function App() {
       </Switch>
         </div>
       {/* For FOOTER --> All the pages */}
-      {/* <Footer /> */}
+      <Footer />
       </div>
     </>
   );
