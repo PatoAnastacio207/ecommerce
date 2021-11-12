@@ -15,6 +15,8 @@ import ShoppingCart from "./components/ShoppingCart";
 import GoogleTest from "./components/GoogleTest";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
+import Category from "./components/Category"
+
 
 function App() {
   const user = useSelector(selectUser);
@@ -47,11 +49,9 @@ function App() {
 
         <Route exact path="/google" component={GoogleTest} />
 
-        {/*FOR ALL CATEGORIES */}
-        {/* <Route path={"/:categorias"} component={} /> */}
 
         {/*FOR CATEGORY */}
-        <Route path={"/:categoria/productos"} component={AllProducts} />
+        <Route path={"/category/:name"} component={Category} />
 
         {/* FOR ALL PRODUCTS */}
         <Route path={"/allproducts"} component={AllProducts} />

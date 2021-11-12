@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import imagen1 from "../assets/imagen1.png"
 const ShoppingCart = () => {
   return (
     <section className="section-content padding-y">
       <div className="container-fluid">
         <br />
         <br />
-        <h2 className="fw-light">Shopping Cart</h2>
+        <h2 className="fw-light titleNoMain"><img src={imagen1}alt="" style={{width:"10%"}}/>Shopping Cart</h2>
+        
         <br />
-        <div className="row container-fluid">
+        <div className="row container-fluid" style={{fontFamily:"Bebas Neue"}}>
           <div className="col-sm-7">
             <div className="row border border-dark rounded">
               <div className="col-sm-8">
@@ -219,12 +220,12 @@ const ShoppingCart = () => {
           <div className="col-sm-1 ">
             <span></span>
           </div>
-          <div className="col-sm-4 ">
+          <div className="col-sm-4 " >
             <div
-              className="card border border-dark shadow-0 text-right"
-              style={{ minHeight: "400px" }}
+              className="card border border-dark shadow-0 text-right "
+              style={{ minHeight: "400px", backgroundColor:""}}
             >
-              <div class="card-body">
+              <div class="card-body" >
                 <h5 class="card-title">Checkout</h5>
 
                 <p class="card-text">
@@ -248,8 +249,8 @@ const ShoppingCart = () => {
                 <h4>$44000</h4>
                 <hr />
 
-                <button type="button" class="btn btn-lg btn-warning shadow-0">
-                  <strong>Comprar</strong>
+                <button type="button" class="btn  buyButton shadow-0">
+                  <strong>Dummie compra</strong>
                 </button>
               </div>
               <div class="card-footer">
@@ -261,6 +262,8 @@ const ShoppingCart = () => {
           </div>
         </div>
       </div>
+      <br/><br/>
+      
     </section>
   );
 };

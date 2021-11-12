@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = () => {
     console.log("logout attempt...")
     axios
-    .post("/api/auth/logout")
+    .post("/api/users/logout")
     .then((res) => dispatch(logout(res.data)))
     .then(() => {
       console.log("logged out")
@@ -24,7 +24,7 @@ const Navbar = () => {
   useEffect(() => {
     console.log(`fetching user...`);
     axios
-      .get("/api/auth/logged")
+      .get("/api/users/logged")
       .then((res) => dispatch(login(res.data)))
       .then((user) => {
         console.log(`found user ${user.payload.email}`);
@@ -34,11 +34,10 @@ const Navbar = () => {
       });
   }, []);
 
-  console.log(user)
-
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style={{fontFamily: "Rock Salt"}}>
+      
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style={{fontFamily: "Bebas Neue",fontSize:"150%"}}>
         <div class="container">
           <button
             class="navbar-toggler"
@@ -57,7 +56,7 @@ const Navbar = () => {
               <GiSkateboard />
             </a>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
               <li class="nav-item">
                 <a class="nav-link" href="#">
                  sk8 4 dummies
@@ -159,22 +158,23 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" style={{ fontFamily: "Rock Salt"}}>
-        <div class="container-fluid justify-content-around">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style={{ fontFamily: "Bebas Neue", fontSize:"150%", margin:"5px"}}>
+        <div class="container justify-content-around ">
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
               <li class="nav-item">
-                <Link class="nav-link text-black" to="/skates"  >
+                <Link class="nav-link text-black" to="/category/skates"  >
                   Skates
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link text-black" to="/longboards">
+                <Link class="nav-link text-black" to="/category/longboards">
                   Longboards
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link text-black" to="/clothes">
+                <Link class="nav-link text-black" to="/category/clothes">
                   Clothes
                 </Link>
               </li>
@@ -182,16 +182,6 @@ const Navbar = () => {
                 <Link class="nav-link text-black" to="/allproducts">
                   All Products
                 </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div class="d-flex align-items-center">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Link
-                </a>
               </li>
             </ul>
           </div>
