@@ -1,26 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const CartController = require("../controllers/cart.controller")
 
-router.get('/', (req, res, next) => {
-    res.send(req.session.cart)
-})
-router.post('/add', (req, res, next) => {
-    if (!req.body.id) return res.sendStatus(500)
-    const product = { id: req.body.id, quantity: req.body.quantity ? req.body.quantity : 1 }
-    if (req.session.cart) req.session.cart.push(product)
-    else req.session.cart = [product]
-    res.sendStatus(200)
-})
-router.delete('/remove', (req, res, next) => {
-    if (req.session.cart) req.session.cart = req.session.cart.filter(item => item.id != req.body.id)
-    res.sendStatus(204)
-})
-router.put('/edit', (req, res, next) => {
-    if (req.session.cart) req.session.cart = req.session.cart.map(item => {
-        if (item.id === req.body.id) return { quantity: req.body.quantity, id: item.id }
-        return { item }
-    })
-    res.sendStatus(201)
-})
+// Devuelve array de objetos con el _id y la cantidad del producto
+router.get('/', CartController.getCart)
+// Añadir objeto al array de cart
+router.post('/add', CartController.addItem)
+// Eliminar objeto del cart por medio del _id
+router.delete('/remove', CartController.deleteItem)
+// Edita la cantidad de un producto
+router.put('/edit', CartController.editItem)
 
 module.exports = router;

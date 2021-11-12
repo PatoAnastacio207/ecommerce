@@ -8,8 +8,6 @@ const GOOGLE_CLIENT_ID =
   "853910693747-q00iaamotqqnprgqeju02cjqnkb7rtcl.apps.googleusercontent.com";
 const GOOGLE_CLIENT_SECRET = "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";
 
-console.log(app)
-
 app.use(passport.initialize());
 app.use(passport.session());
 
