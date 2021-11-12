@@ -13,9 +13,14 @@ import Register from "./components/Register";
 import AdminView from "./components/AdminView";
 import ShoppingCart from "./components/ShoppingCart";
 import GoogleTest from "./components/GoogleTest";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 import Category from "./components/Category"
 
+
 function App() {
+  const user = useSelector(selectUser);
+
   return (
     <>
       {/* For NAVBAR --> All the pages */}
@@ -34,8 +39,9 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route exact path="/" component={Home} />
-        <Route exact path="/admin" component={AdminView} />
-
+        {
+          user?.isAdmin ? <Route exact path="/admin" component={AdminView} /> : null
+        }
 
         {/* SHOPPING CART */}
         <Route exact path="/cart" component={ShoppingCart} />

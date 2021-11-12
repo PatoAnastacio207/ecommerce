@@ -89,7 +89,7 @@ const Navbar = () => {
             </form>
           </div>
           <div class="d-flex align-items-center">
-            <Link class="text-reset me-3" to="/cart">
+            <Link class="text-reset me-3" to="+/cart">
               <i class="fas fa-shopping-cart text-white"></i>
             </Link>
 

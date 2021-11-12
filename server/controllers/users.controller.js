@@ -2,9 +2,15 @@ const User = require("../models/User");
 
 class UsersController {
     static async register (req, res, next) {
-        const newUser = new User(req.body)
-        await newUser.save()
-        res.status(201).json(newUser)
+        try {
+            const user = await User.findOne({ email: req.body.email })
+            if (user) return res.send("Email ya registrado")
+            const newUser = new User(req.body)
+            await newUser.save()
+            res.status(201).json(newUser)
+        } catch {
+            return res.send("Credenciales incorrectas")
+        }
     }
     static async login (req, res, next) {
         res.json(req.user)
