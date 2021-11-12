@@ -44,29 +44,29 @@ passport.use(
 );
 
 // Passport google
-passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3001/api/auth/google/callback"
-  },
-  async function (accessToken, refreshToken, profile, done) {
-    let user = await User.findOne({ email: profile.email })
-    console.log(user)
-    if(user) console.log("ya existe")
-    else {
-      user = new User({
-        type: "google",
-        email: profile.email,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        salt: ""
-      })
-      await user.save()
-    }
-    user = await User.find({ email: profile.email })
-    return done (null, user)
-  }
-));
+// passport.use(new GoogleStrategy({
+//     clientID: GOOGLE_CLIENT_ID,
+//     clientSecret: GOOGLE_CLIENT_SECRET,
+//     callbackURL: "http://localhost:3001/api/auth/google/callback"
+//   },
+//   async function (accessToken, refreshToken, profile, done) {
+//     let user = await User.findOne({ email: profile.email })
+//     console.log(user)
+//     if(user) console.log("ya existe")
+//     else {
+//       user = new User({
+//         type: "google",
+//         email: profile.email,
+//         firstName: profile.name.givenName,
+//         lastName: profile.name.familyName,
+//         salt: ""
+//       })
+//       await user.save()
+//     }
+//     user = await User.find({ email: profile.email })
+//     return done (null, user)
+//   }
+// ));
 
 
 module.exports = passport;

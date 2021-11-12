@@ -5,8 +5,10 @@ router.get('/', (req, res, next) => {
     res.send(req.session.cart)
 })
 router.post('/add', (req, res, next) => {
-    if (req.session.cart) req.session.cart.push(req.body)
-    else req.session.cart = [req.body]
+    if (!req.body.id) return res.sendStatus(500)
+    const product = { id: req.body.id, quantity: req.body.quantity ? req.body.quantity : 1 }
+    if (req.session.cart) req.session.cart.push(product)
+    else req.session.cart = [product]
     res.sendStatus(200)
 })
 router.delete('/remove', (req, res, next) => {
