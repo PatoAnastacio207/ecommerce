@@ -13,7 +13,7 @@ const data = [
         inventory: 15,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget lacinia lorem. Nullam sollicitudin, arcu non ornare placerat, metus quam varius lacus, nec venenatis odio leo a orci. Curabitur a elit in nisl ultricies dictum vel quis ipsum. Nunc varius velit sit amet velit volutpat, ac eleifend lacus malesuada. Nulla.",
         category: {
-            name: "skate",
+            name: "skates",
             type: "calle"
         }
     },
@@ -68,8 +68,8 @@ const data = [
         inventory: 2,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget lacinia lorem. Nullam sollicitudin, arcu non ornare placerat, metus quam varius lacus, nec venenatis odio leo a orci. Curabitur a elit in nisl ultricies dictum vel quis ipsum. Nunc varius velit sit amet velit volutpat, ac eleifend lacus malesuada. Nulla.",
         category: {
-            name: "skates",
-            type: "longboard"
+            name: "longboards",
+            type: "tabla"
         }
     },
     {
@@ -79,8 +79,8 @@ const data = [
         inventory: 9,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget lacinia lorem. Nullam sollicitudin, arcu non ornare placerat, metus quam varius lacus, nec venenatis odio leo a orci. Curabitur a elit in nisl ultricies dictum vel quis ipsum. Nunc varius velit sit amet velit volutpat, ac eleifend lacus malesuada. Nulla.",
         category: {
-            name: "skates",
-            type: "longboard"
+            name: "longboards",
+            type: "tabla"
         }
     },
     {

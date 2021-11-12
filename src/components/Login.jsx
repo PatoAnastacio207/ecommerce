@@ -64,7 +64,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container-sm">
+    <div className="container-sm" style={{fontFamily:"Bebas Neue"}}>
       <div className="row">
         <div className="col-sm">
           <span></span>
@@ -72,12 +72,13 @@ const Login = () => {
         <div className="col-sm-3">
           <main className="form-signin text-center">
             <form onSubmit={handleSubmit}>
-              <span><br /><br /><br /><br /><br /><br /></span>
+              <span><br /><br /><br /><br /><br /></span>
               <h1 className=" mb-3 fw-light">Log in</h1>
               <span><br /></span>
 
               <div className="form-floating">
                 <input
+                  style={{fontFamily: "roboto condensed"}}
                   type="email"
                   className="form-control"
                   id="floatingInput"
@@ -107,7 +108,7 @@ const Login = () => {
               </button>
             </form>
             <br />
-            <button class="w-100 btn btn-google btn-danger btn-lg mb-4" onClick={handleGoogle}> <i class="fab fa-google"></i>  Sign in with Google</button>
+            {/* <button class="w-100 btn btn-google btn-danger btn-lg mb-4" onClick={handleGoogle}> <i class="fab fa-google"></i>  Sign in with Google</button> */}
             <span><br /></span>
           </main>
         </div>
@@ -115,6 +116,7 @@ const Login = () => {
           <span></span>
         </div>
       </div>
+      <br /><br /><br /><br />
       <br /><br /><br /><br />
     </div>
   );

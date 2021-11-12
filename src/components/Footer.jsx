@@ -19,7 +19,7 @@ const Footer = () => {
       ></a>
 
     
-      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" target="_blank"
         ><i class="fab fa-instagram"></i
       ></a>
 

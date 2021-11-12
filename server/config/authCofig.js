@@ -32,6 +32,7 @@ passport.use(
       passwordField: "password",
     },
     async (email, password, done) => {
+      email = email.toLowerCase()
       const user = await User.findOne({ email });
       if (!user) return done(null, false);
       const hash = await User.hash(password, user.salt);

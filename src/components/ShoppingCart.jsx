@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import imagen1 from "../assets/imagen1.png"
 import CartProductCard from "./CartProductCard";
+import imagen from "../assets/caballoGrinder.png";
 const ShoppingCart = () => {
   const priceOptions = { style: 'currency', currency: 'USD' };
   const priceFormat = new Intl.NumberFormat('en-US', priceOptions);
@@ -40,7 +41,13 @@ const ShoppingCart = () => {
             {
               cart.items.length ? (
                 cart.items.map(cartItem => <><CartProductCard product={cartItem} setCart={setCart} cart={cart}/> <br /></>)
-              ) : <p>Tu carrito esta vacio! Compra gil</p>
+              ) : (
+              <div className="container col-sm-7">
+                <h1>Hey dummie! Tu carrito está vacío</h1>
+                <br />
+                <img src={imagen} style={{maxWidth: "60%", marginLeft: "60px"}}/>
+              </div>
+              )
             }
           </div>
           <div className="col-sm-1 ">
