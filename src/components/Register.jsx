@@ -146,7 +146,7 @@ const Register = () => {
               <span>
                 <br />
               </span>
-              <button className="w-100 btn btn-lg btn-info" type="submit">
+              <button className="w-100 btn btn-lg btn-info" type="submit" style={{fontSize: 'large'}}>
                 Register
               </button>
             </form>

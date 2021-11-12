@@ -10,7 +10,6 @@ class ProductsController {
         }
     }
     static async getProductsArray (req, res, next) {
-        console.log(req.body)
         try {
             const products = await Product.find({ _id: { $in: req.body }})
             res.json(products)

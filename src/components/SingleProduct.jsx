@@ -41,15 +41,15 @@ const SingleProduct = () => {
             <p><b>Descrition:</b></p>
             <p>{product.description}</p>
             <hr style={{margin: "5px"}}/>
-            <p>{priceFormat.format(product.price)}</p>
-            <button className="btn btn-light" style={{marginRight: "15px"}}>
+            <h3>{priceFormat.format(product.price)}</h3>
+            <button className="btn btn-success shadow-0" style={{marginRight: "15px", fontSize: 'large'}}>
                 Buy now
             </button>
-            <button onClick={handleCart} className="btn btn-dark" style={{marginRight: "15px"}}>
-                Add to cart
+            <button onClick={handleCart} className="btn btn-dark shadow-0" style={{marginRight: "15px", fontSize: 'large'}}>
+                <i className='fas fa-shopping-cart'></i>
             </button>
-            <button className="btn btn-success">
-                Favorites
+            <button className="btn btn-danger shadow-0" style={{fontSize: 'large'}}>
+                <i className='fas fa-heart'></i>
             </button>
           </div>
         </div>
