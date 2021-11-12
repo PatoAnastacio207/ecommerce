@@ -38,7 +38,7 @@ const Navbar = () => {
     <div>
       
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style={{fontFamily: "Bebas Neue",fontSize:"150%"}}>
-        <div class="container">
+        <div class="container-fluid">
           <button
             class="navbar-toggler"
             type="button"

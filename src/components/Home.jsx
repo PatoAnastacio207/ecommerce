@@ -4,7 +4,7 @@ import { login, selectUser } from "../features/userSlice";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import imagen1 from "../assets/Buildyourown.png";
-import imagen3 from "../assets/Photo3.png";
+import imagen3 from "../assets/Photo1.png";
 import imagen4 from "../assets/Photo4.png";
 
 const Home = () => {
