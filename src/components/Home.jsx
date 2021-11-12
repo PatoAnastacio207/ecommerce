@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import imagen1 from "../assets/Buildyourown.png";
 import imagen3 from "../assets/Photo1.png";
 import imagen4 from "../assets/Photo4.png";
+import imagen5 from "../assets/SkaterCaido.png";
 
 const Home = () => {
   const user = useSelector(selectUser);
@@ -21,7 +22,6 @@ const Home = () => {
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img src={imagen3} class="d-block w-100" alt="..." />
-        
           </div>
         </div>
       </div>
@@ -36,14 +36,22 @@ const Home = () => {
       <br />
       <br />
       <br />
-      <h1 className="titleBottoms">Our story</h1>
+      <div className="container" id="our-story">
+        <br />
+        <h1 className="titleBottoms">Our story</h1>
+      </div>
       <div>
         <p className="textHome">
-          We born to be cool, but we decided to be cool dummies.
+          We were born to be cool, but we decided to be cool dummies.
         </p>
-        <img className="align-self-center" src={imagen4} alt="" />
+        <p className="textHome">
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. Donec risus tortor<br /> convallis ac dictum vitae auctor quis quam. 
+        </p>
+        <div className="d-flex justify-content-around">
+          <img className="align-self-center" src={imagen4} alt="" style={{maxWidth: "40%"}}/>
+          <img className="align-self-center" src={imagen5} alt="" style={{maxWidth: "35%"}}/>
+        </div>
       </div>
-      
     </div>
   );
 };

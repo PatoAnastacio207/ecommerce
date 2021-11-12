@@ -15,33 +15,46 @@ const SingleProduct = () => {
   const priceOptions = { style: 'currency', currency: 'USD' };
   const priceFormat = new Intl.NumberFormat('en-US', priceOptions);
 
+  const handleCart = (e) => {
+    e.preventDefault();
+    axios
+      .post('/api/cart/add', {_id: product._id, quantity: +1})
+      .then(res => res.data)
+      .catch(err => console.log(err))
+    console.log(`added`)
+  }
+
   return (
-    <div>
+    <div className="container">
+    <br />
+    <br />
     {product ?
       (
-        <div className="d-flex justify-content-evenly" style={{margin: "5rem", marginBottom: "0", padding: "2rem", fontFamily:"Bebas Neue"}}>
-          <div style={{border: " 1px solid #000"}} style={{ maxWidth: "50%", height: "auto"}}>
+        <div className="row" style={{fontFamily:"Bebas Neue"}}>
+          <div style={{maxWidth: "50%"} } className="col-sm-6 card d-flex justify-content-between shadow-1-strong">
             <img src={product.imgUrl} alt={product.name}/>
           </div>
-          <div style={{ width: "50%", padding: "10px"}}>
+          <div className="col-sm-1"></div>
+          <div className="col-sm-5" style={{padding: "10px"}}>
             <h2>{product.name}</h2>
             <hr style={{margin: "5px"}}/>
             <p><b>Descrition:</b></p>
             <p>{product.description}</p>
             <hr style={{margin: "5px"}}/>
             <p>{priceFormat.format(product.price)}</p>
-            <a className="btn btn-light" style={{marginRight: "15px"}}>
+            <button className="btn btn-light" style={{marginRight: "15px"}}>
                 Buy now
-            </a>
-            <a className="btn btn-dark" style={{marginRight: "15px"}}>
+            </button>
+            <button onClick={handleCart} className="btn btn-dark" style={{marginRight: "15px"}}>
                 Add to cart
-            </a>
-            <a className="btn btn-success">
+            </button>
+            <button className="btn btn-success">
                 Favorites
-            </a>
+            </button>
           </div>
         </div>
       ) : (<span></span>) }
+      <br />
     </div>
   );
 };

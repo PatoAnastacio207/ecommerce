@@ -70,7 +70,7 @@ const Register = () => {
   };
 
   return (
-    <div className="container-sm">
+    <div className="container-sm" style={{fontFamily:"Bebas Neue"}}>
       <div className="row">
         <div className="col-sm">
           <span></span>
@@ -82,9 +82,6 @@ const Register = () => {
                 <br />
                 <br />
                 <br />
-                <br />
-                <br />
-                <br />
               </span>
               <h1 className=" mb-3 fw-light">Register</h1>
               <span>
@@ -92,6 +89,7 @@ const Register = () => {
               </span>
               <div className="form-floating">
                 <input
+                  style={{fontFamily: "roboto condensed"}}
                   type="text"
                   className="form-control"
                   id="floatingInput"
@@ -105,6 +103,7 @@ const Register = () => {
               </span>
               <div className="form-floating">
                 <input
+                  style={{fontFamily: "roboto condensed"}}
                   type="text"
                   className="form-control"
                   id="floatingInput"
@@ -118,6 +117,7 @@ const Register = () => {
               </span>
               <div className="form-floating">
                 <input
+                  style={{fontFamily: "roboto condensed"}}
                   type="email"
                   className="form-control"
                   id="floatingInput"
@@ -151,13 +151,13 @@ const Register = () => {
               </button>
             </form>
             <br />
-            <button
+            {/* <button
               class="w-100 btn btn-google btn-danger btn-lg mb-4"
               onClick={handleGoogle}
-            >
+              >
               {" "}
               <i class="fab fa-google"></i> Sign in with Google
-            </button>
+            </button> */}
             <span>
               <br />
             </span>
@@ -167,6 +167,10 @@ const Register = () => {
           <span></span>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br style={{marginBottom: "9px"}}/>
     </div>
   );
 };
