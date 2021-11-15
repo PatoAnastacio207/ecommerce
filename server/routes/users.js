@@ -9,6 +9,4 @@ router.put("/admin/:id", adminAuthoritation, UsersController.switchAdmin)
 router.delete("/admin/:id", adminAuthoritation, UsersController.deleteUser)
 router.get("/admin", adminAuthoritation, UsersController.getAllUsers)
 
-
-
 module.exports = router;

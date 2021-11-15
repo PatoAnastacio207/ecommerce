@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
     password: { type: String },
     salt: { type: String, default: "" },
     type: { type: String, default: "default"},
+    checkoutInfo: {
+        address: { type: String },
+        phone: { type: String },
+    },
     history: [
         {
             name: { type: String },
