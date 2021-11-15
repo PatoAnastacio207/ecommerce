@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useInput } from "../hooks/custom-hooks";
 
 
 function CartProductCard ({ product, setCart, cart }) {
@@ -6,7 +7,7 @@ function CartProductCard ({ product, setCart, cart }) {
     // console.log(product)
     const priceOptions = { style: 'currency', currency: 'USD' };
     const priceFormat = new Intl.NumberFormat('en-US', priceOptions);
-
+  const cantidad =useInput("cantidad")
     const handleDelete = () => {
         // Modificar el cart
         const cartSinItem = cart.items.filter(item => item._id !== product._id)
@@ -40,8 +41,8 @@ function CartProductCard ({ product, setCart, cart }) {
                         </div>
                       </div>
                       <div className="align-self-center">
-                        <h2 className="h1 mb-0">{priceFormat.format(product.price)}</h2>
-                        <p className="mb-0 text-muted">Per unit.</p>
+                        <h2 className="h1 mb-0">{priceFormat.format(product.price*(cantidad.value||1))}</h2>
+                      
                       </div>
                     </div>
                   </div>
@@ -55,12 +56,12 @@ function CartProductCard ({ product, setCart, cart }) {
                         <div
                           className="align-self-center"
                           style={{ height: "100px" }}
-                        >
+                        > 
                           <p>Cantidad:</p>
-                          <select className="form-control-lg">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                          <select className="form-control-lg" onChange={cantidad.onChange}>
+                            <option value={cantidad.value=1}>1</option>
+                            <option value={cantidad.value=2}>2</option>
+                            <option value={cantidad.value=3}>3</option>
                           </select>
                         </div>
                       </div>

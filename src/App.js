@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import Category from "./components/Category"
 import AdminSidebar from "./components/AdminSidebar"
+import Checkout from "./components/Checkout"
 
 function App() {
   const user = useSelector(selectUser);
@@ -39,6 +40,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route exact path="/" component={Home} />
+        
         {
           user?.isAdmin ? <Route exact path="/admin" component={AdminSidebar} /> : null
         }
@@ -62,11 +64,10 @@ function App() {
         {/*FOR BUILD YOUR OWN*/}
         {/* <Route path={"/buildyourown"} component={} /> */}
 
-        {/*FOR REGISTER */}
-        {/* <Route path={"/register"} component={Register} /> */}
-
         {/*FOR CONTACT */}
         <Route path={"/contact"} component={Contact} />
+        <Route path={"/checkout"} component={Checkout} />
+
       </Switch>
         </div>
       {/* For FOOTER --> All the pages */}
