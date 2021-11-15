@@ -13,13 +13,11 @@ app.use(passport.session());
 
 // Crea la cookie
 passport.serializeUser(function (user, done) {
-  console.log("SERIALIZE", user);
   done(null, user._id || user.id);
 });
 
 // Transforma la cookie en un user
 passport.deserializeUser(async function (id, done) {
-  console.log("DESERIALIZE");
   const user = await User.findOne({ _id: id });
   done(null, user);
 });

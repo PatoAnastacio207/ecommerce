@@ -4,15 +4,23 @@ import { Link } from "react-router-dom";
 import imagen1 from "../assets/imagen1.png"
 import CartProductCard from "./CartProductCard";
 import imagen from "../assets/caballoGrinder.png";
+import { useSelector } from "react-redux"
+import { selectUser } from "../features/userSlice";
+
 const ShoppingCart = () => {
   const priceOptions = { style: 'currency', currency: 'USD' };
   const priceFormat = new Intl.NumberFormat('en-US', priceOptions);
-
   const [cart, setCart] = useState({ items: [], total: 0 })
+  const user = useSelector(selectUser)
+
+  const handleCheckout = () => {
+    axios.post("/api/checkout/buycart", { cart, user: { checkoutInfo: { address: "direccion", phone: "3815796366" }, ...user }}) 
+      .then(({data}) => console.log(data))
+      .catch(console.error)
+  }
 
   useEffect(() => {
     // Devuelve un array de objectos con el id y la cantidad de cada item
-    console.log("useEffect")
     axios.get('/api/cart')
       .then(({data}) => {
         const itemsIds = data.map(item => item._id)
@@ -82,7 +90,7 @@ const ShoppingCart = () => {
                 <h4>{priceFormat.format(cart.total)}</h4>
                 <hr />
 
-                <button type="button" class="btn  buyButton shadow-0">
+                <button type="button" class="btn  buyButton shadow-0" onClick={handleCheckout}>
                   <strong>Dummie compra</strong>
                 </button>
               </div>
