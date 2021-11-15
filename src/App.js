@@ -16,7 +16,7 @@ import GoogleTest from "./components/GoogleTest";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import Category from "./components/Category"
-
+import AdminSidebar from "./components/AdminSidebar"
 
 function App() {
   const user = useSelector(selectUser);
@@ -40,7 +40,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route exact path="/" component={Home} />
         {
-          user?.isAdmin ? <Route exact path="/admin" component={AdminView} /> : null
+          user?.isAdmin ? <Route exact path="/admin" component={AdminSidebar} /> : null
         }
 
         {/* SHOPPING CART */}
