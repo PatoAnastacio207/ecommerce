@@ -16,7 +16,37 @@ const productSchema = new mongoose.Schema({
         name: { type: String },
         type: { type: String }
     },
-}, { versionKey: false })
+    reviews: [
+        {
+            valoration: { type: Number },
+            message: { type: String },
+            authorId: { type: String }
+        }
+    ]
+}, { 
+    versionKey: false,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+})
+
+// Devuelve el promedio de las valoraciones de un producto
+productSchema.virtual('valoration').get(function () {
+    var valoration = this.reviews.reduce((previo, current) => {
+        return previo ? current.valoration + previo : current.valoration
+      }, 0)
+    console.log(valoration)
+    return valoration / this.reviews.length
+})
+
+// Añade review individual al producto
+productSchema.methods.addReview = async function ({ valoration, message = "", authorId }) {
+    try {
+        const review = { valoration, message, authorId }
+        const product = await Product.updateOne({ _id: this._id }, { $push: { reviews: review }})    
+    } catch (err) {
+        return err
+    }
+}
 
 const Product = mongoose.model('Product', productSchema)
 

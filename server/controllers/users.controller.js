@@ -44,6 +44,12 @@ class UsersController {
         const users = await User.find()
         res.json(users)
     }
+    static async addHistory (req, res, next) {
+
+    }
+    static async getHistory (req, res, next) {
+        
+    }
 }
 
 module.exports = UsersController
