@@ -20,7 +20,10 @@ const productSchema = new mongoose.Schema({
         {
             valoration: { type: Number },
             message: { type: String },
-            authorId: { type: String }
+            author: {
+                name: { type: String },
+                imgUrl: { type: String }
+            }
         }
     ]
 }, { 
@@ -34,7 +37,6 @@ productSchema.virtual('valoration').get(function () {
     var valoration = this.reviews.reduce((previo, current) => {
         return previo ? current.valoration + previo : current.valoration
       }, 0)
-    console.log(valoration)
     return valoration / this.reviews.length
 })
 
