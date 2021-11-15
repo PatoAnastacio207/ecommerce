@@ -78,6 +78,14 @@ class ProductsController {
             res.sendStatus(500)
         }
     }
+    static async addProductReview (req, res, next) {
+        try {
+            const product = await Product.findOne({ _id: req.body._id })
+            product.addReview(req.body)
+        } catch {
+            next()
+        }
+    }
 }
 
 module.exports = ProductsController
