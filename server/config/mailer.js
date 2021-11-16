@@ -1,12 +1,12 @@
 const nodemailer = require("nodemailer")
-const { google_key } = require("../../secret.json")
+const { google_key, email } = require("../../secret.json")
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
-        user: "patricioanastacio01@gmail.com",
+        user: email,
         pass: google_key
     }
 })
