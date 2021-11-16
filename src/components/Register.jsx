@@ -1,20 +1,20 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login, selectUser } from "../features/userSlice";
 import Notification from "../utils/Notification"
+import Swal from "sweetalert2";
+
 //import { UserContext } from "../index";
 
 const Register = () => {
-  const dispatch = useDispatch();
-  //const { setUser } = useContext(UserContext);
   const history = useHistory();
   const email = useInput("email");
   const password = useInput("password");
   const firstName = useInput('firstName')
-  const lastName = useInput('lasttName')
+  const lastName = useInput('lastName')
 
   const handleGoogle = (e) => {
     e.preventDefault();
