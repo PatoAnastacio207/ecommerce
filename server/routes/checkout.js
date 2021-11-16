@@ -1,5 +1,4 @@
 const express = require("express");
-const Order = require("../models/Order")
 const OrdersController = require("../controllers/orders.controller")
 const { adminAuthoritation } = require('../middleware/auth')
 const router = express.Router();

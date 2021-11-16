@@ -39,31 +39,31 @@ class OrdersController {
             }
             return res.sendStatus(401)
         } catch {
-            res.sendStatus(500)
+            return res.sendStatus(500)
         }
     }
     static async getOrders (req, res, next) {
         try {
             const orders = await Order.find()
-            res.send(orders)
+            return res.send(orders)
         } catch {
-            res.sendStatus(500)
+            return res.sendStatus(500)
         }
     }
     static async getUserOrders (req, res, next) {
         try {
             const orders = await Order.find({ userId: req.user._id })
-            res.send(orders)
+            return res.send(orders)
         } catch {
-            res.sendStatus(500)
+            return res.sendStatus(500)
         }
     }
     static async updateStatus (req, res, next) {
         try {
             await Order.updateOne({ _id: req.params.id }, { status: req.body.status })
-            res.sendStatus(200)
+            return res.sendStatus(200)
         } catch {
-            res.sendStatus(500)
+            return res.sendStatus(500)
         }
     } 
 }
