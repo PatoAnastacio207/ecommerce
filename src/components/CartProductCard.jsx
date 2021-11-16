@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useInput } from "../hooks/custom-hooks";
-import { selectCart, buy, borrar } from "../features/cartSlice";
+import { selectCart, buy, borrar,edit } from "../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -22,7 +22,14 @@ function CartProductCard({ product }) {
         )
       );
   };
+  
+  const handleChange = (e)=>{
+    cantidad.onChange(e)
+    dispatch(edit({_id:product._id,quantity:e.target.value}))
+    axios.put("/api/cart/edit",{_id:product._id,quantity:e.target.value})
+  }
 
+  console.log(cart)
   return (
     <div className="row border border-dark rounded">
       <div className="col-sm-8">
@@ -61,7 +68,7 @@ function CartProductCard({ product }) {
                   <p>Cantidad:</p>
                   <select
                     className="form-control-lg"
-                    onChange={cantidad.onChange}
+                    onChange={handleChange}
                     defaultValue={product.quantity}
                   >
                     <option value={(cantidad.value = 1)}>1</option>
