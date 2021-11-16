@@ -23,6 +23,7 @@ import AdminProduct from './components/AdminProduct'
 import AdminSidebar from './components/AdminSidebar'
 import AdminUsers from './components/AdminUsers'
 import UsersList from './components/UsersList'
+import ProductManager from "./components/ProductManager";
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         }
 
         <Route exact path="/admin/productadd" component={AdminProduct} />
+        <Route exact path="/admin/product/:id" component={ProductManager} />
         <Route exact path="/admin/products" component={AllProducts} />
         <Route exact path="/admin/useradd" component={AdminUsers} />
         <Route exact path="/admin/users" component={UsersList} />
