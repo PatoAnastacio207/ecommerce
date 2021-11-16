@@ -10,14 +10,20 @@ import Footer from "./components/Footer"
 import Contact from "./components/Contact"
 import Login from "./components/Login";
 import Register from "./components/Register";
-import AdminView from "./components/AdminView";
 import ShoppingCart from "./components/ShoppingCart";
 import GoogleTest from "./components/GoogleTest";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import Category from "./components/Category"
-import AdminSidebar from "./components/AdminSidebar"
+
 import Checkout from "./components/Checkout"
+
+import AdminView from "./components/AdminView";
+import AdminProduct from './components/AdminProduct'
+import AdminSidebar from './components/AdminSidebar'
+import AdminUsers from './components/AdminUsers'
+import UsersList from './components/UsersList'
+
 
 function App() {
   const user = useSelector(selectUser);
@@ -42,8 +48,13 @@ function App() {
         <Route exact path="/" component={Home} />
         
         {
-          user?.isAdmin ? <Route exact path="/admin" component={AdminSidebar} /> : null
+          user?.isAdmin ? <Route exact path="/admin" component={AdminView} /> : null
         }
+
+        <Route exact path="/admin/productadd" component={AdminProduct} />
+        <Route exact path="/admin/products" component={AllProducts} />
+        <Route exact path="/admin/useradd" component={AdminUsers} />
+        <Route exact path="/admin/users" component={UsersList} />
 
         {/* SHOPPING CART */}
         <Route exact path="/cart" component={ShoppingCart} />

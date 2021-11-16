@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import imagen1 from "../assets/imagen1.png";
 import CartProductCard from "./CartProductCard";
 import imagen from "../assets/caballoGrinder.png";
+
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { selectCart, buy } from "../features/cartSlice";
@@ -18,15 +19,13 @@ const ShoppingCart = () => {
   const cartGlobal = useSelector(selectCart);
 
 
+
   useEffect(() => {
     // Devuelve un array de objectos con el id y la cantidad de cada item
-    console.log("useEffect");
-    axios
-      .get("/api/cart")
-      .then(({ data }) => {
-        dispatch(buy(data))
-        const itemsIds = data.map((item) => item._id);
-        return axios.post("/api/products/array", itemsIds);
+    axios.get('/api/cart')
+      .then(({data}) => {
+        const itemsIds = data.map(item => item._id)
+        return axios.post('/api/products/array', itemsIds)
       })
       .then(({ data }) => {
         var total = data.reduce((previo, current) => {
@@ -108,6 +107,7 @@ const ShoppingCart = () => {
                 <h4>{priceFormat.format(cart.total)}</h4>
                 <hr />
 
+
                 <button type="button" class="btn  buyButton shadow-0">
                   {user ? (
                     <Link to="/checkout">
@@ -119,6 +119,7 @@ const ShoppingCart = () => {
                       <strong>Dummie compra</strong>
                     </Link>
                   )}
+
                 </button>
               </div>
               <div class="card-footer">
