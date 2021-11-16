@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const { dbUrl } = require('../../secret.json')
 
-mongoose.connect('mongodb+srv://ecommerce:ecommerce@ecommerce.6slhp.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // nrxiacoozcxiqpmj
 
