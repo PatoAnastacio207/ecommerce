@@ -19,7 +19,7 @@ function ProductCard({ product, admin }) {
   const handleCart = (e) => {
     e.preventDefault();
     axios
-      .post("/api/cart/add", { _id: product._id, quantity: +1 })
+      .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then((res) => res.data)
       .catch((err) => console.log(err));
     console.log(`added`);
@@ -57,6 +57,7 @@ function ProductCard({ product, admin }) {
                   <button className="btn btn-danger shadow-0" onClick={handleDelete}>
                     <i className="fas fa-trash"></i>
                   </button>
+
                 </div>
               </div>
             ) : (
