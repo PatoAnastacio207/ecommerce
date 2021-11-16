@@ -86,18 +86,21 @@ const ShoppingCart = () => {
                 <h4>{priceFormat.format(cart.total)}</h4>
                 <hr />
 
-                <button type="button" class="btn  buyButton shadow-0">
+                
                   {user ? (
-                    <Link to="/checkout">
+                    <Link type="button" class="btn  buyButton shadow-0" to="/checkout">
+                    
                       {" "}
                       <strong>Dummie compra</strong>
                     </Link>
+                    
                   ) : (
-                    <Link to="/login">
+                    <Link type="button" class="btn  buyButton shadow-0" to="/login">
+                  
                       <strong>Dummie compra</strong>
                     </Link>
+                 
                   )}
-                </button>
               </div>
               <div class="card-footer">
                 <Link to="/allproducts">Seguir comprando.</Link>
