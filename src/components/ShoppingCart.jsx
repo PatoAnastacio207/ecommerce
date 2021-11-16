@@ -24,11 +24,10 @@ const ShoppingCart = () => {
     axios.get('/api/cart')
       .then(({data}) => {
         const itemsIds = data.map(item => item._id)
-        return axios.post('/api/products/array', itemsIds)
+        return axios.post('/api/products/array', { items: itemsIds })
       })
       .then(({data}) => {
         var total = data.reduce((previo, current) => {
-          console.log("REDUCER", previo, current)
           return previo ? current.price + previo : current.price
         }, 0)
         setCart({ items: data, total: total })
