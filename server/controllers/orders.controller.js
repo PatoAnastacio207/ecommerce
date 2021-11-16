@@ -20,7 +20,7 @@ class OrdersController {
                     userId: req.body.user._id,
                     total: req.body.cart.total
                 })
-                console.log(req.body.cart)
+                console.log("add order", req.body.cart)
                 await transporter.sendMail({
                     from: "Order registrada!",
                     to: req.body.user.email,

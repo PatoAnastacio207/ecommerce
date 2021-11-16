@@ -24,21 +24,22 @@ const ShoppingCart = () => {
     // Devuelve un array de objectos con el id y la cantidad de cada item
     axios.get('/api/cart')
       .then(({data}) => {
-        const itemsIds = data.map(item => item._id)
-        return axios.post('/api/products/array', { items: itemsIds })
+        // const itemsIds = data.map(item => item._id)
+        console.log(data)
+        setCart(data)
+        return axios.post('/api/products/array', { items: [] })
       })
       .then(({ data }) => {
         var total = data.reduce((previo, current) => {
-
           return previo ? current.price + previo : current.price
         }, 0)
-        setCart({ items: data, total: total })
+        // setCart({ items: data, total: total })
 
       })
-      .catch(() => console.log("ERROR"));
+      .catch((e) => console.log(e));
   }, []);
 
-  console.log("iam cart",cartGlobal);
+  // console.log("iam cart",cartGlobal);
   return (
     <section className="section-content padding-y">
       <div className="container-fluid">
