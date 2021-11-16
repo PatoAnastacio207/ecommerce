@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 const UsersCard = ({user}) => {
+
+  const handleAdmin = () => {
+    axios
+      .put(`/api/users/admin/${user._id}`)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+      console.log(`switched`);
+      window.location.reload(false);
+  }
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -17,11 +26,10 @@ const UsersCard = ({user}) => {
   return (
     <div className="col">
       <div className="card hover-shadow border" style={{ fontFamily: "Bebas Neue" }}>
-        <Link>
+        
           <div className="bg-image hover-overlay ripple ">
             <img src="https://lateclapat-repos-dgf.aplinews.com/archivos/noticias/fotografias/66992_3.jpg" className="img-fluid" />
           </div>
-        </Link>
         <div className="card-body">
           <Link className="link-dark text-decoration-none">
             <h5 class="card-title">{`${user.firstName} ${user.lastName || ""}`}</h5>
@@ -30,7 +38,9 @@ const UsersCard = ({user}) => {
             {user.email}
           </p>
           <div className="d-flex justify-content-between">
+            <Link onClick={handleAdmin}>
             <h4>{user.isAdmin ? ("Es admin") : ("No es admin")}</h4>
+            </Link>
 
               <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group me-2 shadow-0" role="group">

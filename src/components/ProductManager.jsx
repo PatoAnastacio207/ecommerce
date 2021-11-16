@@ -7,15 +7,14 @@ const ProductManager = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
 
-  useEffect(() => {
-    axios
-      .get(`/api/products/id/${id}`)
-      .then((res) => res.data)
-      .then((product) => {
-        setProduct(product);
-      })
-      .catch((error) => console.log(error));
-  }, [window.location.pathname]);
+  useEffect(async () => {
+    try {
+      const { data } = await axios.get(`/api/products/id/${id}`);
+      setProduct(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return <AdminProduct product={product} />;
 };

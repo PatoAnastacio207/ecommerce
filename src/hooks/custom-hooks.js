@@ -9,7 +9,7 @@ import * as react from "react";
  *   {name} name
  */
 
-export const useInput = (name, defaultValue = '') => {
+export const useInput = (name, defaultValue) => {
   
   const [value, setValue] = react.useState(defaultValue);
 
