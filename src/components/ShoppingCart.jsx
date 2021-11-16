@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import imagen1 from "../assets/imagen1.png";
 import CartProductCard from "./CartProductCard";
 import imagen from "../assets/caballoGrinder.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
+import { selectCart, buy } from "../features/cartSlice";
 import Login from "./Login";
 
 const ShoppingCart = () => {
@@ -13,6 +14,9 @@ const ShoppingCart = () => {
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const user = useSelector(selectUser);
   const [cart, setCart] = useState({ items: [], total: 0 });
+  const dispatch = useDispatch();
+  const cartGlobal = useSelector(selectCart);
+
 
   useEffect(() => {
     // Devuelve un array de objectos con el id y la cantidad de cada item
@@ -20,12 +24,12 @@ const ShoppingCart = () => {
     axios
       .get("/api/cart")
       .then(({ data }) => {
+        dispatch(buy(data))
         const itemsIds = data.map((item) => item._id);
         return axios.post("/api/products/array", itemsIds);
       })
       .then(({ data }) => {
         var total = data.reduce((previo, current) => {
-          console.log("REDUCER", previo, current);
           return previo ? current.price + previo : current.price;
         }, 0);
         setCart({ items: data, total: total });
@@ -33,6 +37,7 @@ const ShoppingCart = () => {
       .catch(() => console.log("ERROR"));
   }, []);
 
+  console.log("iam cart",cartGlobal);
   return (
     <section className="section-content padding-y">
       <div className="container-fluid">
