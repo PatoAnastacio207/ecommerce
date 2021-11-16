@@ -1,36 +1,28 @@
 import axios from "axios";
 import { useInput } from "../hooks/custom-hooks";
-import { selectCart, buy } from "../features/cartSlice";
-import { useSelector } from "react-redux";
+import { selectCart, buy, borrar } from "../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-function CartProductCard({ product, setCart, cart }) {
-  const cartGlobal = useSelector(selectCart);
-  // console.log(product)
+function CartProductCard({ product }) {
+  const cart = useSelector(selectCart);
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const cantidad = useInput("cantidad");
-
- useEffect(()=>{
-  cartGlobal.map(item=>item.quantity)
-
- },[])
-    
-  
+  const dispatch = useDispatch();
 
   const handleDelete = () => {
     // Modificar el cart
     const cartSinItem = cart.items.filter((item) => item._id !== product._id);
-    setCart({
-      items: cartSinItem,
-      total: cart.total - product.price,
-    });
     axios
       .delete("/api/cart/remove", { data: { _id: product._id } })
-      .then(() => axios.get("/api/cart"))
-      .then(({ data }) => console.log(data));
+      .then(() =>
+        dispatch(
+          borrar({ items: cartSinItem, total: cart.total - product.price })
+        )
+      );
   };
- 
+
   return (
     <div className="row border border-dark rounded">
       <div className="col-sm-8">

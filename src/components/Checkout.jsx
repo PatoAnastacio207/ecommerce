@@ -1,44 +1,32 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, login } from "../features/userSlice";
 import imagen1 from "../assets/imagen1.png";
 import CartProductCard from "./CartProductCard";
 import { Link } from "react-router-dom";
 import imagen from "../assets/caballoGrinder.png";
 import { useInput } from "../hooks/custom-hooks";
+import { selectCart } from "../features/cartSlice";
 
 const Checkout = () => {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch()
+  const metodo = useInput("")
+  const envio = useInput("")
   const direction = useInput("");
   const phone = useInput("");
-  const [cart, setCart] = useState({ items: [], total: 0 });
+  const cart = useSelector(selectCart);
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
-  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const uno = user.checkoutInfo.address = direction.value
+    console.log("soy mensaje",direction.value)
+    console.log("soy user", uno)
+console.log(dispatch(user))
   };
-
-  useEffect(() => {
-    // Devuelve un array de objectos con el id y la cantidad de cada item
-    console.log("useEffect");
-    axios
-      .get("/api/cart")
-      .then(({ data }) => {
-        const itemsIds = data.map((item) => item._id);
-        return axios.post("/api/products/array", itemsIds);
-      })
-      .then(({ data }) => {
-        var total = data.reduce((previo, current) => {
-          console.log("REDUCER", previo, current);
-          return previo ? current.price + previo : current.price;
-        }, 0);
-        setCart({ items: data, total: total });
-      })
-      .catch(() => console.log("ERROR"));
-  }, []);
 
   console.log(cart);
   return (
@@ -50,24 +38,34 @@ const Checkout = () => {
           <img src={imagen1} alt="" style={{ width: "10%" }} />
           Checkout
         </h2>
-        {console.log(cart)}
         <br />
         <div
           className="row container-fluid"
           style={{ fontFamily: "Bebas Neue" }}
         >
-          <div className="col-sm-7">
-            <form>
+          <div>
+           
               <div className="container">
                 <br />
-                <h1>HEY! {user.firstName} YA CASI TENEMOS TODO LISTO</h1>
+                <h1>HEY! {user?.firstName} YA CASI TENEMOS TODO LISTO</h1>
                 <br />
                 <div className="card container">
                   <br />
                   <div className="card-body container">
-                    <form>
-                      
-                     
+                    <form  onSubmit={handleSubmit}>
+                      <h3 class="card-text">
+                        Tus productos:
+                        <br />
+                        <br />
+                        {cart.items.map((cartItem) => (
+                          <div>
+                            <h4 className="text-muted">
+                              {cartItem.name}{" "}
+                              {priceFormat.format(cartItem.price)}
+                            </h4>
+                          </div>
+                        ))}
+                      </h3>
                       <br></br>
                       <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">
@@ -76,7 +74,7 @@ const Checkout = () => {
                         <input
                           type="text"
                           class="form-control"
-                          value={user.checkoutInfo?.address || direction.value}
+                          value={user?.checkoutInfo.address || direction.value}
                           onChange={direction.onChange}
                         />
                       </div>
@@ -87,7 +85,7 @@ const Checkout = () => {
                         <input
                           type="text"
                           class="form-control"
-                          value={user.checkoutInfo?.phone || phone.value}
+                          value={user?.checkoutInfo.phone || phone.value}
                           onChange={phone.onChange}
                           maxLength="15"
                         />
@@ -103,23 +101,35 @@ const Checkout = () => {
                           disabled
                         />
                       </div>
-                      <div class="form-check">
-                        <br></br>
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="flexCheckChecked"
-                        />
-                        <label class="form-check-label" for="flexCheckChecked">
-                          MERCADO PAGO
-                        </label>
+                      <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">
+                          METODO DE PAGO
+                        </span>
+                      <select
+                        className="form-control-lg"
+                        onChange={metodo.onChange}
+                      >
+                        <option value={(metodo.value = 1)}>Mercado Pago</option>
+                        <option value={(metodo.value = 2)}>Contraentrega</option>
+                        <option value={(metodo.value = 3)}>Tarjeta de credito</option>
+                      </select>
                       </div>
-                    
-                      
+                      <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">
+                          METODO DE ENVIO
+                        </span>
+                      <select
+                        className="form-control-lg"
+                        onChange={envio.onChange}
+                      >
+                        <option value={(envio.value = 1)}>Envio a domicilio</option>
+                        <option value={(envio.value = 2)}>Recojo en tienda</option>
+                      </select>
+                      </div>
                       <button
-                        className="w-200 btn btn-lg btn-danger"
+                        className="w-400 mainButton "
                         type="submit"
+                        style={{fontSize:"20px", fontFamily:"Bebas Neue"}}
                       >
                         CONFIRMAR
                       </button>
@@ -128,66 +138,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
-          <div className="col-sm-1 ">
-            <span></span>
-          </div>
-          <div className="col-sm-4 ">
-            <div
-              className="card border border-dark shadow-0 text-right "
-              style={{ minHeight: "400px", backgroundColor: "" }}
-            >
-              <div class="card-body">
-                <h5 class="card-title">Checkout</h5>
-                <p class="card-text">
-                  Productos:
-                  {cart.items.map((cartItem) => (
-                    <div>
-                      <p className="text-muted">
-                        {cartItem.name} {priceFormat.format(cartItem.price)}
-                      </p>
-                    </div>
-                  ))}
-                </p>
-                <p class="card-text">
-                  Número de celular: <p className="text-muted">{phone.value}</p>
-                </p>
-                <p class="card-text">
-                  Método de envío:{" "}
-                  <p className="text-muted">Entrega a domicilio.</p>
-                </p>
-                <p class="card-text">
-                  Dirección: <p className="text-muted">{direction.value}</p>
-                </p>
-                <p class="card-text">
-                  Método de pago:{" "}
-                  <p className="text-muted">Tarjeta de crédito.</p>
-                </p>
-                <hr />
-                <p>
-                  <strong>Total:</strong>
-                </p>
-                <h4>{priceFormat.format(cart.total)}</h4>
-                <hr />
-
-                <button type="button" class="btn  buyButton shadow-0">
-                  {user ? (
-                    <Link to="/checkout">
-                      {" "}
-                      <strong>Dummie compra</strong>
-                    </Link>
-                  ) : (
-                    <Link to="/login">
-                      <strong>Dummie compra</strong>
-                    </Link>
-                  )}
-                </button>
-              </div>
-              <div class="card-footer">
-                <Link to="/allproducts">Seguir comprando.</Link>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>
