@@ -4,7 +4,7 @@ import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login, selectUser } from "../features/userSlice";
-import Swal from "sweetalert2";
+import Notification from "../utils/Notification"
 //import { UserContext } from "../index";
 
 const Register = () => {
@@ -20,12 +20,7 @@ const Register = () => {
     e.preventDefault();
     console.log("register attempt...");
     axios.post("/api/auth/google").then(() => {
-      Swal.fire({
-        icon: "success",
-        title: "Register success",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      Notification.successMessage("Register success")
       history.push("/login");
     });
   };
@@ -42,30 +37,13 @@ const Register = () => {
       })
       .then(({data}) => {
         if (data._id) {
-          Swal.fire({
-            icon: "success",
-            title: `Register success ${''}`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          Notification.successMessage("Register success")
           return history.push("/login");
         }
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          showConfirmButton: false,
-          text: data,
-          timer: 1500,
-        });
+        Notification.successMessage("Oops...")
       })
       .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          showConfirmButton: false,
-          text: "",
-          timer: 1500,
-        });
+        Notification.successMessage("Oops...")
       });
   };
 

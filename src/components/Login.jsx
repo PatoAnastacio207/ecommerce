@@ -4,7 +4,7 @@ import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { useDispatch } from 'react-redux'
 import { login, selectUser } from '../features/userSlice'
-import Swal from 'sweetalert2'
+import Notification from "../utils/Notification"
 //import { UserContext } from "../index";
 
 
@@ -24,16 +24,11 @@ const Login = () => {
 
       .then(res => {
         dispatch(login(res.data))
-        Swal.fire({
-          icon: 'success',
-          title: 'Login success',
-          showConfirmButton: false,
-          timer: 1500
-        })
+        Notification.successMessage("Login success")
         history.push("/");
       })
   }
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("login attempt...")
@@ -43,22 +38,11 @@ const Login = () => {
       })
       .then(res => {
         dispatch(login(res.data))
-        Swal.fire({
-          icon: 'success',
-          title: 'Login success',
-          showConfirmButton: false,
-          timer: 1500
-        })
+        Notification.successMessage("Login success")
         history.push("/");
       })
      .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          showConfirmButton: false,
-          text: "Credenciales incorrectas!",
-          timer: 1500
-        })
+        Notification.errorMessage("Oops...")
         console.log(err)
       })
   };
