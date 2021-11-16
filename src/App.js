@@ -19,6 +19,7 @@ import AdminView from "./components/AdminView";
 import AdminProduct from './components/AdminProduct'
 import AdminSidebar from './components/AdminSidebar'
 import AdminUsers from './components/AdminUsers'
+import UsersList from './components/UsersList'
 
 function App() {
   const user = useSelector(selectUser);
@@ -48,7 +49,7 @@ function App() {
         <Route exact path="/admin/productadd" component={AdminProduct} />
         <Route exact path="/admin/products" component={AllProducts} />
         <Route exact path="/admin/useradd" component={AdminUsers} />
-        
+        <Route exact path="/admin/users" component={UsersList} />
 
         {/* SHOPPING CART */}
         <Route exact path="/cart" component={ShoppingCart} />

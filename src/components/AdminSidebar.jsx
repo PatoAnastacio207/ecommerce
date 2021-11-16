@@ -5,11 +5,11 @@ const AdminSidebar = () => {
   return (
       <main
         className="col-sm-2 flex-shrink-0 p-3 bg-white card"
-        style={{ width: "280px", minHeight: "720px" }}
+        style={{ width: "280px", height: "100%", fontFamily: "Bebas Neue", minHeight: "720px" }}
       >
         <div className="card-tittle">
           {" "}
-          <h4>Dashboard</h4>
+          <h4>Panel Admin</h4>
         </div>
 
         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -69,7 +69,7 @@ const AdminSidebar = () => {
                     <Link to="/admin/useradd" class="link-dark text-decoration-none">Agregar</Link>
                   </li>
                   <li class="list-group-item">
-                    <Link to="admin/users" class="link-dark text-decoration-none">Editar/Eliminar</Link>
+                    <Link to="/admin/users" class="link-dark text-decoration-none">Editar/Eliminar</Link>
                   </li>
                 </ul>
               </div>
