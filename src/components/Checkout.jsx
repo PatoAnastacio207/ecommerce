@@ -27,6 +27,7 @@ const Checkout = () => {
     console.log("soy user", uno)
 console.log(dispatch(user))
   };
+  //api/checkout/buycart recibe user y cart
 
   console.log(cart);
   return (

@@ -24,20 +24,11 @@ const ShoppingCart = () => {
     axios
       .get("/api/cart")
       .then(({ data }) => {
-        const itemsIds = data.map((item) => item._id);
-        return axios.post("/api/products/array", { items: itemsIds });
-      })
-      .then(({ data }) => {
-        var total = data.reduce((previo, current) => {
-          return previo ? current.price + previo : current.price;
-        }, 0);
-        dispatch(buy({ items: data, total: total }));
-
-
+        dispatch(buy(data));
       })
       .catch((e) => console.log(e));
   }, []);
-
+  
 
   return (
     <section className="section-content padding-y">
@@ -86,25 +77,28 @@ const ShoppingCart = () => {
             >
               <div class="card-body">
                 <h5 class="card-title">Total:</h5>
-          
+
                 <h4>{priceFormat.format(cart.total)}</h4>
                 <hr />
 
-                
-                  {user ? (
-                    <Link type="button" class="btn  buyButton shadow-0" to="/checkout">
-                    
-                      {" "}
-                      <strong>Dummie compra</strong>
-                    </Link>
-                    
-                  ) : (
-                    <Link type="button" class="btn  buyButton shadow-0" to="/login">
-                  
-                      <strong>Dummie compra</strong>
-                    </Link>
-                 
-                  )}
+                {user ? (
+                  <Link
+                    type="button"
+                    class="btn  buyButton shadow-0"
+                    to="/checkout"
+                  >
+                    {" "}
+                    <strong>Dummie compra</strong>
+                  </Link>
+                ) : (
+                  <Link
+                    type="button"
+                    class="btn  buyButton shadow-0"
+                    to="/login"
+                  >
+                    <strong>Dummie compra</strong>
+                  </Link>
+                )}
               </div>
               <div class="card-footer">
                 <Link to="/allproducts">Seguir comprando.</Link>

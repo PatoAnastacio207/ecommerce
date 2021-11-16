@@ -19,7 +19,16 @@ export const cartSlice = createSlice({
             state.cart = action.payload
         },
         edit: (state,action)=>{
-            state.cart = action.payload
+            let total = 0
+           const items = state.cart.items.map(item=>{
+                if(item._id===action.payload._id){
+                    item.quantity=action.payload.quantity 
+                }  
+                total += item.quantity*item.price
+                console.log("total",total)
+                return item
+            })
+            state.cart = {items, total}
         },
         empty: (state,action)=>{
             state.cart = {
