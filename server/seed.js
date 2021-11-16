@@ -96,15 +96,25 @@ const data = [
     }
 ]
 
-data.forEach(async product => {
-    var nuevoProducto = new Product(product)
-    await nuevoProducto.save()
-    console.log(nuevoProducto)
-})
+const users = [
+    {
+        firstName: "admin",
+        lastName: "admin",
+        email: "admin@mail.com"
+    }
 
-//  users.forEach(async usuario => {
-//      var nuevoUsuario = new User(usuario)
-//      await nuevoUsuario.save()
-//      const creado = await User.findOne({ email: usuario.email })
-//      await creado.switchAdmin
-//  })
+]
+
+
+// data.forEach(async product => {
+//     var nuevoProducto = new Product(product)
+//     await nuevoProducto.save()
+//     console.log(nuevoProducto)
+// })
+
+ users.forEach(async usuario => {
+     var nuevoUsuario = new User(usuario)
+     await nuevoUsuario.save()
+     const creado = await User.findOne({ email: usuario.email })
+     await creado.switchAdmin
+ })

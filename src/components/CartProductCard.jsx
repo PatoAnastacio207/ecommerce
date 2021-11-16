@@ -62,6 +62,7 @@ function CartProductCard({ product }) {
                   <select
                     className="form-control-lg"
                     onChange={cantidad.onChange}
+                    defaultValue={product.quantity}
                   >
                     <option value={(cantidad.value = 1)}>1</option>
                     <option value={(cantidad.value = 2)}>2</option>

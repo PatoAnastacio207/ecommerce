@@ -20,6 +20,7 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     // Devuelve un array de objectos con el id y la cantidad de cada item
+
     axios
       .get("/api/cart")
       .then(({ data }) => {
@@ -31,9 +32,12 @@ const ShoppingCart = () => {
           return previo ? current.price + previo : current.price;
         }, 0);
         dispatch(buy({ items: data, total: total }));
+
+
       })
-      .catch(() => console.log("ERROR"));
+      .catch((e) => console.log(e));
   }, []);
+
 
   return (
     <section className="section-content padding-y">
