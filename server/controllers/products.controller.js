@@ -10,8 +10,9 @@ class ProductsController {
         }
     }
     static async getProductsArray (req, res, next) {
+        console.log(req.body)
         try {
-            const products = await Product.find({ _id: { $in: req.body }})
+            const products = await Product.find({ _id: { $in: req.body.items }})
             return res.json(products)
         } catch (err) {
             return res.sendStatus(500)
