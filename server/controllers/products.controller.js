@@ -45,6 +45,7 @@ class ProductsController {
         }
     }
     static async deleteProduct (req, res, next) {
+        console.log(req.params.id)
         try {
             await Product.deleteOne({ _id: req.params.id })
             return res.sendStatus(204)

@@ -18,7 +18,7 @@ const Register = () => {
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    console.log("register attempt...");
+
     axios.post("/api/auth/google").then(() => {
       Notification.successMessage("Register success")
       history.push("/login");
@@ -27,7 +27,6 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Register attempt...");
     axios
       .post("/api/auth/register", {
         firstName: firstName.value,
@@ -40,10 +39,10 @@ const Register = () => {
           Notification.successMessage("Register success")
           return history.push("/login");
         }
-        Notification.successMessage("Oops...")
+        Notification.errorMessage("Oops...")
       })
       .catch((err) => {
-        Notification.successMessage("Oops...")
+        Notification.errorMessage("Oops...")
       });
   };
 
