@@ -4,10 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "../features/userSlice";
 import { GiSkateboard } from "react-icons/gi";
 import axios from "axios";
+import { selectCart, populate } from "../features/cartSlice"
+
 
 const Navbar = () => {
+  // const cart = useSelector(selectCart);
+
   const history = useHistory();
   const dispatch = useDispatch();
+
   const user = useSelector(selectUser);
 
   const handleLogout = () => {
@@ -32,7 +37,9 @@ const Navbar = () => {
       .catch((error) => {
         console.log(error);
       });
+    axios.get("/api/cart/").then(({data}) => dispatch(populate(data)))
   }, []);
+  
 
   console.log(user)
 

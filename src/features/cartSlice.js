@@ -1,49 +1,60 @@
-import {createSlice} from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
+
+const getTotal = (items) => {
+  console.log("items", items);
+  items.forEach((item) => {
+    console.log(item);
+  });
+  return 123;
+};
 
 export const cartSlice = createSlice({
-    name:"cart",
-    initialState:{
-       cart: {
-           items: [],
-           total: 0
-       }
+  name: "cart",
+  initialState: {
+    cart: {
+      items: [],
+      total: 0,
     },
-    reducers:{
-        buy: (state,action)=>{
-            state.cart = action.payload
-        },
-        borrar: (state,action)=>{
-            state.cart = action.payload
-        },
-        add: (state,action)=>{
-            state.cart = action.payload
-        },
-        edit: (state,action)=>{
-            let total = 0
-           const items = state.cart.items.map(item=>{
-                if(item._id===action.payload._id){
-                    item.quantity=action.payload.quantity 
-                }  
-                total += item.quantity*item.price
-                console.log("total",total)
-                return item
-            })
-            state.cart = {items, total}
-        },
-        empty: (state,action)=>{
-            state.cart = {
-                items: [],
-                total: 0
-            }
-        },
-        checkout: (state,action) =>{
-            let compras = []
-            state.cart = compras.push(action.payload)
+  },
+  reducers: {
+    populate: (state, action) => {
+      state.cart = action.payload;
+    },
+    add: (state, action) => {
+        let cart = state.cart
+        if (!state.cart.items.some(e => e._id === action.payload.product._id)) {
+            cart.items.push({quantity: parseInt(action.payload.quantity), ...action.payload.product})
+            cart.total += parseInt(action.payload.quantity) * action.payload.product.price
         }
+        state.cart = cart
+    },
+    remove: (state, action) => {
+        let total = state.cart.total
+        const items = state.cart.items.filter((item) => {
+            if (item._id === action.payload.product._id) {
+                total -= item.price * item.quantity
+                return false
+            } else return true
+        })
+        state.cart = { items, total }
+    },
+    edit: (state, action) => {
+        // Cambiar la quantity de un item
+        const items = state.cart.items
+        let total = state.cart.total
+        items.forEach((item, index) => {
+            if(item._id === action.payload._id) {
+                total -= item.price * item.quantity
+                items[index].quantity = parseInt(action.payload.quantity)
+                total += item.price * item.quantity
+            }
+        })
+        state.cart = { items, total }
     }
-})
-export const {buy,borrar,add,edit,empty,checkout}=cartSlice.actions
+  },
+});
+export const { populate, remove, add, edit, empty, checkout } = cartSlice.actions;
 
 export const selectCart = (state) => state.cart.cart;
 
-export default cartSlice.reducer
+export default cartSlice.reducer;

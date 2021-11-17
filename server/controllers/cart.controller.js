@@ -21,15 +21,7 @@ class CartController {
         const product = { _id: req.body._id, quantity: req.body.quantity ? req.body.quantity : 1 }
         if (req.session.cart) {
             // Checkear si existe y añadir la quanti q se añada
-            if (req.session.cart.some(e => e._id === product._id)) {
-                console.log("-----------------------")
-                req.session.cart = req.session.cart.map((item, index) => {
-                    item.quantity += item._id === product._id ? product.quantity : 0
-                    console.log(product)
-                    return item
-                })
-            }
-            else req.session.cart.push(product)
+            if (!req.session.cart.some(e => e._id === product._id)) req.session.cart.push(product)
         }
         else req.session.cart = [product]
         return res.sendStatus(200)
@@ -40,8 +32,8 @@ class CartController {
     }
     static editItem (req, res, next) {
         if (req.session.cart) req.session.cart = req.session.cart.map(item => {
-            if (item._id === req.body._id) return { quantity: req.body.quantity, _id: item._id }
-            return { item }
+            if (item._id === req.body._id) return { quantity: parseInt(req.body.quantity), _id: item._id }
+            return { ...item }
         })
         res.sendStatus(201)
     }
