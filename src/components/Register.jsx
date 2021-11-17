@@ -40,10 +40,10 @@ const Register = () => {
           Notification.successMessage("Register success")
           return history.push("/login");
         }
-        Notification.successMessage("Oops...")
+        Notification.errorMessage("Oops...")
       })
       .catch((err) => {
-        Notification.successMessage("Oops...")
+        Notification.errorMessage("Oops...")
       });
   };
 
@@ -72,6 +72,8 @@ const Register = () => {
                   className="form-control"
                   id="floatingInput"
                   placeholder="first name"
+                  required
+                  pattern="[a-zA-Z]*"
                   {...firstName}
                 />
                 <label for="floatingInput">Nombre</label>
@@ -86,6 +88,8 @@ const Register = () => {
                   className="form-control"
                   id="floatingInput"
                   placeholder="last name"
+                  required
+                  pattern="[a-zA-Z]*"
                   {...lastName}
                 />
                 <label for="floatingInput">Apellido</label>
@@ -100,7 +104,9 @@ const Register = () => {
                   className="form-control"
                   id="floatingInput"
                   placeholder="name@example.com"
+                  required
                   {...email}
+                  pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
                 />
                 <label for="floatingInput">Email address</label>
               </div>
@@ -113,6 +119,7 @@ const Register = () => {
                   className="form-control"
                   id="floatingPassword"
                   placeholder="Password"
+                  required
                   {...password}
                 />
                 <label for="floatingPassword">Password</label>

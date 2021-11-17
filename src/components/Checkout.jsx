@@ -89,6 +89,7 @@ console.log(metodo.value)
                         class="form-control"
                         value={user?.checkoutInfo.address || direction.value}
                         onChange={direction.onChange}
+                        required
                       />
                     </div>
                     <div class="input-group mb-3">
@@ -102,6 +103,7 @@ console.log(metodo.value)
                         onChange={phone.onChange}
                         maxLength="15"
                         pattern="[0-9]+"
+                        required
                       />
                     </div>
                     <div class="input-group mb-3">
@@ -122,6 +124,7 @@ console.log(metodo.value)
                       <select
                         className="form-control-lg"
                         onChange={metodo.onChange}
+                        required
                       >
                         <option value={("mercadoPago")}>
                           Mercado Pago
@@ -141,6 +144,7 @@ console.log(metodo.value)
                       <select
                         className="form-control-lg"
                         onChange={envio.onChange}
+                        required
                       >
                         <option value={(envio.value = 1)}>
                           Envio a domicilio

@@ -45,6 +45,7 @@ const Tarjeta = () => {
               name="number"
               maxlength="16"
               pattern="[0-9]+"
+              required
             ></input>
           </div>
         </div>
@@ -52,7 +53,7 @@ const Tarjeta = () => {
         <div className="row">
           <div className="col-sm-9">
             <label for="name">Card Name</label>
-            <input type="text" className="form-control" name="name"></input>
+            <input type="text" className="form-control" name="name"  pattern="[a-zA-Z]*" required></input>
           </div>
         </div>
         <br />
@@ -64,7 +65,7 @@ const Tarjeta = () => {
 
         <div className="row">
           <div className="col-sm-4">
-            <select className="form-control" name="expiry">
+            <select className="form-control" name="expiry" required>
               <option value=" ">Month</option>
               <option value="01">Jan</option>
               <option value="02">Feb</option>
@@ -82,7 +83,7 @@ const Tarjeta = () => {
           </div>
           &nbsp;
           <div className="col-sm-4">
-            <select className="form-control" name="expiry">
+            <select className="form-control" name="expiry" required>
               <option value=" ">Year</option>
               <option value="21">2021</option>
               <option value="22">2022</option>
@@ -107,6 +108,7 @@ const Tarjeta = () => {
             maxlength="3"
             className=" form-control"
             pattern="\d*"
+            required
           ></input>
         </div>
         <br />
