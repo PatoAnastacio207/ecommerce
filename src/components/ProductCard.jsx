@@ -1,19 +1,23 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react"
 
 function ProductCard({ product, admin }) {
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const urlRedirect = `/product/${product._id}`;
 
+  const [deleted, setDeleted] = useState(false)
+
   const handleDelete = (e) => {
     e.preventDefault();
     axios
       .delete(`/api/products/id/${product._id}`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-      console.log(`deleted`);
-      window.location.reload(false);
+      .then((res) => {
+        setDeleted(true)
+        return res.data
+      })
+      .catch((err) => console.error(err));
   }
 
   const handleCart = (e) => {
@@ -21,12 +25,14 @@ function ProductCard({ product, admin }) {
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then((res) => res.data)
-      .catch((err) => console.log(err));
-    console.log(`added`);
+      .catch((err) => console.error(err));
   };
 
   return (
-    <div className="col">
+    <>
+    {
+      deleted ? <></> : (
+        <div className="col">
       <div className="card hover-shadow border" style={{ fontFamily: "Bebas Neue" }}>
         <Link to={urlRedirect}>
           <div className="bg-image hover-overlay ripple ">
@@ -71,6 +77,9 @@ function ProductCard({ product, admin }) {
         </div>
       </div>
     </div>
+      )
+    }
+    </>
   );
 }
 
