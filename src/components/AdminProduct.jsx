@@ -16,7 +16,7 @@ const AdminProduct = ({ product }) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (window.location.pathname === `/admin/product/${product.id}`) {
+    if (window.location.pathname === `/admin/product/${product?.id}`) {
       axios
       .put(`/api/products/id/${product.id}`, {
         name: name.value || product.name,
