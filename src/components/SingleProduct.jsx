@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-
-
+import { useDispatch } from "react-redux"
+import { add } from "../features/cartSlice"
 
 const SingleProduct = () => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
-
+  const dispatch = useDispatch()
 
   const starsReview = {
-    
     count: 5,
     color: "black",
     activeColor: "#ffd700",
@@ -29,7 +28,6 @@ const SingleProduct = () => {
   const ratingChanged = (newRating) => {
     console.log(newRating);
   };
-  
 
   useEffect(() => {
     axios.get(`/api/products/id/${id}`).then(({ data }) => setProduct(data));
@@ -39,12 +37,11 @@ const SingleProduct = () => {
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   const handleCart = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     axios
-      .post("/api/cart/add", { _id: product._id, quantity: +1 })
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-    console.log(`added`);
+      .post("/api/cart/add", { _id: product._id, quantity: 1 })
+      .then(() => dispatch(add({ product, quantity: 1 })))
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -71,12 +68,14 @@ const SingleProduct = () => {
             <ReactStars {...starsReview} />
             <hr style={{ margin: "5px" }} />
             <h3>{priceFormat.format(product.price)}</h3>
-            <button
+            <Link
+              onClick={handleCart}
+              to="/cart"
               className="btn btn-success shadow-0"
               style={{ marginRight: "15px", fontSize: "large" }}
             >
               Buy now
-            </button>
+            </Link>
             <button
               onClick={handleCart}
               className="btn btn-dark shadow-0"

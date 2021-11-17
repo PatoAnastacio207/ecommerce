@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useInput } from "../hooks/custom-hooks";
-import { selectCart, buy, borrar,edit } from "../features/cartSlice";
+import { selectCart, buy, remove, edit } from "../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -8,28 +8,24 @@ function CartProductCard({ product }) {
   const cart = useSelector(selectCart);
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
-  const cantidad = useInput("cantidad");
   const dispatch = useDispatch();
+
+  console.log(cart)
 
   const handleDelete = () => {
     // Modificar el cart
     const cartSinItem = cart.items.filter((item) => item._id !== product._id);
     axios
       .delete("/api/cart/remove", { data: { _id: product._id } })
-      .then(() =>
-        dispatch(
-          borrar({ items: cartSinItem, total: cart.total - product.price })
-        )
-      );
+      .then(() => dispatch(remove({ product })));
   };
   
   const handleChange = (e)=>{
-    cantidad.onChange(e)
-    dispatch(edit({_id:product._id,quantity:e.target.value}))
-    axios.put("/api/cart/edit",{_id:product._id,quantity:e.target.value})
+    // dispatch(edit({ _id:product._id, quantity: parseInt(e.target.value) }))
+    axios.put("/api/cart/edit",{ _id: product._id, quantity: parseInt(e.target.value) })
+      .then(() => dispatch(edit({ _id: product._id, quantity: parseInt(e.target.value) })))
   }
 
-  console.log(cart)
   return (
     <div className="row border border-dark rounded">
       <div className="col-sm-8">
@@ -52,7 +48,7 @@ function CartProductCard({ product }) {
               </div>
               <div className="align-self-center">
                 <h2 className="h1 mb-0">
-                  {priceFormat.format(product.price * (cantidad.value || 1))}
+                  {priceFormat.format(product.price * (product.quantity || 1))}
                 </h2>
               </div>
             </div>
@@ -69,11 +65,11 @@ function CartProductCard({ product }) {
                   <select
                     className="form-control-lg"
                     onChange={handleChange}
-                    defaultValue={product.quantity}
+                    defaultValue={product.quantity + ""}
                   >
-                    <option value={(cantidad.value = 1)}>1</option>
-                    <option value={(cantidad.value = 2)}>2</option>
-                    <option value={(cantidad.value = 3)}>3</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
                   </select>
                 </div>
               </div>

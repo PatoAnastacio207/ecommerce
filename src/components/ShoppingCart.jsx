@@ -15,20 +15,7 @@ const ShoppingCart = () => {
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const user = useSelector(selectUser);
 
-  const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-
-  useEffect(() => {
-    // Devuelve un array de objectos con el id y la cantidad de cada item
-
-    axios
-      .get("/api/cart")
-      .then(({ data }) => {
-        dispatch(buy(data));
-      })
-      .catch((e) => console.log(e));
-  }, []);
-  
 
   return (
     <section className="section-content padding-y">
@@ -94,7 +81,7 @@ const ShoppingCart = () => {
                   <Link
                     type="button"
                     class="btn  buyButton shadow-0"
-                    to="/login"
+                    to="/login?buy=true"
                   >
                     <strong>Dummie compra</strong>
                   </Link>

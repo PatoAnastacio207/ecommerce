@@ -1,20 +1,25 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { useDispatch } from 'react-redux'
 import { login, selectUser } from '../features/userSlice'
 import Notification from "../utils/Notification"
-//import { UserContext } from "../index";
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const Login = () => {
-
   const dispatch = useDispatch();
   //const { setUser } = useContext(UserContext);
   const history = useHistory();
   const email = useInput("email");
   const password = useInput("password");
+
+  let query = useQuery()
+  const redirect = query.get("buy") === "true" ? true : false 
+  const url = redirect ? "/cart" : "/"
 
   const handleGoogle = (e) => {
     e.preventDefault();
@@ -25,7 +30,7 @@ const Login = () => {
       .then(res => {
         dispatch(login(res.data))
         Notification.successMessage("Login success")
-        history.push("/");
+        history.push(url);
       })
   }
   
@@ -39,7 +44,7 @@ const Login = () => {
       .then(res => {
         dispatch(login(res.data))
         Notification.successMessage("Login success")
-        history.push("/");
+        history.push(url);
       })
      .catch((err) => {
         Notification.errorMessage("Oops...")
@@ -85,7 +90,7 @@ const Login = () => {
                 />
                 <label for="floatingPassword">Password</label>
                 <div id="emailHelp" className="form-text">
-                  Don't have an account? <Link to='/register'>Register.</Link>
+                  Don't have an account? <Link to='/register?buy=true'>Register.</Link>
                 </div>
               </div>
 

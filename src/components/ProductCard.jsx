@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { add } from "../features/cartSlice"
 
 function ProductCard({ product, admin }) {
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const urlRedirect = `/product/${product._id}`;
+  const dispatch = useDispatch()
 
   const [deleted, setDeleted] = useState(false)
 
@@ -24,7 +27,7 @@ function ProductCard({ product, admin }) {
     e.preventDefault();
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
-      .then((res) => res.data)
+      .then(() => dispatch(add({ product, quantity: 1 }))      )
       .catch((err) => console.error(err));
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,9 @@ import { login, selectUser } from "../features/userSlice";
 import Notification from "../utils/Notification"
 import Swal from "sweetalert2";
 
-//import { UserContext } from "../index";
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const Register = () => {
   const history = useHistory();
@@ -15,6 +17,10 @@ const Register = () => {
   const password = useInput("password");
   const firstName = useInput('firstName')
   const lastName = useInput('lastName')
+
+  let query = useQuery()
+  const redirect = query.get("buy") === "true" ? true : false 
+  const url = redirect ? "/login?buy=true" : "/login"
 
   const handleGoogle = (e) => {
     e.preventDefault();
@@ -37,7 +43,7 @@ const Register = () => {
       .then(({data}) => {
         if (data._id) {
           Notification.successMessage("Register success")
-          return history.push("/login");
+          return history.push(url);
         }
         Notification.errorMessage("Oops...")
       })
