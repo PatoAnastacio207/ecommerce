@@ -67,7 +67,9 @@ const Login = () => {
                   className="form-control"
                   id="floatingInput"
                   placeholder="name@example.com"
+                  pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
                   {...email}
+                  required
                 />
                 <label for="floatingInput">Email address</label>
               </div>
@@ -79,6 +81,7 @@ const Login = () => {
                   id="floatingPassword"
                   placeholder="Password"
                   {...password}
+                  required
                 />
                 <label for="floatingPassword">Password</label>
                 <div id="emailHelp" className="form-text">

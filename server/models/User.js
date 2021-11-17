@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
     
     history: [
       {
-        name: { type: String },
+        product: { type: String },
         imgUrl: { type: String },
         price: { type: Number },
         quantity: { type: Number },
