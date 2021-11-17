@@ -35,10 +35,14 @@ export const cartSlice = createSlice({
                 items: [],
                 total: 0
             }
+        },
+        checkout: (state,action) =>{
+            let compras = []
+            state.cart = compras.push(action.payload)
         }
     }
 })
-export const {buy,borrar,add,edit,empty}=cartSlice.actions
+export const {buy,borrar,add,edit,empty,checkout}=cartSlice.actions
 
 export const selectCart = (state) => state.cart.cart;
 

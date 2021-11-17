@@ -17,7 +17,7 @@ import { selectUser } from "./features/userSlice";
 import Category from "./components/Category"
 
 import Checkout from "./components/Checkout"
-
+import TarjetaDeCredito from "./components/Pago/TarjetaDeCredito"
 import AdminView from "./components/AdminView";
 import AdminProduct from './components/AdminProduct'
 import AdminSidebar from './components/AdminSidebar'
@@ -80,7 +80,7 @@ function App() {
         {/*FOR CONTACT */}
         <Route path={"/contact"} component={Contact} />
         <Route path={"/checkout"} component={Checkout} />
-
+        <Route path={"/creditcard"} component={TarjetaDeCredito} />
       </Switch>
         </div>
       {/* For FOOTER --> All the pages */}
