@@ -49,9 +49,11 @@ function ProductCard({ product, admin }) {
             {admin ? (
               <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group me-2 shadow-0" role="group">
-                  <button className="btn btn-info shadow-0">
-                    <i className="fas fa-edit"></i>
-                  </button>
+                  <Link to={`/admin/product/${product._id}`}>
+                    <button className="btn btn-info shadow-0">
+                      <i className="fas fa-edit"></i>
+                    </button>
+                  </Link>
                 </div>
                 <div class="btn-group shadow-0" role="group">
                   <button className="btn btn-danger shadow-0" onClick={handleDelete}>

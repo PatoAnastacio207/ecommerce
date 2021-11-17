@@ -75,37 +75,6 @@ const AdminSidebar = () => {
               </div>
             </div>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#flush-collapseThree"
-                aria-expanded="false"
-                aria-controls="flush-collapseThree"
-              >
-                Admins
-              </button>
-            </h2>
-            <div
-              id="flush-collapseThree"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingThree"
-              data-mdb-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <Link to="/admin/adminadd" class="link-dark text-decoration-none">Agregar</Link>
-                  </li>
-                  <li class="list-group-item">
-                    <Link to="/admin/admins" class="link-dark text-decoration-none">Editar/Eliminar</Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
   );
