@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
         phone: { type: String, default: "" },
       },
     
-    history: [
+    favorites: [
       {
         product: { type: String },
         imgUrl: { type: String },
