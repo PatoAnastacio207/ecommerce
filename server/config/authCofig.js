@@ -1,15 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require("../models/User");
-const app = require("../app")
-
-const GOOGLE_CLIENT_ID =
-  "853910693747-q00iaamotqqnprgqeju02cjqnkb7rtcl.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
-
-app.use(passport.initialize());
-app.use(passport.session());
+// const app = require("../app")
 
 // Crea la cookie
 passport.serializeUser(function (user, done) {
@@ -39,31 +31,5 @@ passport.use(
     }
   )
 );
-
-// Passport google
-// passport.use(new GoogleStrategy({
-//     clientID: GOOGLE_CLIENT_ID,
-//     clientSecret: GOOGLE_CLIENT_SECRET,
-//     callbackURL: "http://localhost:3001/api/auth/google/callback"
-//   },
-//   async function (accessToken, refreshToken, profile, done) {
-//     let user = await User.findOne({ email: profile.email })
-//     console.log(user)
-//     if(user) console.log("ya existe")
-//     else {
-//       user = new User({
-//         type: "google",
-//         email: profile.email,
-//         firstName: profile.name.givenName,
-//         lastName: profile.name.familyName,
-//         salt: ""
-//       })
-//       await user.save()
-//     }
-//     user = await User.find({ email: profile.email })
-//     return done (null, user)
-//   }
-// ));
-
 
 module.exports = passport;

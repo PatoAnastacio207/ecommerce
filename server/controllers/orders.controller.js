@@ -38,33 +38,42 @@ class OrdersController {
             }
             return res.sendStatus(401)
         } catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async getOrders (req, res, next) {
         try {
             const orders = await Order.find()
             return res.send(orders)
-        } catch {
-            return res.sendStatus(500)
+        } catch (err) {
+            return next(err)
         }
     }
     static async getUserOrders (req, res, next) {
         try {
             const orders = await Order.find({ userId: req.user._id })
             return res.send(orders)
-        } catch {
-            return res.sendStatus(500)
+        } catch (err) {
+            return next(err)
         }
     }
     static async updateStatus (req, res, next) {
         try {
             await Order.updateOne({ _id: req.params.id }, { status: req.body.status })
             return res.sendStatus(200)
-        } catch {
-            return res.sendStatus(500)
+        } catch (err) {
+            return next(err)
         }
     } 
+    static async getSingleOrder (req, res, next) {
+        try {
+            const order = await Order.find({ _id: req.params.id })
+            if (req.user && (req.user.isAdmin || order.authorId === req.user._id)) return res.send(order)
+            else return res.sendStatus(401)
+        } catch (err) {
+            return next(err)
+        }
+    }
 }
 
 module.exports = OrdersController

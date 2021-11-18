@@ -6,7 +6,7 @@ class ProductsController {
             const products = await Product.find()
             return res.json(products)
         } catch (err) {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async getProductsArray (req, res, next) {
@@ -15,7 +15,7 @@ class ProductsController {
             const products = await Product.find({ _id: { $in: req.body.items }})
             return res.json(products)
         } catch (err) {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async getProductById (req, res, next) {
@@ -23,7 +23,7 @@ class ProductsController {
             const product = await Product.findOne({ _id: req.params.id })
             return res.json(product)
         } catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async createProduct (req, res, next) {
@@ -32,7 +32,7 @@ class ProductsController {
             await newProduct.save()
             return res.json(newProduct)
         } catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async updateProduct (req, res, next) {
@@ -41,7 +41,7 @@ class ProductsController {
             const product = await Product.find({ _id: req.params.id })
             res.json(product)
         } catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async deleteProduct (req, res, next) {
@@ -50,7 +50,7 @@ class ProductsController {
             await Product.deleteOne({ _id: req.params.id })
             return res.sendStatus(204)
         } catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async getProductByCategoryName (req, res, next) {
@@ -59,7 +59,7 @@ class ProductsController {
             return res.json(products)
         }
         catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async getProductByCategoryType (req, res, next) {
@@ -68,7 +68,7 @@ class ProductsController {
             return res.json(products)
         }
         catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async searchProducts (req, res, next) {
@@ -78,7 +78,7 @@ class ProductsController {
             return res.json(products)
         }
         catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
     static async addProductReview (req, res, next) {
@@ -87,7 +87,7 @@ class ProductsController {
             product.addReview(req.body)
             return res.send(product)
         } catch {
-            return res.sendStatus(500)
+            return next(err)
         }
     }
 }
