@@ -2,37 +2,39 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { useInput } from "../hooks/custom-hooks";
-import axios from "axios"
-import {login} from "../features/userSlice"
-import {useHistory} from 'react-router-dom'
-
+import axios from "axios";
+import { login } from "../features/userSlice";
+import { useHistory } from "react-router-dom";
 
 const UserEdit = () => {
   const user = useSelector(selectUser);
   const phone = useInput("phone");
   const address = useInput("address");
 
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-//   useEffect(() => {
-//     axios
-//     .get('/checkout/myorders')
-//     .then((res)=>console.log(res)
-//   }, [])
+  //   useEffect(() => {
+  //     axios
+  //     .get('/checkout/myorders')
+  //     .then((res)=>console.log(res)
+  //   }, [])
 
   const handleSave = (e) => {
-    console.log("hola")
+    console.log("hola");
     e.preventDefault();
     axios
       .put(`/api/users/single/${user._id}`, {
-        checkoutInfo: { address: address.value || user?.checkoutInfo.address, phone: phone.value || user?.checkoutInfo.phone},
+        checkoutInfo: {
+          address: address.value || user?.checkoutInfo.address,
+          phone: phone.value || user?.checkoutInfo.phone,
+        },
       })
       .then((data) => {
         dispatch(login(data.data));
-        history.push("/myProfile")
-      })
-    }
+        history.push("/myProfile");
+      });
+  };
   return (
     <div>
       <br />
@@ -79,7 +81,6 @@ const UserEdit = () => {
               className="form-control"
               onChange={phone.onChange}
               required
-            
             ></input>
           </div>
         </div>
@@ -87,32 +88,43 @@ const UserEdit = () => {
         <br />
         <div className="col-sm-12">
           <label for="cvv">Address </label> {"  "}
-          <input 
+          <input
             type="text"
             defaultValue={user?.checkoutInfo.address}
             value={address.value}
             className="form-control"
             onChange={address.onChange}
             required
-         
           ></input>
-        
-        </div >
+        </div>
         <br />
+        <div className="col-sm-12">
+          <label for="cvv">Email </label> {"  "}
+          <input
+            type="text"
+            value={user.email}
+            className="form-control"
+            required
+            disabled
+          ></input>
+        </div>
+        <br/>
         <div className="row">
-        <div className="col-sm-4"></div>
-        <div className="col-sm-4">
-        <input
-          type="submit"
-          className="btn btn-danger"
-          value="Save Change"
-        />
+          <div className="col-sm-4"></div>
+          <div className="col-sm-4">
+            <input
+              type="submit"
+              className="btn btn-danger"
+              value="Save Change"
+            />
 
-        <br />
-        <br /></div>
-        <div className="col-sm-4"></div>
+            <br />
+            <br />
+          </div>
+          <div className="col-sm-4"></div>
         </div>
       </form>
+      
       <br />
       <br />
       <br />

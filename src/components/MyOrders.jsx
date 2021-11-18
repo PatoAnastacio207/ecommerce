@@ -14,27 +14,28 @@ const MyOrders = () => {
 
   return (
     <div>
-      {orders.map(({ items, date, status, _id }) => (
-        <div class="accordion" id="accordionExample">
+      {orders.map(({ items, date, status, _id },i) => (
+        <div class="accordion" id="accordionFlushExample">
           <div class="accordion-item">
-            <h2 class="accordion-header" id={`heading${_id}`}>
+            <h2 class="accordion-header" id={`flush-heading${_id}`}>
               <button
-                class="accordion-button"
+                class="accordion-button collapsed"
                 type="button"
                 data-mdb-toggle="collapse"
-                data-mdb-target={`#collapse${_id}`}
-                aria-expanded="true"
-                aria-controls={`collapse${_id}`}
+                data-mdb-target={`#flush-collapse${_id}`}
+                aria-expanded="false"
+                aria-controls={`flush-collapse${_id}`}
+                key={i}
               >
-                ORDER:   {status}
+               {` ORDER ${i+1}:   ${status}`}
               </button>
             </h2>
           </div>
           <div
-            id={`collapse${_id}`}
-            class="accordion-collapse collapse show"
-            aria-labelledby={`heading${_id}`}
-            data-mdb-parent="#accordionExample"
+            id={`flush-collapse${_id}`}
+            class="accordion-collapse collapse"
+            aria-labelledby={`flush-heading${_id}`}
+            data-mdb-parent="#accordionFlushExample"
           >
             <div class="accordion-body">
               <div>
