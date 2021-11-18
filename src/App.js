@@ -78,6 +78,7 @@ function App() {
         {/* <Route path={"/buildyourown"} component={} /> */}
 
         {/*FOR CONTACT */}
+        
         <Route path={"/contact"} component={Contact} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/creditcard"} component={TarjetaDeCredito} />
