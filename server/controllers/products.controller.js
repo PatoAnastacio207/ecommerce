@@ -63,7 +63,8 @@ class ProductsController {
     }
     static async getProductByCategoryType (req, res, next) {
         try {
-            const products = await Product.find({ "category.name": req.params.name, "category.type": req.params.type })
+            console.log(req.params)
+            const products = await Product.find({ $and: [{ "category.name": req.params.name }, { "category.type": req.params.type }]})
             return res.json(products)
         }
         catch {
