@@ -6,6 +6,7 @@ import axios from "axios";
 import { login } from "../features/userSlice";
 import { useHistory } from "react-router-dom";
 
+
 const UserEdit = () => {
   const user = useSelector(selectUser);
   const phone = useInput("phone");
@@ -124,7 +125,7 @@ const UserEdit = () => {
           <div className="col-sm-4"></div>
         </div>
       </form>
-      
+
       <br />
       <br />
       <br />
@@ -132,14 +133,6 @@ const UserEdit = () => {
       <br />
     </div>
 
-    // <div className="container">
-    //     <h1>My Profile</h1>
-    //     <h4>Nombre</h4>
-    //     <p>{user && user.firstName}</p>
-    //     <h4>Apellido</h4>
-    //     <p>{user && user.lastName}</p>
-
-    // </div>
   );
 };
 

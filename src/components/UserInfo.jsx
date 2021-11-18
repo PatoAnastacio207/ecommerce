@@ -4,7 +4,7 @@ import { selectUser } from "../features/userSlice";
 import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { login } from "../features/userSlice";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import MyOrders from "./MyOrders";
 
 const UserInfo = () => {
@@ -90,16 +90,31 @@ const UserInfo = () => {
               disabled
             ></input>
           </div>
-          <div className="col-sm-6">
-            <img src="https://media.discordapp.net/attachments/906301841460043853/908458976201551912/260ab4121609229.60c95d4a44ee8.png?width=441&height=441" alt="" style={{width:"60%"}}/>
+          <div className="container col-sm-6 d-flex justify-content-center">
+            <div className="container col-sm-3 ">
+              <br />
+              <img
+                src="https://media.discordapp.net/attachments/906301841460043853/908458976201551912/260ab4121609229.60c95d4a44ee8.png?width=441&height=441"
+                alt=""
+              />
+              <br />
+            </div>
+            <div className="container col-sm-9 ">
+              <Link
+                className=" mainButton text-decoration-none link-dark"
+                style={{ fontFamily: "Bebas Neue" }}
+                to="/myOrders"
+              >
+                My orders
+              </Link>
+              <br />
+              <br />
+            </div>
           </div>
         </div>
-        <br />
-        <br />
       </form>
       <br />
       <br />
-      <MyOrders />
       <br />
       <br />
       <br />

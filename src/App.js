@@ -28,6 +28,7 @@ import ProductManager from "./components/ProductManager";
 import UserInfo from "./components/UserInfo"
 import UserEdit from "./components/UserEdit"
 import MyOrders from "./components/MyOrders"
+import Review from "./components/reviewForm"
 
 import OrdersList from "./components/OrdersList";
 import SingleOrder from "./components/SingleOrder";
@@ -91,13 +92,15 @@ function App() {
         {/*FOR CONTACT */}
         
         <Route path={"/contact"} component={Contact} />
+        {/*FOR CHECKOUT AND PAYMENT*/}
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/creditcard"} component={TarjetaDeCredito} />
 
+        {/*FOR USER VIEW*/}
         <Route path={"/myProfile"} component={UserInfo} />
         <Route path={"/myProfileEdit"} component={UserEdit} />
         <Route path={"/myOrders"} component={MyOrders} />
-
+        <Route path={"/myReview"} component={Review} />
 
         <Route path="/404" >404</Route>
         <Route path={"*"} ><Redirect to="/404"></Redirect></Route>
