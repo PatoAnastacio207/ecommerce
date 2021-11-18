@@ -31,8 +31,8 @@ const SingleProduct = () => {
   };
 
   const addReview = async (e) => {
-    const updatedProduct = await axios.post("/api/products/reviews/add", { user, _id: id, review: { valoration: 4, message: "Default message" }})
-    setProduct(updatedProduct)
+    const updatedProduct = await axios.post("/api/products/reviews/add", { user, _id: id, orderId: "123456", review: { valoration: 4, message: "Default message" }})
+    console.log(updatedProduct)
   }
 
   const addFavorite = async (e) => {

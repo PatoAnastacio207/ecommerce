@@ -82,23 +82,21 @@ class ProductsController {
     }
     static async addProductReview (req, res, next) {
         try {
-            console.log(req.body)
+            await Product.findOneAndUpdate({ _id: req.body._id }, { $pull: { reviews: { orderId: req.body.orderId }}})
             const product = await Product.findOneAndUpdate(
                 {_id: req.body._id},
                 { $push: { reviews: {
                     valoration: req.body.review.valoration,
                     message: req.body.review.message,
                     authorName: `${req.body.user.firstName} ${req.body.user.lastName}`, 
-                    authorId: req.body.user._id
+                    orderId: req.body.orderId
                 }}},
                 {
                     returnOriginal: false,
                     useFindAndModify: false
                 }
             )
-            // const product = await Product.findOne({ _id: req.body._id })
-            // product.addReview(req.body)
-            return res.sendStatus(200)
+            return res.send(product)
         } catch (err) {
             return next(err)
         }
