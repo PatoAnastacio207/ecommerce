@@ -25,7 +25,7 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`/api/users/${user._id}`, {
+      .put(`/api/users/single/${user._id}`, {
         checkoutInfo: { address: direction.value, phone: phone.value },
       })
       .then((data) => {
@@ -109,7 +109,7 @@ const Checkout = () => {
                         type="text"
                         class="form-control"
                         defaultValue={user?.checkoutInfo.phone}
-                        value={user?.checkoutInfo.phone}
+                        value={phone.value}
                         onChange={phone.onChange}
                         maxLength="15"
                         pattern="[0-9]+"

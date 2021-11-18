@@ -22,8 +22,11 @@ class UsersController {
         res.sendStatus(200)
     }
     static async getLogged (req, res, next) {
-        if (req.user) res.send(req.user)
-        else res.sendStatus(401)
+        if (req.user) {
+            req.user = await User.findOne({ _id: req.user._id })
+            return res.send(req.user)
+        }
+        else return res.sendStatus(401)
     }
     static async editUser (req, res, next) {
         try {
@@ -66,13 +69,16 @@ class UsersController {
         }
     }
     static async addFavorite (req, res, next) {
-        
+        await User.updateOne({ _id: req.user._id }, { $addToSet: { favorites: req.params.id }})
+        res.sendStatus(200)
     }
     static async removeFavorite (req, res, next) {
-
+        await User.updateOne({ _id: req.user._id }, { $pull: { favorites: req.params.id }})
+        res.sendStatus(200)
     }
     static async getFavorites (req, res, next) {
-        
+        const user = await User.findById(req.user._id)
+        res.send(user.favorites)
     }
 }
 
