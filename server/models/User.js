@@ -24,14 +24,8 @@ const userSchema = new mongoose.Schema(
         phone: { type: String, default: "" },
       },
     
-    history: [
-      {
-        product: { type: String },
-        imgUrl: { type: String },
-        price: { type: Number },
-        quantity: { type: Number },
-        date: { type: Date },
-      },
+    favorites: [
+      { type: String, required: true }
     ],
     isAdmin: { type: Boolean, default: false },
   },
@@ -42,6 +36,14 @@ const userSchema = new mongoose.Schema(
 userSchema.methods.switchAdmin = async function (password, salt) {
   await User.updateOne({ _id: this._id }, { isAdmin: !this.isAdmin });
 };
+
+userSchema.methods.addFavorite = async function (id) {
+  await User.updateOne({ _id: this._id }, { favorites: this.favorites.push(id) })
+}
+
+userSchema.methods.removeFavorite = async function (id) {
+  await User.updateOne({ _id: this._id }, { favorites: this.favorites.filter(item => item === id) })
+}
 
 // Para añadir metodos de clase
 userSchema.static("hash", function (password, salt) {

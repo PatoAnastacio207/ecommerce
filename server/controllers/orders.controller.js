@@ -68,7 +68,7 @@ class OrdersController {
     static async getSingleOrder (req, res, next) {
         try {
             const order = await Order.find({ _id: req.params.id })
-            if (req.user && (req.user.isAdmin || order.authorId === req.user._id)) return res.send(order)
+            if (req.user && (req.user.isAdmin || order.authorId === req.user._id)) return res.send(order[0])
             else return res.sendStatus(401)
         } catch (err) {
             return next(err)
