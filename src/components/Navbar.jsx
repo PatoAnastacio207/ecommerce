@@ -19,7 +19,9 @@ const Navbar = () => {
     axios
       .post("/api/auth/logout")
       .then((res) => dispatch(logout(res.data)))
-      .then(() => dispatch(empty(cart)))
+      .then(() => 
+        dispatch(empty(cart))
+      )
       .catch((err) => console.log(err));
   };
 
@@ -138,7 +140,7 @@ const Navbar = () => {
                     class="nav-item nav-link dropdown-item-dark"
                     to="/myProfile"
                   >
-                    <strong>My Profile</strong>
+                    <strong>{user.firstName}{" "}{user.lastName}</strong>
                   </Link>
                 </li>
                 <li>
