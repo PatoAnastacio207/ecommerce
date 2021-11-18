@@ -32,9 +32,7 @@ const OrdersList = () => {
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {ordersList ? (
                   ordersList.map((data) => (
-
                     <>
-                    
                     {(window.location.pathname === '/admin/orders/old' && data.status !== 'pending') ? (<OrdersCard
                       key={data._id}
                       order={data}

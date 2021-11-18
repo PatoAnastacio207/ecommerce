@@ -7,12 +7,18 @@ const SingleOrder = () => {
   const [order, setOrder] = useState({});
   const [userOrder, setUserOrder] = useState({});
 
+  const priceOptions = { style: "currency", currency: "USD" };
+  const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
+
   const { id } = useParams();
 
   const handleChange = (e) => {
     axios
       .put(`/api/checkout/update/${id}`, {status: e.target.value})
-      .then(res => setOrder(res.data))
+      .then(res => {
+        console.log(res.data)
+        setOrder(res.data)
+      })
       .catch(err => console.log(err))
   }
 
@@ -90,8 +96,8 @@ const SingleOrder = () => {
               <p>
                 <strong>Productos:</strong>
               </p>
-              {order.items?.map((e) => (
-                <p>{`Producto: ${e.name}. Cantidad: ${e.quantity}. Precio: $${e.price} c/u.`}</p>
+              {order.items?.map((product) => (
+                <p>{`Producto: ${product.name}. Cantidad: ${product.quantity}. Precio: ${priceFormat.format(product.price)} c/u.`}</p>
               ))}
 
               <hr />
@@ -108,7 +114,7 @@ const SingleOrder = () => {
                 <strong>TOTAL:</strong>
               </h5>
               <h4>
-                <strong>{`$${order.total}`}</strong>
+                <strong>{priceFormat.format(order.total)}</strong>
               </h4>
             </div>
           </div>
