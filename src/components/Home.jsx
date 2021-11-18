@@ -28,7 +28,7 @@ const Home = () => {
       <br/><br/><br/><br/><br/>
       <div class="d-flex justify-content-center align-items-center h-100">
               <img src={imagen1} alt="" style={{ width: "30%",height:"40%"}}/>
-              <Link to="/buildyourown"><button type="button" class="mainButton" style={{ width: "80%",height:"80%" ,opacity:"0.9"}} >Build your own sk8 <br/>
+              <Link to="/buildyourown"><button type="button" className="mainButton" style={{ width: "80%",height:"80%" ,opacity:"0.9"}} >Build your own sk8 <br/>
               </button>
               </Link>
               <br/>

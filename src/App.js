@@ -33,6 +33,7 @@ import Review from "./components/reviewForm"
 import OrdersList from "./components/OrdersList";
 import SingleOrder from "./components/SingleOrder";
 import FavList from "./components/FavList";
+import BuildYourOwn from "./components/BuildYourOwn";
 
 
 
@@ -72,7 +73,7 @@ function App() {
         {/* SHOPPING CART */}
         <Route exact path="/cart" component={ShoppingCart} />
 
-        <Route exact path="/myfavs" component={FavList} />
+        {user ? <Route exact path="/myfavs" component={FavList} /> : null}
 
 
         <Route exact path="/google" component={GoogleTest} />
@@ -88,7 +89,7 @@ function App() {
         <Route path={"/product/:id"} component={SingleProduct} />
 
         {/*FOR BUILD YOUR OWN*/}
-        {/* <Route path={"/buildyourown"} component={} /> */}
+        <Route path={"/buildyourown"} component={BuildYourOwn} />
 
         {/*FOR CONTACT */}
         
