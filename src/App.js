@@ -31,6 +31,7 @@ import MyOrders from "./components/MyOrders"
 
 import OrdersList from "./components/OrdersList";
 import SingleOrder from "./components/SingleOrder";
+import FavList from "./components/FavList";
 
 
 
@@ -56,21 +57,21 @@ function App() {
         <Route path="/register" component={Register} />
         <Route exact path="/" component={Home} />
         
-        {
-          user?.isAdmin ? <Route exact path="/admin" component={AdminView} /> : null
-        }
-
-        <Route exact path="/admin/productadd" component={AdminProduct} />
-        <Route exact path="/admin/product/:id" component={ProductManager} />
-        <Route exact path="/admin/products" component={AllProducts} />
-        <Route exact path="/admin/useradd" component={AdminUsers} />
-        <Route exact path="/admin/users" component={UsersList} />
-        <Route exact path="/admin/orders/pending" component={OrdersList} />
-        <Route exact path="/admin/orders/old" component={OrdersList} />
-        <Route exact path="/admin/orders/:id" component={SingleOrder} />
+        {/* RUTAS ADMIN */}
+        {user?.isAdmin ? <Route exact path="/admin" component={AdminView} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/productadd" component={AdminProduct} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/product/:id" component={ProductManager} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/products" component={AllProducts} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/useradd" component={AdminUsers} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/users" component={UsersList} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/orders/pending" component={OrdersList} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/orders/old" component={OrdersList} /> : null}
+        {user?.isAdmin ? <Route exact path="/admin/orders/:id" component={SingleOrder} /> : null}
 
         {/* SHOPPING CART */}
         <Route exact path="/cart" component={ShoppingCart} />
+
+        <Route exact path="/myfavs" component={FavList} />
 
 
         <Route exact path="/google" component={GoogleTest} />

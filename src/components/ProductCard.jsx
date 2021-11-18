@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { add } from "../features/cartSlice"
+import { selectUser, updateData } from "../features/userSlice";
 
-function ProductCard({ product, admin }) {
+function ProductCard({ product, admin, favs }) {
+  const user = useSelector(selectUser)
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const urlRedirect = `/product/${product._id}`;
@@ -22,6 +24,13 @@ function ProductCard({ product, admin }) {
       })
       .catch((err) => console.error(err));
   }
+
+  const removeFavorite = async (e) => {
+    e.preventDefault();
+    await axios.delete(`/api/users/favorites/remove/${product._id}`)
+    const res = await axios.get("/api/auth/logged")
+    dispatch(updateData(res.data))
+  } 
 
   const handleCart = (e) => {
     e.preventDefault();
@@ -71,6 +80,10 @@ function ProductCard({ product, admin }) {
 
                 </div>
               </div>
+            ) : favs? (
+              <button className="btn btn-danger shadow-0" onClick={removeFavorite}>
+                <i className="fas fa-ban"></i>
+              </button>
             ) : (
               <button className="btn btn-dark shadow-0" onClick={handleCart}>
                 <i className="fas fa-shopping-cart"></i>
