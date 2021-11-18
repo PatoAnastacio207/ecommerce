@@ -10,8 +10,6 @@ function CartProductCard({ product }) {
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const dispatch = useDispatch();
 
-  console.log(cart)
-
   const handleDelete = () => {
     // Modificar el cart
     const cartSinItem = cart.items.filter((item) => item._id !== product._id);
