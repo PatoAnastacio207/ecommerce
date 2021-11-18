@@ -60,7 +60,7 @@ class OrdersController {
     static async updateStatus (req, res, next) {
         try {
             await Order.updateOne({ _id: req.params.id }, { status: req.body.status })
-            const order = await Order.findOne({ _id: req.params.id }, { status: req.body.status })
+            const order = await Order.findOne({ _id: req.params.id })
             return res.send(order)
         } catch (err) {
             return next(err)
