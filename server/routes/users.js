@@ -4,8 +4,10 @@ const router = express.Router();
 const UsersController = require("../controllers/users.controller")
 const { adminAuthoritation, adminOrUser } = require('../middleware/auth')
 
+// Devuelve el usuario por id
+router.get("/single/:id", adminOrUser, UsersController.getSingleUser)
 // Devuelve el usuario logeado por id (solo el admin o el mismo usuario pueden modificar estos datos)
-router.put("/:id", adminOrUser, UsersController.editUser)
+router.put("/single/:id", adminOrUser, UsersController.editUser)
 // Transforma un usuario en admin
 router.put("/admin/:id", adminAuthoritation, UsersController.switchAdmin)
 // Elimina un usuario

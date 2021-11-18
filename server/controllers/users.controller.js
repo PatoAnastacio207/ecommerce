@@ -57,6 +57,14 @@ class UsersController {
             return next(err)
         }
     }
+    static async getSingleUser (req, res, next) {
+        try {
+            const user = await User.findOne({ _id: req.params.id })
+            return res.send(user)
+        } catch (err) {
+            return next(err)
+        }
+    }
     static async addFavorite (req, res, next) {
 
     }
