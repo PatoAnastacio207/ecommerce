@@ -20,10 +20,8 @@ const productSchema = new mongoose.Schema({
         {
             valoration: { type: Number },
             message: { type: String },
-            author: {
-                name: { type: String },
-                imgUrl: { type: String }
-            }
+            authorName: { type: String },
+            authorId: { type: String }
         }
     ]
 }, { 

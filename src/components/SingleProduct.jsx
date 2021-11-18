@@ -9,7 +9,8 @@ import { useHistory } from "react-router-dom"
 import { selectUser, updateData } from "../features/userSlice";
 
 const SingleProduct = () => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({ reviews: [] });
+
   const { id } = useParams();
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
@@ -28,6 +29,11 @@ const SingleProduct = () => {
       console.log(`Example 2: new value is ${newValue}`);
     }
   };
+
+  const addReview = async (e) => {
+    const updatedProduct = await axios.post("/api/products/reviews/add", { user, _id: id, review: { valoration: 4, message: "Default message" }})
+    setProduct(updatedProduct)
+  }
 
   const addFavorite = async (e) => {
     await axios.post(`/api/users/favorites/add/${product._id}`)
@@ -63,6 +69,7 @@ const SingleProduct = () => {
 
   return (
     <div className="container">
+      {console.log(product)}
       <br />
       <br />
       {product ? (
@@ -100,6 +107,13 @@ const SingleProduct = () => {
             >
               <i className="fas fa-shopping-cart"></i>
             </button>
+            <button
+            onClick={addReview}
+            className="btn btn-dark shadow-0"
+            style={{ marginRight: "15px", fontSize: "large" }}
+            >
+              Añadir review
+            </button>
             {
               user ? (
                 user.favorites.indexOf(product._id) < 0 ? (
@@ -108,7 +122,6 @@ const SingleProduct = () => {
                   style={{ fontSize: "large" }}
                   onClick={addFavorite}
                 >
-                  {console.log(user.favorites.indexOf(product._id) >= 0)}
                   <i className="fas fa-heart"></i>
                 </button>
                 ) : ( 
