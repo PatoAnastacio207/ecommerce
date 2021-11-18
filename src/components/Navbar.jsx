@@ -16,6 +16,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     console.log("logout attempt...");
+    axios.delete("/api/cart/clear")
     axios
       .post("/api/auth/logout")
       .then((res) => dispatch(logout(res.data)))

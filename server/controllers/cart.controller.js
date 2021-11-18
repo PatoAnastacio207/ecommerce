@@ -41,6 +41,14 @@ class CartController {
         })
         res.sendStatus(201)
     }
+    static clearCart (req, res, next) {
+        try {
+            req.session.cart = []
+            res.sendStatus(201)
+        } catch (err) {
+            next(err)
+        }
+    }
 }
 
 module.exports = CartController
