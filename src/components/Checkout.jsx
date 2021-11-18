@@ -95,7 +95,8 @@ const Checkout = () => {
                       <input
                         type="text"
                         class="form-control"
-                        value={user?.checkoutInfo.address || direction.value}
+                        defaultValue={user?.checkoutInfo.address}
+                        value={direction.value}
                         onChange={direction.onChange}
                         required
                       />
@@ -107,7 +108,8 @@ const Checkout = () => {
                       <input
                         type="text"
                         class="form-control"
-                        value={user?.checkoutInfo.phone || phone.value}
+                        defaultValue={user?.checkoutInfo.phone}
+                        value={user?.checkoutInfo.phone}
                         onChange={phone.onChange}
                         maxLength="15"
                         pattern="[0-9]+"
