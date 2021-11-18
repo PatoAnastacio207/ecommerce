@@ -39,9 +39,6 @@ const Navbar = () => {
       });
     axios.get("/api/cart/").then(({data}) => dispatch(populate(data)))
   }, []);
-  
-
-  console.log(user)
 
   return (
     <div>
