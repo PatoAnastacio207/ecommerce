@@ -65,7 +65,8 @@ function App() {
         <Route exact path="/admin/products" component={AllProducts} />
         <Route exact path="/admin/useradd" component={AdminUsers} />
         <Route exact path="/admin/users" component={UsersList} />
-        <Route exact path="/admin/orders" component={OrdersList} />
+        <Route exact path="/admin/orders/pending" component={OrdersList} />
+        <Route exact path="/admin/orders/old" component={OrdersList} />
         <Route exact path="/admin/orders/:id" component={SingleOrder} />
 
         {/* SHOPPING CART */}
