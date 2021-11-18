@@ -14,5 +14,10 @@ router.put("/admin/:id", adminAuthoritation, UsersController.switchAdmin)
 router.delete("/admin/:id", adminAuthoritation, UsersController.deleteUser)
 // Devuelve todos los usuarios
 router.get("/admin", adminAuthoritation, UsersController.getAllUsers)
+// Añade item a la lista de favoritos
+router.post("/favorites/add/:id", adminOrUser, UsersController.addFavorite)
+// Elimina item de la lista de favoritos
+router.delete("/favorites/remvoe/:id", adminOrUser, UsersController.removeFavorite)
+
 
 module.exports = router;
