@@ -82,9 +82,9 @@ class ProductsController {
     }
     static async addProductReview (req, res, next) {
         try {
-            await Product.findOneAndUpdate({ _id: req.body._id }, { $pull: { reviews: { orderId: req.body.orderId }}})
+            await Product.findOneAndUpdate({ _id: req.body.productId }, { $pull: { reviews: { orderId: req.body.orderId }}})
             const product = await Product.findOneAndUpdate(
-                {_id: req.body._id},
+                {_id: req.body.productId},
                 { $push: { reviews: {
                     valoration: req.body.review.valoration,
                     message: req.body.review.message,
