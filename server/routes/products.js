@@ -1,6 +1,7 @@
 const express = require('express')
 const ProductsController = require('../controllers/products.controller')
 const { adminAuthoritation } = require('../middleware/auth')
+const { userBoughtProduct } = require('../middleware/reviewMiddle')
 const router = express.Router()
 
 // Devuelve todos los productos
@@ -16,7 +17,7 @@ router.get('/category/:name/:type', ProductsController.getProductByCategoryName)
 // Devuelve un producto específico (id)
 router.get('/id/:id', ProductsController.getProductById)
 // Añadir review (body: { user, review: { valoration, message } })
-router.post('/reviews/add', ProductsController.addProductReview)
+router.post('/reviews/add', userBoughtProduct, ProductsController.addProductReview)
 // Agregar un producto
 router.post('/', adminAuthoritation, ProductsController.createProduct)
 // Modificar un producto (id)
