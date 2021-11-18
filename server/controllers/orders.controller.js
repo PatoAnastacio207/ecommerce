@@ -37,7 +37,7 @@ class OrdersController {
                 return res.send(order)
             }
             return res.sendStatus(401)
-        } catch {
+        } catch (err) {
             return next(err)
         }
     }
