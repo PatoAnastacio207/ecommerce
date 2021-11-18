@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-import { useDispatch } from "react-redux"
+
+import { useDispatch, useSelector } from "react-redux"
 import { add } from "../features/cartSlice"
+import { useHistory } from "react-router-dom"
+import { selectUser, updateData } from "../features/userSlice";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
   const dispatch = useDispatch()
+  const user = useSelector(selectUser)
 
   const starsReview = {
     count: 5,
@@ -24,6 +28,19 @@ const SingleProduct = () => {
       console.log(`Example 2: new value is ${newValue}`);
     }
   };
+
+  const addFavorite = async (e) => {
+    await axios.post(`/api/users/favorites/add/${product._id}`)
+    const res = await axios.get("/api/auth/logged")
+    dispatch(updateData(res.data))
+  }
+
+  const removeFavorite = async (e) => {
+    e.preventDefault();
+    await axios.delete(`/api/users/favorites/remove/${product._id}`)
+    const res = await axios.get("/api/auth/logged")
+    dispatch(updateData(res.data))
+  } 
 
   const ratingChanged = (newRating) => {
     console.log(newRating);
@@ -83,12 +100,28 @@ const SingleProduct = () => {
             >
               <i className="fas fa-shopping-cart"></i>
             </button>
-            <button
-              className="btn btn-danger shadow-0"
-              style={{ fontSize: "large" }}
-            >
-              <i className="fas fa-heart"></i>
-            </button>
+            {
+              user ? (
+                user.favorites.indexOf(product._id) < 0 ? (
+                <button
+                  className="btn btn-danger shadow-0"
+                  style={{ fontSize: "large" }}
+                  onClick={addFavorite}
+                >
+                  {console.log(user.favorites.indexOf(product._id) >= 0)}
+                  <i className="fas fa-heart"></i>
+                </button>
+                ) : ( 
+                  <button
+                  className="btn btn-danger shadow-0"
+                  style={{ fontSize: "large" }}
+                  onClick={removeFavorite}
+                  >
+                    <i class="fas fa-ban"></i>
+                  </button>
+                )
+              ) : <><br /><br /><p>Login to add to favorites!</p></>
+            }
           </div>
         </div>
       ) : (

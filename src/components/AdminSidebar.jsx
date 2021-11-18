@@ -96,15 +96,54 @@ const AdminSidebar = () => {
                     Editar/Eliminar
                   </Link>
                 </li>
+                
               </ul>
             </div>
           </div>
-          <hr />
-          <Link to="/admin/orders" className="link-dark text-decoration-none">
-          <div className="container-fluid">
-              <h6>Órdenes</h6>
+          
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTres">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#flush-collapseTres"
+              aria-expanded="false"
+              aria-controls="flush-collapseTres"
+            >
+              Órdenes
+            </button>
+          </h2>
+          <div
+            id="flush-collapseTres"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingTres"
+            data-mdb-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <Link
+                    to="/admin/orders/pending"
+                    class="link-dark text-decoration-none"
+                  >
+                    Pendientes
+                  </Link>
+                </li>
+                <li class="list-group-item">
+                  <Link
+                    to="/admin/orders/old"
+                    class="link-dark text-decoration-none"
+                  >
+                    Pasadas
+                  </Link>
+                </li>
+                
+              </ul>
+            </div>
           </div>
-          </Link>  
+          
         </div>
       </div>
     </main>

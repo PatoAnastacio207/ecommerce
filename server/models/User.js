@@ -38,11 +38,11 @@ userSchema.methods.switchAdmin = async function (password, salt) {
 };
 
 userSchema.methods.addFavorite = async function (id) {
-  await User.updateOne({ _id: this._id }, { favorites: this.favorites.push(id) })
+  await User.updateOne({ _id: this._id }, { $addToSet: { favorites: id }})
 }
 
 userSchema.methods.removeFavorite = async function (id) {
-  await User.updateOne({ _id: this._id }, { favorites: this.favorites.filter(item => item === id) })
+  await User.updateOne({ _id: this._id }, { $pullAll: [id] })
 }
 
 // Para añadir metodos de clase

@@ -16,7 +16,7 @@ const OrdersCard = ({order}) => {
           <div className="d-flex justify-content-between p-md-1">
             <div className="d-flex flex-row">
               <div className="align-self-center">
-                <i className="fas fa-money-check text-danger fa-3x me-4"></i>
+                {order.status === 'pending' ? (<i className="fas fa-money-check text-dark fa-3x me-4"></i>) : order.status === 'completed' ? (<i className="fas fa-money-check text-success fa-3x me-4"></i>) : (<i className="fas fa-money-check text-danger fa-3x me-4"></i>)}
               </div>
               <div>
                 <h4 style={{ textTransform: 'uppercase'}}>{order.status}</h4>
