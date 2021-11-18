@@ -3,6 +3,4 @@ const { dbUrl } = require('../../secret.json')
 
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
-// nrxiacoozcxiqpmj
-
 module.exports = mongoose

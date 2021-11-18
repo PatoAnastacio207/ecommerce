@@ -3,6 +3,7 @@ const User = require("../models/User");
 class UsersController {
     static async register (req, res, next) {
         req.body.email = req.body.email.toLowerCase()
+        
         try {
             const user = await User.findOne({ email: req.body.email })
             if (user) return res.send("Email ya registrado")
@@ -25,9 +26,13 @@ class UsersController {
         else res.sendStatus(401)
     }
     static async editUser (req, res, next) {
-        await User.updateOne({ _id: req.params.id }, req.body)
-        const userUpdated = await User.findOne({ _id: req.params.id})
-        res.json(userUpdated)
+        try {
+            await User.updateOne({ _id: req.params.id }, req.body)
+            const userUpdated = await User.findOne({ _id: req.params.id})
+            res.json(userUpdated)
+        } catch (err) {
+            return next(err)
+        }
     }
     static async switchAdmin (req, res, next) {
         let user = await User.findOne({ _id: req.params.id })
@@ -36,18 +41,29 @@ class UsersController {
         res.send(user)
     }
     static async deleteUser (req, res, next) {
-        let user = await User.findOne({ _id: req.params.id })
-        await User.deleteOne({ _id: req.params.id })
-        res.json(user)
+        try {
+            let user = await User.findOne({ _id: req.params.id })
+            await User.deleteOne({ _id: req.params.id })
+            res.json(user)
+        } catch (err) {
+            return next(err)
+        }
     }
     static async getAllUsers (req, res, next) {
-        const users = await User.find()
-        res.json(users)
+        try {
+            const users = await User.find()
+            res.json(users)
+        } catch (err) {
+            return next(err)
+        }
     }
-    static async addHistory (req, res, next) {
+    static async addFavorite (req, res, next) {
 
     }
-    static async getHistory (req, res, next) {
+    static async removeFavorites (req, res, next) {
+
+    }
+    static async getFavorites (req, res, next) {
         
     }
 }

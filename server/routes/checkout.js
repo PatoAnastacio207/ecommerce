@@ -1,6 +1,6 @@
 const express = require("express");
 const OrdersController = require("../controllers/orders.controller")
-const { adminAuthoritation } = require('../middleware/auth')
+const { adminAuthoritation, adminOrUser } = require('../middleware/auth')
 const router = express.Router();
 
 // req recibe el carrito y el user
@@ -11,5 +11,7 @@ router.get('/myorders', OrdersController.getUserOrders)
 router.get('/', adminAuthoritation, OrdersController.getOrders)
 // Modificar el estado de una orden
 router.put('/update/:id', adminAuthoritation, OrdersController.updateStatus)
+// Devuelve una single order
+router.get('/order/:id', OrdersController.getSingleOrder)
 
 module.exports = router;

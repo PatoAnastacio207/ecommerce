@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import React from "react"
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
  import "./App.css";
 import SingleProduct from "./components/SingleProduct"
 import AllProducts from "./components/AllProducts"
@@ -86,6 +86,8 @@ function App() {
         <Route path={"/contact"} component={Contact} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/creditcard"} component={TarjetaDeCredito} />
+        <Route path="/404" >404</Route>
+        <Route path={"*"} ><Redirect to="/404"></Redirect></Route>
       </Switch>
         </div>
       {/* For FOOTER --> All the pages */}
