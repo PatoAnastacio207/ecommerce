@@ -27,7 +27,7 @@ const Checkout = () => {
     axios
 
       .put(`/api/users/single/${user._id}`, {
-        checkoutInfo: { address: direction.value, phone: phone.value },
+        checkoutInfo: { address: direction.value || user?.checkoutInfo.address, phone: phone.value || user?.checkoutInfo.phone},
 
       })
       .then((data) => {

@@ -22,9 +22,10 @@ const UserEdit = () => {
 //   }, [])
 
   const handleSave = (e) => {
+    console.log("hola")
     e.preventDefault();
     axios
-      .put(`/api/users/${user._id}`, {
+      .put(`/api/users/single/${user._id}`, {
         checkoutInfo: { address: address.value || user?.checkoutInfo.address, phone: phone.value || user?.checkoutInfo.phone},
       })
       .then((data) => {
@@ -37,7 +38,7 @@ const UserEdit = () => {
       <br />
       <br />
       <br />
-      <h2 className="fw-light titleNoMain">My Profile</h2>
+      <h2 className="fw-light titleNoMain">Edit my profile</h2>
       <form
         className="container col-sm-3 shadow-2-strong rounded"
         style={{ fontFamily: "Bebas Neue" }}
@@ -45,7 +46,7 @@ const UserEdit = () => {
       >
         <br />
         <div className="row">
-          <div className="col-sm-9">
+          <div className="col-sm-12">
             <label for="name">Name</label>
             <input
               type="text"
@@ -57,7 +58,7 @@ const UserEdit = () => {
         </div>
         <br />
         <div className="row">
-          <div className="col-sm-9">
+          <div className="col-sm-12">
             <label for="name">Last Name</label>
             <input
               type="text"
@@ -69,7 +70,7 @@ const UserEdit = () => {
         </div>
         <br />
         <div className="row">
-          <div className="col-sm-9">
+          <div className="col-sm-12">
             <label for="month">Phone</label>{" "}
             <input
               type="text"
@@ -84,7 +85,7 @@ const UserEdit = () => {
         </div>
 
         <br />
-        <div className="col-sm-9">
+        <div className="col-sm-12">
           <label for="cvv">Address </label> {"  "}
           <input 
             type="text"
@@ -96,16 +97,21 @@ const UserEdit = () => {
          
           ></input>
         
-        </div>
+        </div >
         <br />
+        <div className="row">
+        <div className="col-sm-4"></div>
+        <div className="col-sm-4">
         <input
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-danger"
           value="Save Change"
         />
 
         <br />
-        <br />
+        <br /></div>
+        <div className="col-sm-4"></div>
+        </div>
       </form>
       <br />
       <br />
