@@ -25,8 +25,10 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
+
       .put(`/api/users/single/${user._id}`, {
         checkoutInfo: { address: direction.value, phone: phone.value },
+
       })
       .then((data) => {
         dispatch(login(data.data));
@@ -38,7 +40,7 @@ const Checkout = () => {
               .post("/api/checkout/buycart", { user, cart })
               .then((data) => {
                 Notification.successMessage("Dummie compra lista");
-                history.push("/");
+                history.push("/myProfile");
               })
               .catch((err) => {
                 Notification.errorMessage("Oops...");
