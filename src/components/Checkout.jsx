@@ -23,23 +23,31 @@ const Checkout = () => {
   const history = useHistory();
 
   const handleSubmit = (e) => {
-    console.log(metodo.onChange)
-    console.log(metodo.value);
     e.preventDefault();
-    metodo.value === "tarjetaDeCredito"
-      ? history.push("/creditcard")
-      : axios
-          .post("/api/checkout/buycart", { user, cart })
-          .then((data) => {
-            Notification.successMessage("Dummie compra lista");
-            history.push("/");
-          })
-          .catch((err) => {
-            Notification.errorMessage("Oops...");
-            console.log(err);
-          });
+    axios
+      .put(`/api/users/${user._id}`, {
+        checkoutInfo: { address: direction.value, phone: phone.value },
+      })
+      .then((data) => {
+        dispatch(login(data.data));
+      })
+      .then(() => {
+        metodo.value === "tarjetaDeCredito"
+          ? history.push("/creditcard")
+          : axios
+              .post("/api/checkout/buycart", { user, cart })
+              .then((data) => {
+                Notification.successMessage("Dummie compra lista");
+                history.push("/");
+              })
+              .catch((err) => {
+                Notification.errorMessage("Oops...");
+                console.log(err);
+              });
+      });
   };
-console.log(metodo.value)
+
+  //
 
   return (
     <section className="section-content padding-y">
@@ -87,7 +95,8 @@ console.log(metodo.value)
                       <input
                         type="text"
                         class="form-control"
-                        value={user?.checkoutInfo.address || direction.value}
+                        defaultValue={user?.checkoutInfo.address}
+                        value={direction.value}
                         onChange={direction.onChange}
                         required
                       />
@@ -99,7 +108,8 @@ console.log(metodo.value)
                       <input
                         type="text"
                         class="form-control"
-                        value={user?.checkoutInfo.phone || phone.value}
+                        defaultValue={user?.checkoutInfo.phone}
+                        value={user?.checkoutInfo.phone}
                         onChange={phone.onChange}
                         maxLength="15"
                         pattern="[0-9]+"
@@ -126,13 +136,8 @@ console.log(metodo.value)
                         onChange={metodo.onChange}
                         required
                       >
-                        <option value={("mercadoPago")}>
-                          Mercado Pago
-                        </option>
-                        <option value={("contraEntrega")}>
-                          Contraentrega
-                        </option>
-                        <option value={("tarjetaDeCredito")}>
+                        <option value={"contraEntrega"}>Contraentrega</option>
+                        <option value={"tarjetaDeCredito"}>
                           Tarjeta de credito
                         </option>
                       </select>
