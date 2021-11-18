@@ -39,7 +39,7 @@ function ProductCard({ product, admin }) {
       <div className="card hover-shadow border" style={{ fontFamily: "Bebas Neue" }}>
         <Link to={urlRedirect}>
           <div className="bg-image hover-overlay ripple ">
-            <img src={product.imgUrl} className="img-fluid" />
+            <img src={product.imgUrl} className="img-fluid"/>
             <a href="/">
               <div className="mask"></div>
             </a>
