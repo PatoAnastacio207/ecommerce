@@ -15,7 +15,7 @@ router.get('/category/:name', ProductsController.getProductByCategoryName)
 router.get('/category/:name/:type', ProductsController.getProductByCategoryName)
 // Devuelve un producto específico (id)
 router.get('/id/:id', ProductsController.getProductById)
-// Añadir review
+// Añadir review (body: { user, review: { valoration, message } })
 router.post('/reviews/add', ProductsController.addProductReview)
 // Agregar un producto
 router.post('/', adminAuthoritation, ProductsController.createProduct)
