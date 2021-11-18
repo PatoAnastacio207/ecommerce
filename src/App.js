@@ -24,6 +24,8 @@ import AdminSidebar from './components/AdminSidebar'
 import AdminUsers from './components/AdminUsers'
 import UsersList from './components/UsersList'
 import ProductManager from "./components/ProductManager";
+import OrdersList from "./components/OrdersList";
+import SingleOrder from "./components/SingleOrder";
 
 
 function App() {
@@ -57,6 +59,8 @@ function App() {
         <Route exact path="/admin/products" component={AllProducts} />
         <Route exact path="/admin/useradd" component={AdminUsers} />
         <Route exact path="/admin/users" component={UsersList} />
+        <Route exact path="/admin/orders" component={OrdersList} />
+        <Route exact path="/admin/orders/:id" component={SingleOrder} />
 
         {/* SHOPPING CART */}
         <Route exact path="/cart" component={ShoppingCart} />

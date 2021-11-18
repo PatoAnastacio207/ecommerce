@@ -89,7 +89,26 @@ const AllProducts = function () {
                 </form>
               </div>
             </section>
-          ) : null}
+          ) : 
+
+          <form onSubmit={handleSearch}>
+            <br /><br />
+                  <div className="input-group rounded container d-flex justify-content-center" style={{width: "40%"}}>
+                    <input
+                      type="text"
+                      className="form-control rounded"
+                      placeholder="Search"
+                      aria-label="Search"
+                      aria-describedby="search-addon"
+                      size="75"
+                      onChange={(e) => handleChange(e, setSearch)}
+                    />
+                    <span className="input-group-text border-0" id="search-addon">
+                      <i className="fas fa-search"></i>
+                    </span>
+                  </div>
+                </form>
+          }
 
           <div className="album py-5">
             <div className="container">

@@ -8,7 +8,7 @@ import { selectCart, populate } from "../features/cartSlice"
 
 
 const Navbar = () => {
-  // const cart = useSelector(selectCart);
+  const cart = useSelector(selectCart);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -85,6 +85,7 @@ const Navbar = () => {
           <div class="d-flex align-items-center">
             <Link class="text-reset me-3" to="/cart">
               <i class="fas fa-shopping-cart text-white"></i>
+              <span class="badge rounded-pill badge-notification bg-danger" style={{fontSize: "60%"}}>{cart.items.length || null}</span>
             </Link>
 
             {user?.email ? (
