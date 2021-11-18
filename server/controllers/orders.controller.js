@@ -10,7 +10,8 @@ class OrdersController {
                     items: req.body.cart.items.map(item => ({
                         name: item.name,
                         price: item.price,
-                        quantity: 1
+                        quantity: 1,
+                        productId: item._id
                     })),
                     status: "pending",
                     date: new Date(),
