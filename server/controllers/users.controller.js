@@ -68,7 +68,7 @@ class UsersController {
     static async addFavorite (req, res, next) {
         
     }
-    static async removeFavorites (req, res, next) {
+    static async removeFavorite (req, res, next) {
 
     }
     static async getFavorites (req, res, next) {
