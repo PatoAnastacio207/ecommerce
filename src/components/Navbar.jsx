@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "../features/userSlice";
 import { GiSkateboard } from "react-icons/gi";
 import axios from "axios";
-import { selectCart, populate } from "../features/cartSlice"
-
+import { selectCart, populate, empty } from "../features/cartSlice";
 
 const Navbar = () => {
   const cart = useSelector(selectCart);
@@ -16,15 +15,13 @@ const Navbar = () => {
   const user = useSelector(selectUser);
 
   const handleLogout = () => {
-    console.log("logout attempt...")
+    console.log("logout attempt...");
     axios
-    .post("/api/auth/logout")
-    .then((res) => dispatch(logout(res.data)))
-    .then(() => {
-      console.log("logged out")
-    })
-    .catch ((err) => console.log(err))
-    }
+      .post("/api/auth/logout")
+      .then((res) => dispatch(logout(res.data)))
+      .then(() => dispatch(empty(cart)))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     console.log(`fetching user...`);
@@ -37,13 +34,15 @@ const Navbar = () => {
       .catch((error) => {
         console.log(error);
       });
-    axios.get("/api/cart/").then(({data}) => dispatch(populate(data)))
+    axios.get("/api/cart/").then(({ data }) => dispatch(populate(data)));
   }, []);
 
   return (
     <div>
-      
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style={{fontFamily: "Bebas Neue",fontSize:"150%"}}>
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark "
+        style={{ fontFamily: "Bebas Neue", fontSize: "150%" }}
+      >
         <div class="container-fluid">
           <button
             class="navbar-toggler"
@@ -62,27 +61,27 @@ const Navbar = () => {
               <GiSkateboard />
             </a>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                 sk8 4 dummies
-                </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item nav-link dropdown-item-dark">
+                sk8 4 dummies
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#our-story">
                   our story
                 </a>
               </li>
-        
             </ul>
           </div>
-          <div class="d-flex align-items-center">
-            
-          </div>
+          <div class="d-flex align-items-center"></div>
           <div class="d-flex align-items-center">
             <Link class="text-reset me-3" to="/cart">
               <i class="fas fa-shopping-cart text-white"></i>
-              <span class="badge rounded-pill badge-notification bg-danger" style={{fontSize: "60%"}}>{cart.items.length || null}</span>
+              <span
+                class="badge rounded-pill badge-notification bg-danger"
+                style={{ fontSize: "60%" }}
+              >
+                {cart.items.length || null}
+              </span>
             </Link>
 
             {user?.email ? (
@@ -93,79 +92,78 @@ const Navbar = () => {
               <span></span>
             )}
 
-            <a
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-mdb-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="fas fa-user-alt text-white"></i>
-            </a>
             {!user?.email ? (
-              <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuLink"
-              >
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li>
-                  <Link class="dropdown-item" to="/register">
-                    Register
+                  <Link
+                    class="nav-item nav-link dropdown-item-dark"
+                    to="/login"
+                  >
+                    Login
                   </Link>
                 </li>
                 <li>
-                  <Link class="dropdown-item" to="/login">
-                    Login
+                  <Link
+                    class="nav-item nav-link dropdown-item-dark"
+                    to="/register"
+                  >
+                    Register
                   </Link>
                 </li>
               </ul>
             ) : user.isAdmin ? (
-              <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuLink"
-              >
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li>
-                  <Link class="dropdown-item" to='/' onClick={handleLogout}>
+                  <Link
+                    class="nav-item nav-link dropdown-item-dark"
+                    to="/admin"
+                  >
+                    <strong>Admin</strong>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    class="nav-item nav-link dropdown-item-dark"
+                    to="/"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </Link>
                 </li>
+              </ul>
+            ) : (
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li>
-                  <Link class="dropdown-item" to='/admin'>
-                    <strong>
-                    Admin
-
-                    </strong>
+                  <Link
+                    class="nav-item nav-link dropdown-item-dark"
+                    to="/myProfile"
+                  >
+                    <strong>My Profile</strong>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    class="nav-item nav-link dropdown-item-dark"
+                    to="/"
+                    onClick={handleLogout}
+                  >
+                    Logout
                   </Link>
                 </li>
               </ul>
-            ) : ( <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
-              <li>
-                <Link class="dropdown-item" to='/' onClick={handleLogout}>
-                  Logout
-                </Link>
-              </li>
-              <li>
-                  <Link class="dropdown-item" to='/myProfile'>
-                    <strong>
-                    My Profile
-
-                    </strong>
-                  </Link>
-                </li>
-              </ul>)}
+            )}
           </div>
         </div>
       </nav>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" style={{ fontFamily: "Bebas Neue", fontSize:"150%", margin:"5px"}}>
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-light"
+        style={{ fontFamily: "Bebas Neue", fontSize: "150%", margin: "5px" }}
+      >
         <div class="container justify-content-around ">
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              
               <li class="nav-item">
-                <Link class="nav-link text-black" to="/category/skates"  >
+                <Link class="nav-link text-black" to="/category/skates">
                   Skates
                 </Link>
               </li>

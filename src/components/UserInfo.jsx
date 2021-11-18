@@ -5,7 +5,7 @@ import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { login } from "../features/userSlice";
 import { useHistory } from "react-router-dom";
-import MyOrders from "./MyOrders"
+import MyOrders from "./MyOrders";
 
 const UserInfo = () => {
   const user = useSelector(selectUser);
@@ -26,7 +26,6 @@ const UserInfo = () => {
       <br />
       <br />
       <h2 className="fw-light titleNoMain">My Profile</h2>
-
       <form
         className="container col-sm-8 shadow-2-strong rounded"
         style={{ fontFamily: "Bebas Neue" }}
@@ -53,6 +52,9 @@ const UserInfo = () => {
               disabled
             ></input>
           </div>
+        </div>
+        <br />
+        <div className="row">
           <div className="col-sm-6">
             <label for="lastName">Last Name</label>
             <input
@@ -78,6 +80,9 @@ const UserInfo = () => {
               disabled
             ></input>
           </div>
+        </div>
+        <br />
+        <div className="row">
           <div className="col-sm-6">
             <label for="adress">Address </label>
             <input
@@ -94,7 +99,7 @@ const UserInfo = () => {
 
         <br />
         <div className="row">
-          <div className="col-sm-12">
+          <div className="col-sm-6">
             <label for="phone">EMAIL</label>
             <input
               type="text"
@@ -106,17 +111,10 @@ const UserInfo = () => {
           </div>
         </div>
         <br />
-      
-        <div className="row">
-          <div className="col-sm-12">
-            <label for="phone">MY ORDERS</label>
-           <MyOrders/>
-            <br/>
-          </div>
-        </div>
       </form>
       <br />
       <br />
+      <MyOrders/>
       <br />
       <br />
       <br />

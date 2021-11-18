@@ -7,7 +7,7 @@ import CartProductCard from "./CartProductCard";
 import { Link, useHistory } from "react-router-dom";
 import imagen from "../assets/caballoGrinder.png";
 import { useInput } from "../hooks/custom-hooks";
-import { selectCart, checkout } from "../features/cartSlice";
+import { selectCart, checkout, empty } from "../features/cartSlice";
 import Notification from "../utils/Notification";
 
 const Checkout = () => {
@@ -31,7 +31,8 @@ const Checkout = () => {
 
       })
       .then((data) => {
-        dispatch(login(data.data));
+
+        dispatch(empty(cart))
       })
       .then(() => {
         metodo.value === "tarjetaDeCredito"

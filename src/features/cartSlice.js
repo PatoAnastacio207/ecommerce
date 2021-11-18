@@ -50,6 +50,12 @@ export const cartSlice = createSlice({
             }
         })
         state.cart = { items, total }
+    },
+    empty:(state, action) => {
+      state.cart = {
+        items: [],
+        total: 0,
+      }
     }
   },
 });
