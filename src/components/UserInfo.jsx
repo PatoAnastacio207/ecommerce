@@ -41,7 +41,6 @@ const UserInfo = () => {
           ></input>
         </div>
         <br />
-
         <div className="row">
           <div className="col-sm-6">
             <label for="name">Name</label>
@@ -51,11 +50,7 @@ const UserInfo = () => {
               className="form-control"
               disabled
             ></input>
-          </div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col-sm-6">
+            <br />
             <label for="lastName">Last Name</label>
             <input
               type="text"
@@ -63,12 +58,7 @@ const UserInfo = () => {
               className="form-control"
               disabled
             ></input>
-          </div>
-        </div>
-
-        <br />
-        <div className="row">
-          <div className="col-sm-6">
+            <br />
             <label for="phone">Phone</label>
             <input
               type="text"
@@ -79,11 +69,7 @@ const UserInfo = () => {
               required
               disabled
             ></input>
-          </div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col-sm-6">
+            <br />
             <label for="adress">Address </label>
             <input
               type="text"
@@ -94,12 +80,7 @@ const UserInfo = () => {
               required
               disabled
             />
-          </div>
-        </div>
-
-        <br />
-        <div className="row">
-          <div className="col-sm-6">
+            <br />
             <label for="phone">EMAIL</label>
             <input
               type="text"
@@ -109,12 +90,16 @@ const UserInfo = () => {
               disabled
             ></input>
           </div>
+          <div className="col-sm-6">
+            <img src="https://media.discordapp.net/attachments/906301841460043853/908458976201551912/260ab4121609229.60c95d4a44ee8.png?width=441&height=441" alt="" style={{width:"60%"}}/>
+          </div>
         </div>
+        <br />
         <br />
       </form>
       <br />
       <br />
-      <MyOrders/>
+      <MyOrders />
       <br />
       <br />
       <br />
