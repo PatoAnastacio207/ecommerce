@@ -73,22 +73,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div class="d-flex align-items-center">
-            <form class="d-flex input-group form-control-lg w-auto" >
-              <input
-                type="search"
-                class="form-control rounded"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="search-addon"
-               
-              />
-              <span
-                class="input-group-text text-white border-0"
-                id="search-addon"
-              >
-                <i class="fas fa-search"></i>
-              </span>
-            </form>
+            
           </div>
           <div class="d-flex align-items-center">
             <Link class="text-reset me-3" to="/cart">
