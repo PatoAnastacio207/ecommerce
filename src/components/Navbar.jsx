@@ -148,7 +148,16 @@ const Navbar = () => {
                 <Link class="dropdown-item" to='/' onClick={handleLogout}>
                   Logout
                 </Link>
-              </li></ul>)}
+              </li>
+              <li>
+                  <Link class="dropdown-item" to='/myProfile'>
+                    <strong>
+                    My Profile
+
+                    </strong>
+                  </Link>
+                </li>
+              </ul>)}
           </div>
         </div>
       </nav>

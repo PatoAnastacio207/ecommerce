@@ -24,6 +24,9 @@ import AdminSidebar from './components/AdminSidebar'
 import AdminUsers from './components/AdminUsers'
 import UsersList from './components/UsersList'
 import ProductManager from "./components/ProductManager";
+import UserInfo from "./components/UserInfo"
+import UserEdit from "./components/UserEdit"
+import MyOrders from "./components/MyOrders"
 
 
 function App() {
@@ -82,6 +85,10 @@ function App() {
         <Route path={"/contact"} component={Contact} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/creditcard"} component={TarjetaDeCredito} />
+        <Route path={"/myProfile"} component={UserInfo} />
+        <Route path={"/myProfileEdit"} component={UserEdit} />
+        <Route path={"/myOrders"} component={MyOrders} />
+
       </Switch>
         </div>
       {/* For FOOTER --> All the pages */}
