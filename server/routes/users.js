@@ -17,7 +17,9 @@ router.get("/admin", adminAuthoritation, UsersController.getAllUsers)
 // Añade item a la lista de favoritos
 router.post("/favorites/add/:id", adminOrUser, UsersController.addFavorite)
 // Elimina item de la lista de favoritos
-router.delete("/favorites/remvoe/:id", adminOrUser, UsersController.removeFavorite)
+router.delete("/favorites/remove/:id", adminOrUser, UsersController.removeFavorite)
+// Devuelve la lista de ids de los favoritos
+router.get("/favorites", adminOrUser, UsersController.getFavorites)
 
 
 module.exports = router;
