@@ -6,64 +6,80 @@ import { selectUser } from "../features/userSlice";
 const MyOrders = () => {
   const user = useSelector(selectUser);
   const [orders, setOrders] = useState([]);
-// console.log("orders", orders)
+  // console.log("orders", orders)
 
   useEffect(() => {
     axios.get("/api/checkout/myorders").then((res) => setOrders(res.data));
   }, []);
 
-
-
-
   return (
-    
     <div>
-        {
-             orders.map((item) => {
-                for(let key of item.items){
-                   return (<ul>
-                       <li>{key.name}</li>
-                            <li>{key.price}</li>
-                            <li>{key.quantity}</li>
-                            <li>{item.date}</li>
-                       </ul>
-                        )
-                    
-                    
-                }
-            })
-        }
+      {orders.map(({ items, date, status, _id }) => (
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id={`heading${_id}`}>
+              <button
+                class="accordion-button"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target={`#collapse${_id}`}
+                aria-expanded="true"
+                aria-controls={`collapse${_id}`}
+              >
+                ORDER:   {status}
+              </button>
+            </h2>
+          </div>
+          <div
+            id={`collapse${_id}`}
+            class="accordion-collapse collapse show"
+            aria-labelledby={`heading${_id}`}
+            data-mdb-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <div>
+           
+                {items.map((item) => (
+                  <tr className="d-flex justify-content-center">
+                    <th scope="row">{item.name}</th>
+                    <td>{item.price}</td>
+                    <td>{item.quantity}</td>
+                    <td>{date.slice(0, 10)}</td>
+                  </tr>
+                ))}
+              </div>
+            </div>
+          </div>
 
-    </div>
-
-    // <div className="accordion accordion-flush" id="accordionFlushExample">
-    //   <div className="accordion-item">
+          {/* <table class="table align-middle">
        
-    //    <h2 className="accordion-header" id="flush-headingOne">
-    //       <button
-    //         className="accordion-button collapsed"
-    //         type="button"
-    //         data-mdb-toggle="collapse"
-    //         data-mdb-target="#flush-collapseOne"
-    //         aria-expanded="false"
-    //         aria-controls="flush-collapseOne"
-    //       >
-    //         Order #1
-    //       </button>
-    //     </h2>
-    //     <div
-    //       id="flush-collapseOne"
-    //       className="accordion-collapse collapse"
-    //       aria-labelledby="flush-headingOne"
-    //       data-mdb-parent="#accordionFlushExample"
-    //     >
-    //       <div className="accordion-body">
-    //         adsdasdasd
-    //       </div>
-    //     </div>
-        
-    //   </div>
-    // </div>
+        <tbody>
+          {orders.map(({ items, date,status }) => (
+            <div>
+               <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+              {items.map((item) => (
+                <tr>
+                  <th scope="row">{item.name}</th>
+                  <td>{item.price}</td>
+                  <td>{item.quantity}</td>
+                  <td>{date.slice(0, 10)}</td>
+                </tr>
+              ))}
+            </div>
+          ))}
+        </tbody>
+      </table>
+    </div> */}
+        </div>
+      ))}
+    </div>
   );
 };
 

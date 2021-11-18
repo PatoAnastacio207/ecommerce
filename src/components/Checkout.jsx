@@ -25,7 +25,7 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`/api/users/${user._id}`, {
+      .put(`/api/users/single/${user._id}`, {
         checkoutInfo: { address: direction.value || user?.checkoutInfo.address, phone: phone.value || user?.checkoutInfo.phone},
       })
       .then((data) => {
