@@ -21,7 +21,8 @@ const productSchema = new mongoose.Schema({
             valoration: { type: Number },
             message: { type: String },
             authorName: { type: String },
-            authorId: { type: String }
+            authorId: { type: String },
+            orderId: { type: String }
         }
     ]
 }, { 
