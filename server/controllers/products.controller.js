@@ -73,7 +73,8 @@ class ProductsController {
     }
     static async searchProducts (req, res, next) {
         try {
-            const products = await Product.find({ "name": { $regex: req.params.name }})
+            console.log(req.params.name)
+            const products = await Product.find({ name: { $regex: req.params.name, $options: 'ix' }})
             return res.json(products)
         }
         catch {
