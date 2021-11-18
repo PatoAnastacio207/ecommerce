@@ -2,19 +2,23 @@ const Product = require("../models/Product")
 
 class CartController {
     static async getCart (req, res, next) {
-        let cart = {items: [], total: 0}
-        if (req.session.cart) {
-            const ids = req.session.cart.map(item => item._id)
-            let products = await Product.find({ _id: { $in: ids }}).lean().exec()
-            cart.items = products.map((product, index) => {
-                product.quantity = req.session.cart[index].quantity
-                return product
-            })
-            cart.total = cart.items.reduce((previo, current) => {
-                return previo ? current.price + previo : current.price * current.quantity
-              }, 0)
+        try {
+            let cart = {items: [], total: 0}
+            if (req.session.cart) {
+                const ids = req.session.cart.map(item => item._id)
+                let products = await Product.find({ _id: { $in: ids }}).lean().exec()
+                cart.items = products.map((product, index) => {
+                    product.quantity = req.session.cart[index].quantity
+                    return product
+                })
+                cart.total = cart.items.reduce((previo, current) => {
+                    return previo ? current.price + previo : current.price * current.quantity
+                  }, 0)
+            }
+            return res.send(cart)
+        } catch (err) {
+            return next(err)
         }
-        return res.send(cart)
     }
     static addItem (req, res, next) {
         if (!req.body._id) return res.sendStatus(500)

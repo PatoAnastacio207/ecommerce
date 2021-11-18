@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import React from "react"
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
  import "./App.css";
 import SingleProduct from "./components/SingleProduct"
 import AllProducts from "./components/AllProducts"
@@ -24,9 +24,14 @@ import AdminSidebar from './components/AdminSidebar'
 import AdminUsers from './components/AdminUsers'
 import UsersList from './components/UsersList'
 import ProductManager from "./components/ProductManager";
+
 import UserInfo from "./components/UserInfo"
 import UserEdit from "./components/UserEdit"
 import MyOrders from "./components/MyOrders"
+
+import OrdersList from "./components/OrdersList";
+import SingleOrder from "./components/SingleOrder";
+
 
 
 function App() {
@@ -60,6 +65,8 @@ function App() {
         <Route exact path="/admin/products" component={AllProducts} />
         <Route exact path="/admin/useradd" component={AdminUsers} />
         <Route exact path="/admin/users" component={UsersList} />
+        <Route exact path="/admin/orders" component={OrdersList} />
+        <Route exact path="/admin/orders/:id" component={SingleOrder} />
 
         {/* SHOPPING CART */}
         <Route exact path="/cart" component={ShoppingCart} />
@@ -85,9 +92,14 @@ function App() {
         <Route path={"/contact"} component={Contact} />
         <Route path={"/checkout"} component={Checkout} />
         <Route path={"/creditcard"} component={TarjetaDeCredito} />
+
         <Route path={"/myProfile"} component={UserInfo} />
         <Route path={"/myProfileEdit"} component={UserEdit} />
         <Route path={"/myOrders"} component={MyOrders} />
+
+
+        <Route path="/404" >404</Route>
+        <Route path={"*"} ><Redirect to="/404"></Redirect></Route>
 
       </Switch>
         </div>

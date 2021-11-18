@@ -1,6 +1,11 @@
 const adminAuthoritation = (req, res, next) => {
     if(req.user && req.user.isAdmin) next()
-    else res.sendStatus(401)
+    else return res.sendStatus(401)
 }
 
-module.exports = { adminAuthoritation }
+const adminOrUser = (req, res, next) => {
+    if(req.user && ( req.user.isAdmin || req.user._id == req.params.id)) return next()
+    else return res.sendStatus(401)
+}
+
+module.exports = { adminAuthoritation, adminOrUser }
