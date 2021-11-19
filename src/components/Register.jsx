@@ -2,10 +2,7 @@ import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { login, selectUser } from "../features/userSlice";
 import Notification from "../utils/Notification"
-import Swal from "sweetalert2";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

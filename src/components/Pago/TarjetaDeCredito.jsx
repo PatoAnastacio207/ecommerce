@@ -1,21 +1,26 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { selectCart } from "../../features/cartSlice";
+import { selectCart, empty } from "../../features/cartSlice";
 import { selectUser } from "../../features/userSlice";
 import Notification from "../../utils/Notification";
+
 
 const Tarjeta = () => {
   const history = useHistory();
   const user = useSelector(selectUser);
   const cart = useSelector(selectCart);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(user, cart)
     axios
       .post("/api/checkout/buycart", { user, cart })
-      .then((data) => {
+      .then(async () => {
+        dispatch(empty())
+        await axios.delete("/api/cart/clear")
         Notification.successMessage("Dummie compra lista");
         history.push("/");
       })

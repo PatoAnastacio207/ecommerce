@@ -13,7 +13,7 @@ router.get('/search/:name', ProductsController.searchProducts)
 // Get por categoria
 router.get('/category/:name', ProductsController.getProductByCategoryName)
 // Get por categoria y tipo
-router.get('/category/:name/:type', ProductsController.getProductByCategoryName)
+router.get('/category/:name/:type', ProductsController.getProductByCategoryType)
 // Devuelve un producto específico (id)
 router.get('/id/:id', ProductsController.getProductById)
 // Añadir review (body: { user, review: { valoration, message } })

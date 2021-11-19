@@ -10,5 +10,7 @@ router.post('/add', CartController.addItem)
 router.delete('/remove', CartController.deleteItem)
 // Edita la cantidad de un producto
 router.put('/edit', CartController.editItem)
+// Elimina todos los items del carrito
+router.delete('/clear', CartController.clearCart)
 
 module.exports = router;
