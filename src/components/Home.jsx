@@ -16,17 +16,17 @@ const Home = () => {
     <div>
       <div
         id="carouselExampleSlidesOnly"
-        class="carousel slide"
+        className="carousel slide"
         data-mdb-ride="carousel"
       >
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src={imagen3} class="d-block w-100" alt="..." />
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src={imagen3} className="d-block w-100" alt="..." />
           </div>
         </div>
       </div>
       <br/><br/><br/><br/><br/>
-      <div class="d-flex justify-content-center align-items-center h-100">
+      <div className="d-flex justify-content-center align-items-center h-100">
               <img src={imagen1} alt="" style={{ width: "30%",height:"40%"}}/>
               <Link to="/buildyourown"><button type="button" className="mainButton" style={{ width: "80%",height:"80%" ,opacity:"0.9"}} >Build your own sk8 <br/>
               </button>

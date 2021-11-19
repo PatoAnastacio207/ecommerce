@@ -103,7 +103,7 @@ function App() {
             <Route path={"/category/:name"} component={Category} />
 
             {/* FOR ALL PRODUCTS */}
-            <Route path={"/allproducts"} component={AllProducts} />
+            <Route exact path={"/allproducts"} component={AllProducts} />
 
             {/*FOR EACH BY ID */}
             <Route path={"/product/:id"} component={SingleProduct} />

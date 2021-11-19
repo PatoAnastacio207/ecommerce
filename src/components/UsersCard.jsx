@@ -30,7 +30,7 @@ const UsersCard = ({user}) => {
           </div>
         <div className="card-body">
           <Link className="link-dark text-decoration-none">
-            <h5 class="card-title">{`${user.firstName} ${user.lastName || ""}`}</h5>
+            <h5 className="card-title">{`${user.firstName} ${user.lastName || ""}`}</h5>
           </Link>
           <p className="card-text text-muted">
             {user.email}
@@ -40,13 +40,13 @@ const UsersCard = ({user}) => {
             <h4>{user.isAdmin ? ("Es admin") : ("No es admin")}</h4>
             </Link>
 
-              <div class="btn-toolbar" role="toolbar">
-                <div class="btn-group me-2 shadow-0" role="group">
+              <div className="btn-toolbar" role="toolbar">
+                <div className="btn-group me-2 shadow-0" role="group">
                   <button className="btn btn-info shadow-0">
                     <i className="fas fa-edit"></i>
                   </button>
                 </div>
-                <div class="btn-group shadow-0" role="group">
+                <div className="btn-group shadow-0" role="group">
                   <button className="btn btn-danger shadow-0" onClick={handleDelete}>
                     <i className="fas fa-trash"></i>
                   </button>

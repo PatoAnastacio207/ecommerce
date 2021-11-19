@@ -1,59 +1,59 @@
 const Footer = () => {
   return (
     <footer
-      class="text-center text-white "
+      className="text-center text-white "
       style={{ backgroundColor: "rgba(0, 0, 0,0.82)" }}
     >
-      <div class="container p-4 pb-0">
-        <section class="mb-4">
+      <div className="container p-4 pb-0">
+        <section className="mb-4">
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            className="btn btn-outline-light btn-floating m-1"
             href="#!"
             role="button"
           >
-            <i class="fab fa-facebook-f"></i>
+            <i className="fab fa-facebook-f"></i>
           </a>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            className="btn btn-outline-light btn-floating m-1"
             href="#!"
             role="button"
           >
-            <i class="fab fa-twitter"></i>
+            <i className="fab fa-twitter"></i>
           </a>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            className="btn btn-outline-light btn-floating m-1"
             href="#!"
             role="button"
           >
-            <i class="fab fa-google"></i>
+            <i className="fab fa-google"></i>
           </a>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            className="btn btn-outline-light btn-floating m-1"
             href="#!"
             role="button"
             target="_blank"
           >
-            <i class="fab fa-instagram"></i>
+            <i className="fab fa-instagram"></i>
           </a>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            className="btn btn-outline-light btn-floating m-1"
             href="#!"
             role="button"
           >
-            <i class="fab fa-linkedin-in"></i>
+            <i className="fab fa-linkedin-in"></i>
           </a>
           <a
-            class="btn btn-outline-light btn-floating m-1"
+            className="btn btn-outline-light btn-floating m-1"
             href="#!"
             role="button"
           >
-            <i class="fab fa-github"></i>
+            <i className="fab fa-github"></i>
           </a>
         </section>
       </div>
-      <div class="text-center p-3 bg-light text-black">
+      <div className="text-center p-3 bg-light text-black">
         © 2021 Copyright:
-        <a class="text-black"> SK8 4 DUMMIES</a>
+        <a className="text-black"> SK8 4 DUMMIES</a>
       </div>
     </footer>
   );

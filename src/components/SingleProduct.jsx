@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
 import Notification from "../utils/Notification";
@@ -71,7 +70,7 @@ const SingleProduct = () => {
             <p>{product.description}</p>
             <br />
             <p>
-              <span class="fa fa-star checked">{product.valoration ? product.valoration : "No hay reviews" }</span>  
+              <span className="fa fa-star checked">{product.valoration ? product.valoration : "No hay reviews" }</span>  
             </p>
 
             <hr style={{ margin: "5px" }} />
@@ -107,7 +106,7 @@ const SingleProduct = () => {
                   style={{ fontSize: "large" }}
                   onClick={removeFavorite}
                 >
-                  <i class="fas fa-ban"></i>
+                  <i className="fas fa-ban"></i>
                 </button>
               )
             ) : (
@@ -126,22 +125,22 @@ const SingleProduct = () => {
       <div className="row">
         {product.reviews.map((one) => (
           
-          <div class="col-sm-4" style={{ maxWidth: "23rem" }}>
-            <div class="card">
-              <div class="card-body">
-                <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
-                  <div class="blockquote-custom-icon bg-info shadow-1-strong">
-                    <i class="fa fa-quote-left text-white"></i>
+          <div className="col-sm-4" style={{ maxWidth: "23rem" }}>
+            <div className="card">
+              <div className="card-body">
+                <blockquote className="blockquote blockquote-custom bg-white px-3 pt-4">
+                  <div className="blockquote-custom-icon bg-info shadow-1-strong">
+                    <i className="fa fa-quote-left text-white"></i>
                   </div>
 
-                  <p class="mb-0 mt-2 font-italic">{one.message}</p>
-                  <p class="mb-0 mt-2 font-italic">
+                  <p className="mb-0 mt-2 font-italic">{one.message}</p>
+                  <p className="mb-0 mt-2 font-italic">
                     {" "}
-                    <span class="fa fa-star checked">
+                    <span className="fa fa-star checked">
                       {one.valoration}
                     </span>
                   </p>
-                  <footer class="blockquote-footer pt-4 mt-4 border-top">
+                  <footer className="blockquote-footer pt-4 mt-4 border-top">
                     <cite title="Source Title"> {one.authorName}</cite>
                   </footer>
                 </blockquote>

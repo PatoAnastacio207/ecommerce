@@ -36,7 +36,7 @@ const BuildCard = ({product}) => {
             </Link>
             <div className="card-body">
               <Link to={'/'} className="link-dark text-decoration-none">
-                <h5 class="card-title">{product.name}</h5>
+                <h5 className="card-title">{product.name}</h5>
               </Link>
               <p className="card-text text-muted">
                 {product.category?.name} / {product.category?.type}

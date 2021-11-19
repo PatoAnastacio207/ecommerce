@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
 import { updateData } from "../features/userSlice";
@@ -61,14 +61,14 @@ function ProductCard({ product, admin, favs }) {
             </Link>
             <div className="card-body">
               <Link to={urlRedirect} className="link-dark text-decoration-none">
-                <h5 class="card-title">{product.name}</h5>
+                <h5 className="card-title">{product.name}</h5>
               </Link>
               <p className="card-text text-muted">
                 {product.category?.name} / {product.category?.type}
               </p>
               <p className="card-text text-muted">
                 {product.valoration ? (
-                  <span class="fa fa-star checked">{product.valoration}</span>
+                  <span className="fa fa-star checked">{product.valoration}</span>
                 ) : (
                   <br />
                 )}
@@ -77,15 +77,15 @@ function ProductCard({ product, admin, favs }) {
                 <h4>{priceFormat.format(product.price)}</h4>
 
                 {admin ? (
-                  <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group me-2 shadow-0" role="group">
+                  <div className="btn-toolbar" role="toolbar">
+                    <div className="btn-group me-2 shadow-0" role="group">
                       <Link to={`/admin/product/${product._id}`}>
                         <button className="btn btn-info shadow-0">
                           <i className="fas fa-edit"></i>
                         </button>
                       </Link>
                     </div>
-                    <div class="btn-group shadow-0" role="group">
+                    <div className="btn-group shadow-0" role="group">
                       <button
                         className="btn btn-danger shadow-0"
                         onClick={handleDelete}
