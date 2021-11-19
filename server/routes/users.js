@@ -15,9 +15,9 @@ router.delete("/admin/:id", adminAuthoritation, UsersController.deleteUser)
 // Devuelve todos los usuarios
 router.get("/admin", adminAuthoritation, UsersController.getAllUsers)
 // Añade item a la lista de favoritos
-router.post("/favorites/add/:id", adminOrUser, UsersController.addFavorite)
+router.post("/favorites/add/:id", UsersController.addFavorite)
 // Elimina item de la lista de favoritos
-router.delete("/favorites/remove/:id", adminOrUser, UsersController.removeFavorite)
+router.delete("/favorites/remove/:id", UsersController.removeFavorite)
 // Devuelve la lista de ids de los favoritos
 router.get("/favorites", adminOrUser, UsersController.getFavorites)
 
