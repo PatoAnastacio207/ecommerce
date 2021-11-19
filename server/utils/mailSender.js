@@ -20,7 +20,7 @@ const sendOrderRegistered = async (recipient, order) => {
     })
 }
 
-const sendOrderConfirmed = async () => {
+const sendOrderConfirmed = async (recipient, order) => {
     return transporter.sendMail({
         from: "Order confirmada!",
         to: recipient,
@@ -40,7 +40,7 @@ const sendOrderConfirmed = async () => {
     })
 }
 
-const sendOrderRejected = async () => {
+const sendOrderRejected = async (recipient, order) => {
     return transporter.sendMail({
         from: "Order cancelada",
         to: recipient,

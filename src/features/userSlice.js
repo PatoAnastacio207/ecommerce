@@ -15,7 +15,7 @@ export const userSlice = createSlice({
             state.user = null
         },
         updateData: (state, action) => {
-            console.log(action.payload)
+           
             state.user = action.payload
         }
     }

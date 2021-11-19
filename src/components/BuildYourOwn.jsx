@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React, { useState} from "react";
+
 import { Stepper, Step } from "react-form-stepper";
 
 import BuildList from './BuildList'
@@ -64,7 +63,7 @@ const BuildYourOwn = () => {
   const handleStep = (e) => {
     e.preventDefault()
     const nextIndex = Number(e.target.textContent.slice(0, 1)) - 1
-    console.log(e.target.textContent)
+
     if (nextIndex > -1) setPositionBuild(Number(e.target.textContent.slice(0, 1)) - 1)
   };
 
