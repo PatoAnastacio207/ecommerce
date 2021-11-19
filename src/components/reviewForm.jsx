@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Component } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import { selectUser } from "../features/userSlice";

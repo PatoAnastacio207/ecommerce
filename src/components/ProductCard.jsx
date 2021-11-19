@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
-import { selectUser, updateData } from "../features/userSlice";
+import {  updateData } from "../features/userSlice";
 import { selectCart} from "../features/cartSlice";
 import Notification from "../utils/Notification";
 

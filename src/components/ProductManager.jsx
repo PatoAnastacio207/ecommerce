@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdminProduct from "./AdminProduct";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "axios"
 
 const ProductManager = () => {
   const { id } = useParams();

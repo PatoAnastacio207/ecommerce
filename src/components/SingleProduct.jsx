@@ -35,7 +35,7 @@ const SingleProduct = () => {
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   const handleCart = (e) => {
-    // e.preventDefault();
+  
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then(() => dispatch(add({ product, quantity: 1 })))
@@ -45,7 +45,7 @@ const SingleProduct = () => {
 
   return (
     <div className="container">
-      {console.log(product)}
+  
       <br />
       <br />
       {product ? (
