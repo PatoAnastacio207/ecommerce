@@ -139,11 +139,11 @@ const Register = () => {
             </form>
             <br />
             {/* <button
-              class="w-100 btn btn-google btn-danger btn-lg mb-4"
+              className="w-100 btn btn-google btn-danger btn-lg mb-4"
               onClick={handleGoogle}
               >
               {" "}
-              <i class="fab fa-google"></i> Sign in with Google
+              <i className="fab fa-google"></i> Sign in with Google
             </button> */}
             <span>
               <br />

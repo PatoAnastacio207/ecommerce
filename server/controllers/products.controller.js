@@ -109,19 +109,19 @@ class ProductsController {
     } catch (err) {
       return next(err);
     }
-
-    static async getPaginatedProducts (req, res, next) {
-        try {
-            const options = {
-                page: req.query.page ? req.query.page : 1,
-                limit: 8
-            }
-            const products = await Product.paginate({}, options)
-            res.send(products)
-        } catch (err) {
-            return next(err)
-        }
-    }
+  }
+  static async getPaginatedProducts (req, res, next) {
+      try {
+          const options = {
+              page: req.query.page ? req.query.page : 1,
+              limit: 8
+          }
+          const products = await Product.paginate({}, options)
+          res.send(products)
+      } catch (err) {
+          return next(err)
+      }
+  }
 
 }
 

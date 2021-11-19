@@ -139,7 +139,7 @@ const AllProducts = function () {
             <div className="container">
 
             <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
+                <ul className="pagination justify-content-center">
                 {
                   totalPages.map(n => (
                     <li className={`page-item ${page === n ? "active" : null}`}>
@@ -168,7 +168,7 @@ const AllProducts = function () {
               </div>
               <br />
               <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
+                <ul className="pagination justify-content-center">
                 {
                   totalPages.map(n => (
                     <li className={`page-item ${page === n ? "active" : null}`}>

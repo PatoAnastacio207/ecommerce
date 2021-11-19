@@ -82,7 +82,7 @@ const Checkout = () => {
                 <br />
                 <div className="card-body container">
                   <form onSubmit={handleSubmit}>
-                    <h3 class="card-text">
+                    <h3 className="card-text">
                       Tus productos:
                       <br />
                       <br />
@@ -98,26 +98,26 @@ const Checkout = () => {
                       ))}
                     </h3>
                     <br></br>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">
+                    <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1">
                         DIRECCION
                       </span>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         defaultValue={user?.checkoutInfo.address}
                         value={direction.value}
                         onChange={direction.onChange}
                         required
                       />
                     </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">
+                    <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1">
                         NUMERO CELULAR
                       </span>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         defaultValue={user?.checkoutInfo.phone}
                         value={phone.value}
                         onChange={phone.onChange}
@@ -126,19 +126,19 @@ const Checkout = () => {
                         required
                       />
                     </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">
+                    <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1">
                         TOTAL
                       </span>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         value={priceFormat.format(cart.total)}
                         disabled
                       />
                     </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">
+                    <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1">
                         METODO DE PAGO
                       </span>
                       <select
@@ -152,8 +152,8 @@ const Checkout = () => {
                         </option>
                       </select>
                     </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">
+                    <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1">
                         METODO DE ENVIO
                       </span>
                       <select

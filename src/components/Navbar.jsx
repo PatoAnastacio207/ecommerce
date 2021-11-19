@@ -29,8 +29,10 @@ const Navbar = () => {
     axios
       .get("/api/auth/logged")
       .then((res) => dispatch(login(res.data)))
-      .catch(console.error);
-    axios.get("/api/cart/").then(({ data }) => dispatch(populate(data)));
+      .catch(() => {});
+    axios.get("/api/cart/")
+      .then(({ data }) => dispatch(populate(data)))
+      .catch(() => {});
   }, []);
 
   return (

@@ -66,8 +66,8 @@ const ShoppingCart = () => {
               className="card border border-dark shadow-0 text-right "
               style={{ backgroundColor: "" }}
             >
-              <div class="card-body">
-                <h5 class="card-title">Total:</h5>
+              <div className="card-body">
+                <h5 className="card-title">Total:</h5>
 
                 <h4>{priceFormat.format(cart.total)}</h4>
                 <hr />
@@ -75,7 +75,7 @@ const ShoppingCart = () => {
                 {user ? (
                     cart.items.length ? (<Link
                     type="button"
-                    class="btn  buyButton shadow-0"
+                    className="btn  buyButton shadow-0"
                     to="/checkout"
                     >
                       {" "}
@@ -83,7 +83,7 @@ const ShoppingCart = () => {
                     </Link>) : (
                       <button
                       type="button"
-                      class="btn  buyButton shadow-0"
+                      className="btn  buyButton shadow-0"
                       onClick={emptyCartHandler}
                       >
                       {" "}
@@ -93,14 +93,14 @@ const ShoppingCart = () => {
                 ) : (
                   <Link
                     type="button"
-                    class="btn  buyButton shadow-0"
+                    className="btn  buyButton shadow-0"
                     to="/login?buy=true"
                   >
                     <strong>Dummie compra</strong>
                   </Link>
                 )}
               </div>
-              <div class="card-footer">
+              <div className="card-footer">
                 <Link to="/allproducts">Seguir comprando.</Link>
               </div>
             </div>

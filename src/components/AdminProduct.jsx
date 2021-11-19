@@ -101,79 +101,79 @@ const history = useHistory()
           <br />
           <div className="card-body container">
             <form onSubmit={handleSubmit}>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Nombre producto
                 </span>
                 <input
                   type="text"
-                  class="form-control "
+                  className="form-control "
                   value={name}
                   onChange={(e) => handleChange(e, setName)}
                 />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Descripción
                 </span>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   value={description}
                   onChange={(e) => handleChange(e, setDescription)}
                 />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Precio
                 </span>
                 <input
                   type="number"
-                  class="form-control"
+                  className="form-control"
                   value={price}
                   onChange={(e) => handleChange(e, setPrice)}
                 />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Stock
                 </span>
                 <input
                   type="number"
-                  class="form-control"
+                  className="form-control"
                   value={inventory}
                   onChange={(e) => handleChange(e, setInventory)}
                 />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Imagen
                 </span>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   value={imgUrl}
                   onChange={(e) => handleChange(e, setImgUrl)}
                 />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Nombre Categoría
                 </span>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   value={categoryName}
                   onChange={(e) => handleChange(e, setCategoryName)}
                 />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Tipo Categoría
                 </span>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   value={categoryType}
                   onChange={(e) => handleChange(e, setCategoryType)}
                 />

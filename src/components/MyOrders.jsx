@@ -25,11 +25,11 @@ const MyOrders = () => {
       ) : null}
       <h2 className="fw-light titleNoMain">All my orders</h2>
       {orders.map(({ items, date, status, _id }, i) => (
-        <div class="accordion" id="accordionFlushExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id={`flush-heading${_id}`}>
+        <div className="accordion" id="accordionFlushExample">
+          <div className="accordion-item">
+            <h2 className="accordion-header" id={`flush-heading${_id}`}>
               <button
-                class="accordion-button collapsed"
+                className="accordion-button collapsed"
                 type="button"
                 data-mdb-toggle="collapse"
                 data-mdb-target={`#flush-collapse${_id}`}
@@ -43,13 +43,13 @@ const MyOrders = () => {
           </div>
           <div
             id={`flush-collapse${_id}`}
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby={`flush-heading${_id}`}
             data-mdb-parent="#accordionFlushExample"
           >
-            <div class="accordion-body">
+            <div className="accordion-body">
               <div>
-                <table class="table">
+                <table className="table">
                   <thead>
                     <tr>
                       <th scope="col">Name</th>
