@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { Stepper, Step } from "react-form-stepper";
 
+import BuildList from './BuildList'
+
 import tablas from "../assets/tabla.jpg";
 import trucks from "../assets/trucks.jpg";
 import ruedas from "../assets/ruedas.jpg";
@@ -12,38 +14,43 @@ import hardware from "../assets/hardware.jpg";
 const parts = [
   {
     idx: 0,
-    name: "Tablas",
+    name: "tablas",
     img: tablas,
   },
   {
     idx: 1,
-    name: "Trucks",
+    name: "trucks",
     img: trucks,
   },
   {
     idx: 2,
-    name: "Ruedas",
+    name: "ruedas",
     img: ruedas,
   },
   {
     idx: 3,
-    name: "Rodamientos",
+    name: "rodamientos",
     img: rodamientos,
   },
   {
     idx: 4,
-    name: "Grip",
+    name: "grip",
     img: grip,
   },
   {
     idx: 5,
-    name: "Risers",
+    name: "risers",
     img: spacer,
   },
   {
     idx: 6,
-    name: "Hardware",
+    name: "hardware",
     img: hardware,
+  },
+  {
+    idx: 7,
+    name: "Listo",
+    img: "https://png2.cleanpng.com/sh/fdd23c7813c2368a73f672584aa84ea1/L0KzQYm3U8I5N6t1fZH0aYP2gLBuTfNpbZRwRd9qcnuwc7nskgVmNZRxgeI2YYL3PbTvhfNsNWZmetQ9NnHlcYrogcA1NmE7TKY8OUW0QYa5UsIzOmg7S6gENT7zfri=/kisspng-check-mark-cheque-clip-art-check-5abb46aba9aa04.064439511522222763695.png",
   },
 ];
 
@@ -94,7 +101,9 @@ const BuildYourOwn = () => {
           </div>
         </div>
       </div>
-      <div className="container"></div>
+      <div className="container">
+      <BuildList parts={parts} position={positionBuild}/>
+      </div>
     </div>
   );
 };

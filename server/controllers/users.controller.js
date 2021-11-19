@@ -3,7 +3,6 @@ const User = require("../models/User");
 class UsersController {
   static async register(req, res, next) {
     req.body.email = req.body.email.toLowerCase();
-
     try {
       const user = await User.findOne({ email: req.body.email });
       if (user) return res.send("Email ya registrado");

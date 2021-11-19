@@ -4,7 +4,10 @@ import ProductCard from "./ProductCard";
 import AdminSidebar from "./AdminSidebar";
 
 const AllProducts = function () {
-  const [search, setSearch] = useState("");
+
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState([])
+  const [search, setSearch] = useState("")
   const [products, setProducts] = useState([]);
   const [urlAdmin, setUrlAdmin] = useState(false);
 
@@ -29,20 +32,39 @@ const AllProducts = function () {
         })
         .catch(console.error);
     }
-  };
+  }
+
 
   useEffect(() => {
     window.location.pathname === "/admin/products"
       ? setUrlAdmin(true)
       : setUrlAdmin(false);
     axios
-      .get("/api/products")
+      .get("/api/products/paginate")
       .then((res) => res.data)
-      .then((product) => {
-        setProducts(product);
+      .then((data) => {
+        console.log(data)
+        setTotalPages(Array.from({length: data.totalPages}, (_, i) => i + 1))
+        setProducts(data.docs);
       })
       .catch(console.error);
   }, [window.location.pathname]);
+
+  useEffect(() => {
+    axios
+      .get(`/api/products/paginate?page=${page}`)
+      .then((res) => res.data)
+      .then((data) => {
+        console.log(data)
+        setTotalPages(Array.from({length: data.totalPages}, (_, i) => i + 1))
+        setProducts(data.docs);
+      })
+      .catch((error) => console.log(error));
+  }, [page])
+
+  const changePage = (e) => {
+    setPage(parseInt(e.target.innerText))
+  }
 
   return (
     <>
@@ -115,20 +137,49 @@ const AllProducts = function () {
 
           <div className="album py-5">
             <div className="container">
-        
-              <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                {
+                  totalPages.map(n => (
+                    <li className={`page-item ${page === n ? "active" : null}`}>
+                      <a className="page-link" onClick={changePage}>
+                        {n}
+                      </a>
+                    </li>
+                    ))
+                }        
+                </ul>
+              </nav>
+              <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4" >
                 {products ? (
                   products.map((data) => (
-                    <ProductCard
-                      key={data._id}
-                      product={data}
-                      admin={urlAdmin}
-                    />
+                    <>
+                      <ProductCard
+                        key={data._id}
+                        product={data}
+                        admin={urlAdmin}
+                      />
+                    </>
                   ))
                 ) : (
                   <span></span>
                 )}
               </div>
+              <br />
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                {
+                  totalPages.map(n => (
+                    <li className={`page-item ${page === n ? "active" : null}`}>
+                      <a className="page-link" onClick={changePage}>
+                        {n}
+                      </a>
+                    </li>
+                    ))
+                }        
+                </ul>
+              </nav>
             </div>
           </div>
         </main>
