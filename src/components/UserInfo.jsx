@@ -1,18 +1,16 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { useInput } from "../hooks/custom-hooks";
-import axios from "axios";
-import { login } from "../features/userSlice";
+
 import { useHistory, Link } from "react-router-dom";
-import MyOrders from "./MyOrders";
 
 const UserInfo = () => {
   const user = useSelector(selectUser);
   const phone = useInput("phone");
   const address = useInput("address");
 
-  const dispatch = useDispatch();
+
   const history = useHistory();
 
   const handleEdit = (e) => {

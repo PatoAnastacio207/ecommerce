@@ -40,7 +40,7 @@ const UsersCard = ({user}) => {
       <div className="card hover-shadow border" style={{ fontFamily: "Bebas Neue" }}>
         
           <div className="bg-image hover-overlay ripple ">
-            <img src={img} className="img-fluid" />
+            <img src={img} className="img-fluid" alt="una imagen"/>
           </div>
         <div className="card-body">
           <Link className="link-dark text-decoration-none">

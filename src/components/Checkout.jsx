@@ -1,13 +1,13 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, login, updateData } from "../features/userSlice";
+import { selectUser, updateData } from "../features/userSlice";
 import imagen1 from "../assets/imagen1.png";
-import CartProductCard from "./CartProductCard";
-import { Link, useHistory } from "react-router-dom";
-import imagen from "../assets/caballoGrinder.png";
+
+import { useHistory } from "react-router-dom";
+
 import { useInput } from "../hooks/custom-hooks";
-import { selectCart, checkout, empty } from "../features/cartSlice";
+import { selectCart, empty } from "../features/cartSlice";
 import Notification from "../utils/Notification";
 import Swal from "sweetalert2";
 
@@ -26,14 +26,18 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.put(`/api/users/single/${user._id}`, {
-      checkoutInfo: { address: direction.value || user?.checkoutInfo.address, phone: phone.value || user?.checkoutInfo.phone},
-    })
-    .then(({data}) => {
-      dispatch(updateData(data))
-      return metodo.value === "tarjetaDeCredito"
-            ? history.push("/creditcard")
-            : Swal.fire({
+    axios
+      .put(`/api/users/single/${user._id}`, {
+        checkoutInfo: {
+          address: direction.value || user?.checkoutInfo.address,
+          phone: phone.value || user?.checkoutInfo.phone,
+        },
+      })
+      .then(({ data }) => {
+        dispatch(updateData(data));
+        return metodo.value === "tarjetaDeCredito"
+          ? history.push("/creditcard")
+          : Swal.fire({
               title: "Confirmar compra",
               showCancelButton: true,
               confirmButtonText: "Comprar",
@@ -45,16 +49,16 @@ const Checkout = () => {
                     Notification.successMessage("Dummie compra lista");
                   })
                   .then(async () => {
-                    await axios.delete("/api/cart/clear")
-                    dispatch(empty())
+                    await axios.delete("/api/cart/clear");
+                    dispatch(empty());
                     history.push("/myProfile");
-                  })
-                }
-            })
-    })
-    .catch((err) => {
-      Notification.errorMessage("Oops...");
-    });
+                  });
+              },
+            });
+      })
+      .catch((err) => {
+        Notification.errorMessage("Oops...");
+      });
   };
 
   //

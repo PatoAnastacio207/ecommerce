@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "../features/userSlice";
 import { GiSkateboard } from "react-icons/gi";
@@ -9,19 +9,16 @@ import { selectCart, populate, empty } from "../features/cartSlice";
 const Navbar = () => {
   const cart = useSelector(selectCart);
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
 
   const handleLogout = () => {
-    axios.delete("/api/cart/clear")
+    axios.delete("/api/cart/clear");
     axios
       .post("/api/auth/logout")
       .then((res) => dispatch(logout(res.data)))
-      .then(() => 
-        dispatch(empty(cart))
-      )
+      .then(() => dispatch(empty(cart)))
       .catch((err) => console.error(err));
   };
 
@@ -30,7 +27,8 @@ const Navbar = () => {
       .get("/api/auth/logged")
       .then((res) => dispatch(login(res.data)))
       .catch(() => {});
-    axios.get("/api/cart/")
+    axios
+      .get("/api/cart/")
       .then(({ data }) => dispatch(populate(data)))
       .catch(() => {});
   }, []);
@@ -136,7 +134,9 @@ const Navbar = () => {
                     className="nav-item nav-link dropdown-item-dark"
                     to="/myProfile"
                   >
-                    <strong>{user.firstName}{" "}{user.lastName}</strong>
+                    <strong>
+                      {user.firstName} {user.lastName}
+                    </strong>
                   </Link>
                 </li>
                 <li>
@@ -175,7 +175,7 @@ const Navbar = () => {
                   Clothes
                 </Link>
               </li>
-            
+
               <li className="nav-item">
                 <Link className="nav-link text-black" to="/allproducts">
                   All Products

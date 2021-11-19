@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BuildCard from "./BuildCard";
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { selectCart, add } from "../features/cartSlice";
-import imagen1 from "../assets/Buildyourown.png";
+import {  add } from "../features/cartSlice";
+
 
 const BuildList = ({ parts, position, setPosition }) => {
-  const history = useHistory();
+
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
 

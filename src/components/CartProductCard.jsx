@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useInput } from "../hooks/custom-hooks";
-import { selectCart, buy, remove, edit } from "../features/cartSlice";
+
+import { selectCart, remove, edit } from "../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+
 
 function CartProductCard({ product }) {
   const cart = useSelector(selectCart);

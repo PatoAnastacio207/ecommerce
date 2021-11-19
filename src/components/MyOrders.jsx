@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice";
+
 import { Link, Redirect } from "react-router-dom";
 
 import imagen from "../assets/caballoGrinder.png";
 const MyOrders = () => {
-  const user = useSelector(selectUser);
+
   const [orders, setOrders] = useState([]);
   const [value, setValue] = useState(false);
   const [reviewItem, setReviewItem] = useState("");
   const [reviewId, setReviewId] = useState("");
+  const priceOptions = { style: "currency", currency: "USD" };
+  const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   useEffect(() => {
     axios.get("/api/checkout/myorders").then((res) => setOrders(res.data));
@@ -64,7 +65,7 @@ const MyOrders = () => {
                       {items.map((item) => (
                         <tr>
                           <th scope="row">{item.name}</th>
-                          <td>{item.price}</td>
+                          <td>{priceFormat.format(item.price)}</td>
                           <td>{item.quantity}</td>
                           <td>{date.slice(0, 10)}</td>
                           <td>

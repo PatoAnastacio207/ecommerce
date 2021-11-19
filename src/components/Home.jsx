@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser } from "../features/userSlice";
-import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+
+import { Link } from "react-router-dom";
 import imagen1 from "../assets/Buildyourown.png";
 import imagen3 from "../assets/Photo1.png";
 import imagen4 from "../assets/Photo4.png";
 import imagen5 from "../assets/SkaterCaido.png";
 
 const Home = () => {
-  const user = useSelector(selectUser);
+
 
   const handleCLick = (e) => {
     localStorage.clear()

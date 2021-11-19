@@ -1,14 +1,14 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import { Link } from "react-router-dom";
 import imagen1 from "../assets/imagen1.png";
 import CartProductCard from "./CartProductCard";
 import imagen from "../assets/caballoGrinder.png";
 import Notification from "../utils/Notification"
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
-import { selectCart, buy } from "../features/cartSlice";
-import Login from "./Login";
+import { selectCart } from "../features/cartSlice";
+
 
 const ShoppingCart = () => {
   const priceOptions = { style: "currency", currency: "USD" };
@@ -54,6 +54,7 @@ const ShoppingCart = () => {
                 <img
                   src={imagen}
                   style={{ maxWidth: "60%", marginLeft: "60px" }}
+                  alt="Una imagen"
                 />
               </div>
             )}

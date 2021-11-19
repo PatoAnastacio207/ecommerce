@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import ShoppingCart from "./components/ShoppingCart";
-import GoogleTest from "./components/GoogleTest";
+
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import Category from "./components/Category";
@@ -33,6 +33,8 @@ import OrdersList from "./components/OrdersList";
 import SingleOrder from "./components/SingleOrder";
 import FavList from "./components/FavList";
 import BuildYourOwn from "./components/BuildYourOwn";
+
+import NotFound from "./components/NotFound"
 
 function App() {
   const user = useSelector(selectUser);
@@ -97,8 +99,7 @@ function App() {
 
             {user ? <Route exact path="/myfavs" component={FavList} /> : null}
 
-            <Route exact path="/google" component={GoogleTest} />
-
+       
             {/*FOR CATEGORY */}
             <Route path={"/category/:name"} component={Category} />
 
@@ -124,7 +125,7 @@ function App() {
             <Route path={"/myOrders"} component={MyOrders} />
             <Route path={"/myReview"} component={Review} />
 
-            <Route path={"*"}>404</Route>
+            <Route path={"*"} component={NotFound}/>
           </Switch>
         </div>
         {/* For FOOTER --> All the pages */}
