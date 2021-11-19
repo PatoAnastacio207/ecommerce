@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
-import { Rating } from "semantic-ui-react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
-import { useHistory } from "react-router-dom";
+import Notification from "../utils/Notification";
 import { selectUser, updateData } from "../features/userSlice";
-import { MDBContainer, MDBRating } from "mdbreact";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({ reviews: [] });
-  const [value, setValue] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  console.log(product);
+ 
   const addFavorite = async (e) => {
     await axios.post(`/api/users/favorites/add/${product._id}`);
     const res = await axios.get("/api/auth/logged");
@@ -42,6 +39,7 @@ const SingleProduct = () => {
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then(() => dispatch(add({ product, quantity: 1 })))
+      .then(() => Notification.successMessage("Producto en el carrito"))
       .catch((err) => console.error(err));
   };
 
@@ -69,10 +67,10 @@ const SingleProduct = () => {
             <br />
             <p>
               {product.reviews.map((res) => (
-                 <span class="fa fa-star checked">{res.valoration}</span>
+                <span class="fa fa-star checked">{res.valoration}</span>
               ))}
             </p>
-            
+
             <hr style={{ margin: "5px" }} />
             <h3>{priceFormat.format(product.price)}</h3>
             <Link
@@ -135,7 +133,9 @@ const SingleProduct = () => {
                   <p class="mb-0 mt-2 font-italic">{one.message}</p>
                   <p class="mb-0 mt-2 font-italic">
                     {" "}
-                    <span class="fa fa-star checked">{one.valoration || 0}</span>
+                    <span class="fa fa-star checked">
+                      {one.valoration || 0}
+                    </span>
                   </p>
                   <footer class="blockquote-footer pt-4 mt-4 border-top">
                     <cite title="Source Title"> {one.authorName}</cite>

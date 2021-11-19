@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
 import { selectUser, updateData } from "../features/userSlice";
+import { selectCart} from "../features/cartSlice";
+import Notification from "../utils/Notification";
 
 function ProductCard({ product, admin, favs }) {
-  const user = useSelector(selectUser);
+ const cart = useSelector(selectCart)
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const urlRedirect = `/product/${product._id}`;
@@ -32,11 +34,15 @@ function ProductCard({ product, admin, favs }) {
     dispatch(updateData(res.data));
   };
 
+  
   const handleCart = (e) => {
     e.preventDefault();
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
-      .then(() => dispatch(add({ product, quantity: 1 })))
+      .then(() => {
+        dispatch(add({ product, quantity: 1 }));
+      })
+      .then(() => Notification.successMessage("Producto en el carrito"))
       .catch((err) => console.error(err));
   };
 
