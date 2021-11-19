@@ -8,12 +8,12 @@ import { selectUser, updateData } from "../features/userSlice";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({ reviews: [] });
-  const [average, setAverage] = useState("Nadie dejo su review aun!")
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const priceOptions = { style: "currency", currency: "USD" };
+  const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
- 
   const addFavorite = async (e) => {
     await axios.post(`/api/users/favorites/add/${product._id}`);
     const res = await axios.get("/api/auth/logged");
@@ -36,8 +36,6 @@ const SingleProduct = () => {
       
   }, []);
 
-  const priceOptions = { style: "currency", currency: "USD" };
-  const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   const handleCart = (e) => {
     axios
