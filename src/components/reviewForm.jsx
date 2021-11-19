@@ -76,7 +76,8 @@ const Review = () => {
             <textarea
               className="textarea form-control"
               required
-              {...message}
+              value={message.value}
+              onChange={message.onChange}
             ></textarea>
           </div>
         </div>

@@ -12,6 +12,7 @@ import rodamientos from "../assets/rodamientos.jpg";
 import grip from "../assets/grip.jpg";
 import spacer from "../assets/spacer.jpg";
 import hardware from "../assets/hardware.jpg";
+import imagen1 from "../assets/Buildyourown.png"
 
 const parts = [
   {
@@ -52,7 +53,7 @@ const parts = [
   {
     idx: 7,
     name: "Listo",
-    img: "https://png2.cleanpng.com/sh/fdd23c7813c2368a73f672584aa84ea1/L0KzQYm3U8I5N6t1fZH0aYP2gLBuTfNpbZRwRd9qcnuwc7nskgVmNZRxgeI2YYL3PbTvhfNsNWZmetQ9NnHlcYrogcA1NmE7TKY8OUW0QYa5UsIzOmg7S6gENT7zfri=/kisspng-check-mark-cheque-clip-art-check-5abb46aba9aa04.064439511522222763695.png",
+    img: imagen1,
   },
 ];
 
@@ -68,7 +69,9 @@ const BuildYourOwn = () => {
   };
 
   return (
+   
     <div className="container" style={{ fontFamily: "Bebas Neue" }}>
+       <br/><br/><br/>
       <div className="container border shadow-0 rounded">
       <Stepper
         onClick={handleStep}
@@ -82,6 +85,7 @@ const BuildYourOwn = () => {
         ))}
       </Stepper>
       </div>
+      <br/>
       <div className="container">
         <div className="row">
           <div className="container shadow-0 col-sm-3"></div>
