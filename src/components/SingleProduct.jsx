@@ -135,7 +135,7 @@ const SingleProduct = () => {
                   <p className="mb-0 mt-2 font-italic">
                     {" "}
                     <span className="fa fa-star checked">
-                      {one.valoration}
+                      {one.valoration.toFixed(2)}
                     </span>
                   </p>
                   <footer className="blockquote-footer pt-4 mt-4 border-top">

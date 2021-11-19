@@ -175,9 +175,15 @@ const Navbar = () => {
                   Clothes
                 </Link>
               </li>
+            
               <li className="nav-item">
                 <Link className="nav-link text-black" to="/allproducts">
                   All Products
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-warning" to="/buildyourown">
+                  Build your own
                 </Link>
               </li>
             </ul>

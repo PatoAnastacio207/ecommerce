@@ -17,7 +17,8 @@ const BuildCard = ({ product, position ,setPosition }) => {
 
   return (
     <>
-      <div className="col">
+
+      <div className="col-sm-3">
         <div
           onClick={handleClick}
           className="card hover-shadow border"
@@ -41,6 +42,7 @@ const BuildCard = ({ product, position ,setPosition }) => {
           </div>
         </div>
       </div>
+  
     </>
   );
 };
