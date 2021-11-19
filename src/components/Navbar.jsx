@@ -64,7 +64,7 @@ const Navbar = () => {
                 sk8 4 dummies
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#our-story">
+                <a className="nav-link" href="/#our-story">
                   our story
                 </a>
               </li>

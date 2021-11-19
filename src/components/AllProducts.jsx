@@ -43,7 +43,7 @@ const AllProducts = function () {
       .get("/api/products/paginate")
       .then((res) => res.data)
       .then((data) => {
-        console.log(data)
+     
         setTotalPages(Array.from({length: data.totalPages}, (_, i) => i + 1))
         setProducts(data.docs);
       })
@@ -55,7 +55,7 @@ const AllProducts = function () {
       .get(`/api/products/paginate?page=${page}`)
       .then((res) => res.data)
       .then((data) => {
-        console.log(data)
+     
         setTotalPages(Array.from({length: data.totalPages}, (_, i) => i + 1))
         setProducts(data.docs);
       })
@@ -141,8 +141,8 @@ const AllProducts = function () {
             <nav aria-label="Page navigation example">
                 <ul className="pagination justify-content-center">
                 {
-                  totalPages.map(n => (
-                    <li className={`page-item ${page === n ? "active" : null}`}>
+                  totalPages.map((n,i )=> (
+                    <li key={i} className={`page-item ${page === n ? "active" : null}`}>
                       <a className="page-link" onClick={changePage}>
                         {n}
                       </a>

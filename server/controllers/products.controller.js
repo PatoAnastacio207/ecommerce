@@ -21,7 +21,7 @@ class ProductsController {
     try {
       const product = await Product.findOne({ _id: req.params.id });
       return res.json(product);
-    } catch {
+    } catch (err){
       return next(err);
     }
   }
