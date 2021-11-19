@@ -17,11 +17,11 @@ const AdminSidebar = () => {
         <h4>Panel Admin</h4>
       </div>
 
-      <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingOne">
+      <div className="accordion accordion-flush" id="accordionFlushExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingOne">
             <button
-              class="accordion-button collapsed"
+              className="accordion-button collapsed"
               type="button"
               data-mdb-toggle="collapse"
               data-mdb-target="#flush-collapseOne"
@@ -33,24 +33,24 @@ const AdminSidebar = () => {
           </h2>
           <div
             id="flush-collapseOne"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby="flush-headingOne"
             data-mdb-parent="#accordionFlushExample"
           >
-            <div class="accordion-body">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
+            <div className="accordion-body">
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
                   <Link
                     to="/admin/productadd"
-                    class="link-dark text-decoration-none"
+                    className="link-dark text-decoration-none"
                   >
                     Agregar
                   </Link>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                   <Link
                     to="/admin/products"
-                    class="link-dark text-decoration-none"
+                    className="link-dark text-decoration-none"
                   >
                     Editar/Eliminar
                   </Link>
@@ -59,10 +59,10 @@ const AdminSidebar = () => {
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingTwo">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingTwo">
             <button
-              class="accordion-button collapsed"
+              className="accordion-button collapsed"
               type="button"
               data-mdb-toggle="collapse"
               data-mdb-target="#flush-collapseTwo"
@@ -74,24 +74,24 @@ const AdminSidebar = () => {
           </h2>
           <div
             id="flush-collapseTwo"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby="flush-headingTwo"
             data-mdb-parent="#accordionFlushExample"
           >
-            <div class="accordion-body">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
+            <div className="accordion-body">
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
                   <Link
                     to="/admin/useradd"
-                    class="link-dark text-decoration-none"
+                    className="link-dark text-decoration-none"
                   >
                     Agregar
                   </Link>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                   <Link
                     to="/admin/users"
-                    class="link-dark text-decoration-none"
+                    className="link-dark text-decoration-none"
                   >
                     Editar/Eliminar
                   </Link>
@@ -102,10 +102,10 @@ const AdminSidebar = () => {
           </div>
           
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingTres">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingTres">
             <button
-              class="accordion-button collapsed"
+              className="accordion-button collapsed"
               type="button"
               data-mdb-toggle="collapse"
               data-mdb-target="#flush-collapseTres"
@@ -117,24 +117,24 @@ const AdminSidebar = () => {
           </h2>
           <div
             id="flush-collapseTres"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby="flush-headingTres"
             data-mdb-parent="#accordionFlushExample"
           >
-            <div class="accordion-body">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
+            <div className="accordion-body">
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
                   <Link
                     to="/admin/orders/pending"
-                    class="link-dark text-decoration-none"
+                    className="link-dark text-decoration-none"
                   >
                     Pendientes
                   </Link>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                   <Link
                     to="/admin/orders/old"
-                    class="link-dark text-decoration-none"
+                    className="link-dark text-decoration-none"
                   >
                     Pasadas
                   </Link>

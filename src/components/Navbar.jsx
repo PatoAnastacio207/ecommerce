@@ -15,7 +15,6 @@ const Navbar = () => {
   const user = useSelector(selectUser);
 
   const handleLogout = () => {
-    console.log("logout attempt...");
     axios.delete("/api/cart/clear")
     axios
       .post("/api/auth/logout")
@@ -23,21 +22,17 @@ const Navbar = () => {
       .then(() => 
         dispatch(empty(cart))
       )
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    console.log(`fetching user...`);
     axios
       .get("/api/auth/logged")
       .then((res) => dispatch(login(res.data)))
-      .then((user) => {
-        console.log(`found user ${user.payload.email}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios.get("/api/cart/").then(({ data }) => dispatch(populate(data)));
+      .catch(() => {});
+    axios.get("/api/cart/")
+      .then(({ data }) => dispatch(populate(data)))
+      .catch(() => {});
   }, []);
 
   return (

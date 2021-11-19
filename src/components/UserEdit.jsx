@@ -15,14 +15,7 @@ const UserEdit = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  //   useEffect(() => {
-  //     axios
-  //     .get('/checkout/myorders')
-  //     .then((res)=>console.log(res)
-  //   }, [])
-
   const handleSave = (e) => {
-    console.log("hola");
     e.preventDefault();
     axios
       .put(`/api/users/single/${user._id}`, {

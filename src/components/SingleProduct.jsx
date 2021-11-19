@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
-import { Rating } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
-import { useHistory } from "react-router-dom";
+import Notification from "../utils/Notification";
 import { selectUser, updateData } from "../features/userSlice";
-import { MDBContainer, MDBRating } from "mdbreact";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({ reviews: [] });
-  const [value, setValue] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const priceOptions = { style: "currency", currency: "USD" };
+  const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
-  console.log(product);
   const addFavorite = async (e) => {
     await axios.post(`/api/users/favorites/add/${product._id}`);
     const res = await axios.get("/api/auth/logged");
@@ -31,23 +28,26 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
-    axios.get(`/api/products/id/${id}`).then(({ data }) => setProduct(data));
+    axios.get(`/api/products/id/${id}`)
+      .then(({ data }) => {
+        setProduct(data)
+        return data
+      })
+      
   }, []);
 
-  const priceOptions = { style: "currency", currency: "USD" };
-  const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   const handleCart = (e) => {
-    // e.preventDefault();
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then(() => dispatch(add({ product, quantity: 1 })))
+      .then(() => Notification.successMessage("Producto en el carrito"))
       .catch((err) => console.error(err));
   };
 
   return (
     <div className="container">
-      {console.log(product)}
+  
       <br />
       <br />
       {product ? (
@@ -68,11 +68,9 @@ const SingleProduct = () => {
             <p>{product.description}</p>
             <br />
             <p>
-              {product.reviews.map((res) => (
-                 <span class="fa fa-star checked">{res.valoration}</span>
-              ))}
+              <span className="fa fa-star checked">{product.valoration ? product.valoration : "No hay reviews" }</span>  
             </p>
-            
+
             <hr style={{ margin: "5px" }} />
             <h3>{priceFormat.format(product.price)}</h3>
             <Link
@@ -106,7 +104,7 @@ const SingleProduct = () => {
                   style={{ fontSize: "large" }}
                   onClick={removeFavorite}
                 >
-                  <i class="fas fa-ban"></i>
+                  <i className="fas fa-ban"></i>
                 </button>
               )
             ) : (
@@ -124,20 +122,23 @@ const SingleProduct = () => {
       <br /> <br /> <br /> <br /> <br />
       <div className="row">
         {product.reviews.map((one) => (
-          <div class="col-sm-4" style={{ maxWidth: "23rem" }}>
-            <div class="card">
-              <div class="card-body">
-                <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
-                  <div class="blockquote-custom-icon bg-info shadow-1-strong">
-                    <i class="fa fa-quote-left text-white"></i>
+          
+          <div className="col-sm-4" style={{ maxWidth: "23rem" }}>
+            <div className="card">
+              <div className="card-body">
+                <blockquote className="blockquote blockquote-custom bg-white px-3 pt-4">
+                  <div className="blockquote-custom-icon bg-info shadow-1-strong">
+                    <i className="fa fa-quote-left text-white"></i>
                   </div>
 
-                  <p class="mb-0 mt-2 font-italic">{one.message}</p>
-                  <p class="mb-0 mt-2 font-italic">
+                  <p className="mb-0 mt-2 font-italic">{one.message}</p>
+                  <p className="mb-0 mt-2 font-italic">
                     {" "}
-                    <span class="fa fa-star checked">{one.valoration || 0}</span>
+                    <span className="fa fa-star checked">
+                      {one.valoration}
+                    </span>
                   </p>
-                  <footer class="blockquote-footer pt-4 mt-4 border-top">
+                  <footer className="blockquote-footer pt-4 mt-4 border-top">
                     <cite title="Source Title"> {one.authorName}</cite>
                   </footer>
                 </blockquote>

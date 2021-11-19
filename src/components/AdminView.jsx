@@ -1,11 +1,6 @@
 import React from "react";
-import axios from "axios";
-import { useInput } from "../hooks/custom-hooks";
-import { Route, Switch } from "react-router-dom";
 
-import AdminProduct from "./AdminProduct";
 import AdminSidebar from "./AdminSidebar";
-import AllProducts from "./AllProducts";
 
 const AdminView = () => {
   return (

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Component } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import { selectUser } from "../features/userSlice";
@@ -11,10 +10,11 @@ const Review = () => {
   const user = useSelector(selectUser);
   const location = useLocation();
   const item = location.state.reviewItem;
-  const orderId= location.state.reviewId
+  const orderId = location.state.reviewId;
   const [valoration, setValoration] = useState(0);
   const message = useInput("");
-  const history = useHistory()
+  const history = useHistory();
+
   const starsReview = {
     count: 5,
     color: "black",
@@ -29,7 +29,7 @@ const Review = () => {
       setValoration(newValue);
     },
   };
-console.log(item)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -38,7 +38,7 @@ console.log(item)
         user,
         productId: item.productId,
         review: {
-          valoration: valoration.value,
+          valoration: valoration,
           message: message.value,
         },
       })
@@ -83,7 +83,9 @@ console.log(item)
         <br />
         <div className="row">
           <div className="col-sm-12">
-            <label for="month" required>Valoracion</label>{" "}
+            <label for="month" required>
+              Valoracion
+            </label>{" "}
             <ReactStars {...starsReview} />
           </div>
         </div>

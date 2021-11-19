@@ -39,7 +39,7 @@ productSchema.virtual('valoration').get(function () {
     var valoration = this.reviews.reduce((previo, current) => {
         return previo ? current.valoration + previo : current.valoration
       }, 0)
-    return valoration / this.reviews.length
+    return this.reviews.length ? valoration / this.reviews.length : null
 })
 
 // Añade review individual al producto

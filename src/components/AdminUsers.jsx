@@ -19,7 +19,7 @@ const AdminUsers = () => {
         password: password.value,
       })
       .then((res) => res.data)
-      .catch((err) => console.log(err));
+      .catch(console.error);
       window.location.reload(false);
   };
   return (
@@ -38,29 +38,29 @@ const AdminUsers = () => {
           <br />
           <div className="card-body container">
             <form onSubmit={handleSubmit}>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Primer nombre
                 </span>
-                <input type="text" class="form-control" {...firstName} />
+                <input type="text" className="form-control" {...firstName} />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Apellido
                 </span>
-                <input type="text" class="form-control" {...lastName} />
+                <input type="text" className="form-control" {...lastName} />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Email
                 </span>
-                <input type="email" class="form-control" {...email} />
+                <input type="email" className="form-control" {...email} />
               </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text col-sm-2" id="basic-addon1">
+              <div className="input-group mb-3">
+                <span className="input-group-text col-sm-2" id="basic-addon1">
                   Password
                 </span>
-                <input type="text" class="form-control" {...password} />
+                <input type="text" className="form-control" {...password} />
               </div>
               <span>
                 <br />

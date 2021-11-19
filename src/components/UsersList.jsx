@@ -13,7 +13,7 @@ const UsersList = function () {
       .then((users) => {
         setUsersList(users);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, []);
 
   return (

@@ -23,7 +23,6 @@ const Login = () => {
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    console.log("login attempt...")
     axios
       .post("/api/auth/google")
 
@@ -36,7 +35,6 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("login attempt...")
     axios.post("/api/auth/login", {
         email: email.value,
         password: password.value,
@@ -48,7 +46,7 @@ const Login = () => {
       })
      .catch((err) => {
         Notification.errorMessage("Oops...")
-        console.log(err)
+        console.error(err)
       })
   };
 
@@ -100,7 +98,7 @@ const Login = () => {
               </button>
             </form>
             <br />
-            {/* <button class="w-100 btn btn-google btn-danger btn-lg mb-4" onClick={handleGoogle}> <i class="fab fa-google"></i>  Sign in with Google</button> */}
+            {/* <button className="w-100 btn btn-google btn-danger btn-lg mb-4" onClick={handleGoogle}> <i className="fab fa-google"></i>  Sign in with Google</button> */}
             <span><br /></span>
           </main>
         </div>
