@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import AdminSidebar from "./AdminSidebar";
-import { Pagination } from 'semantic-ui-react'
+
 
 const AllProducts = function () {
   const [page, setPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(1)
+  const [totalPages, setTotalPages] = useState([])
   const [search, setSearch] = useState("")
   const [products, setProducts] = useState([]);
   const [urlAdmin, setUrlAdmin] = useState(false);
@@ -47,7 +47,7 @@ const AllProducts = function () {
       .then((res) => res.data)
       .then((data) => {
         console.log(data)
-        setTotalPages(data.totalPages)
+        setTotalPages(Array.from({length: data.totalPages}, (_, i) => i + 1))
         setProducts(data.docs);
       })
       .catch((error) => console.log(error));
@@ -59,21 +59,18 @@ const AllProducts = function () {
       .then((res) => res.data)
       .then((data) => {
         console.log(data)
-        setTotalPages(data.totalPages)
+        setTotalPages(Array.from({length: data.totalPages}, (_, i) => i + 1))
         setProducts(data.docs);
       })
       .catch((error) => console.log(error));
   }, [page])
 
-  const changePage = (_, {activePage}) => {
-    setPage(parseInt(activePage))
+  const changePage = (e) => {
+    setPage(parseInt(e.target.innerText))
   }
 
   return (
     <>
-    {
-      console.log(totalPages)
-    }
       <div className={urlAdmin ? "row" : "container-fluid"}>
         {urlAdmin ? (
           <>
@@ -133,6 +130,19 @@ const AllProducts = function () {
 
           <div className="album py-5">
             <div className="container">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                {
+                  totalPages.map(n => (
+                    <li className={`page-item ${page === n ? "active" : null}`}>
+                      <a className="page-link" onClick={changePage}>
+                        {n}
+                      </a>
+                    </li>
+                    ))
+                }        
+                </ul>
+              </nav>
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4" >
                 {products ? (
                   products.map((data) => (
@@ -149,19 +159,18 @@ const AllProducts = function () {
                 )}
               </div>
               <br />
-              <nav aria-label="Page navigation example" className="d-flex justify-content-center">
-                <Pagination 
-                  activePage={page}
-                  ellipsisItem={null}
-                  defaultActivePage={1}
-                  firstItem={null}
-                  lastItem={null}
-                  pointing
-                  secondary
-                  siblingRange={5}
-                  totalPages={totalPages}
-                  onPageChange={changePage}
-                />
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                {
+                  totalPages.map(n => (
+                    <li className={`page-item ${page === n ? "active" : null}`}>
+                      <a className="page-link" onClick={changePage}>
+                        {n}
+                      </a>
+                    </li>
+                    ))
+                }        
+                </ul>
               </nav>
             </div>
           </div>
