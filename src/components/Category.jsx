@@ -10,7 +10,7 @@ const Category = () =>{
         axios.get(`/api/products/category/${name}`)
         .then(all=>setProducts(all.data))
     },[name])
-    console.log(products)
+
     return(
         <main>
       <section class="py-5 text-center container">

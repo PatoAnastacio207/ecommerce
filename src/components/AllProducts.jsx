@@ -13,17 +13,13 @@ const AllProducts = function () {
   };
 
   const handleSearch = (e) => {
-    console.log(search);
     e.preventDefault();
     if (search) {
       axios
         .get(`/api/products/search/${search}`)
         .then((res) => res.data)
-        .then((product) => {
-          console.log(product);
-          setProducts(product);
-        })
-        .catch((error) => console.log(error));
+        .then(setProducts)
+        .catch(console.error);
     } else {
       axios
         .get("/api/products")
@@ -31,7 +27,7 @@ const AllProducts = function () {
         .then((product) => {
           setProducts(product);
         })
-        .catch((error) => console.log(error));
+        .catch(console.error);
     }
   };
 
@@ -45,7 +41,7 @@ const AllProducts = function () {
       .then((product) => {
         setProducts(product);
       })
-      .catch((error) => console.log(error));
+      .catch(console.error);
   }, [window.location.pathname]);
 
   return (

@@ -9,6 +9,7 @@ import { selectUser, updateData } from "../features/userSlice";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({ reviews: [] });
+  const [average, setAverage] = useState("Nadie dejo su review aun!")
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -28,14 +29,18 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
-    axios.get(`/api/products/id/${id}`).then(({ data }) => setProduct(data));
+    axios.get(`/api/products/id/${id}`)
+      .then(({ data }) => {
+        setProduct(data)
+        return data
+      })
+      
   }, []);
 
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   const handleCart = (e) => {
-  
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then(() => dispatch(add({ product, quantity: 1 })))
@@ -66,9 +71,7 @@ const SingleProduct = () => {
             <p>{product.description}</p>
             <br />
             <p>
-              {product.reviews.map((res) => (
-                <span class="fa fa-star checked">{res.valoration}</span>
-              ))}
+              <span class="fa fa-star checked">{product.valoration ? product.valoration : "No hay reviews" }</span>  
             </p>
 
             <hr style={{ margin: "5px" }} />
@@ -135,7 +138,7 @@ const SingleProduct = () => {
                   <p class="mb-0 mt-2 font-italic">
                     {" "}
                     <span class="fa fa-star checked">
-                    {console.log(one)}
+                      {one.valoration}
                     </span>
                   </p>
                   <footer class="blockquote-footer pt-4 mt-4 border-top">

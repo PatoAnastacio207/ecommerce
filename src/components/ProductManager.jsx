@@ -8,12 +8,9 @@ const ProductManager = () => {
   const [product, setProduct] = useState({});
 
   useEffect(async () => {
-    try {
-      const { data } = await axios.get(`/api/products/id/${id}`);
-      setProduct(data);
-    } catch (error) {
-      console.log(error);
-    }
+    axios.get(`/api/products/id/${id}`)
+      .then(({data}) => setProduct(data))
+      .catch(console.error)
   }, []);
 
   return <AdminProduct product={product} />;

@@ -13,18 +13,9 @@ function ProductCard({ product, admin, favs }) {
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const urlRedirect = `/product/${product._id}`;
   const dispatch = useDispatch();
-  const [oneProduct, setOneProduct] = useState();
   const [deleted, setDeleted] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get(`/api/products/id/${product.id}`)
-      .then(({ data }) => setOneProduct(data));
-  }, [product.id]);
-console.log(oneProduct)
-
   const handleDelete = (e) => {
-    e.preventDefault();
     axios
       .delete(`/api/products/id/${product._id}`)
       .then((res) => {
@@ -35,14 +26,12 @@ console.log(oneProduct)
   };
 
   const removeFavorite = async (e) => {
-    e.preventDefault();
     await axios.delete(`/api/users/favorites/remove/${product._id}`);
     const res = await axios.get("/api/auth/logged");
     dispatch(updateData(res.data));
   };
 
   const handleCart = (e) => {
-    e.preventDefault();
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then(() => {
@@ -78,9 +67,11 @@ console.log(oneProduct)
                 {product.category?.name} / {product.category?.type}
               </p>
               <p className="card-text text-muted">
-              <span class="fa fa-star checked">
-                {oneProduct? oneProduct?.valoration:" No tenemos rating aun :("}
-                </span>
+                {product.valoration ? (
+                  <span class="fa fa-star checked">{product.valoration}</span>
+                ) : (
+                  <br />
+                )}
               </p>
               <div className="d-flex justify-content-between">
                 <h4>{priceFormat.format(product.price)}</h4>

@@ -93,7 +93,6 @@ const history = useHistory()
       </div>
       <div className="container col-sm-7">
         <br />
-        {console.log("asdf", title)}
         <h1 style={{ fontFamily: "Bebas Neue" }}>
           {title !== "" ? `EDITAR PRODUCTO: ${title}` : "AGREGAR PRODUCTOS"}
         </h1>

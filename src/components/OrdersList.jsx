@@ -13,7 +13,7 @@ const OrdersList = () => {
       .then((orders) => {
         setOrdersList(orders);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, []);
 
   return (

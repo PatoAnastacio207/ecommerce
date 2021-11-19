@@ -8,8 +8,7 @@ const UsersCard = ({user}) => {
     axios
       .put(`/api/users/admin/${user._id}`)
       .then((res) => res.data)
-      .catch((err) => console.log(err));
-      console.log(`switched`);
+      .catch((err) => console.error(err));
       window.location.reload(false);
   }
 
@@ -18,8 +17,7 @@ const UsersCard = ({user}) => {
     axios
       .delete(`/api/users/admin/${user._id}`)
       .then((res) => res.data)
-      .catch((err) => console.log(err));
-      console.log(`deleted`);
+      .catch((err) => console.error(err));
       window.location.reload(false);
   }
 

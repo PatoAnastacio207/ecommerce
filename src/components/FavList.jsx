@@ -8,15 +8,12 @@ const FavList = () => {
   const user = useSelector(selectUser);
   const [favs, setFavs] = useState([]);
 
-
   useEffect(() => {
     axios
       .post(`/api/products/array`, { items: user?.favorites })
       .then(({ data }) => setFavs(data))
-      .catch((err) => console.log(err));
+      .catch(console.error);
   }, [user]);
-
-  console.log("HOLAAAAAAAAA", favs);
 
   return (
     <div className="container-fluid">

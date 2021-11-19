@@ -54,7 +54,6 @@ const BuildYourOwn = () => {
 
   const handleStep = (e) => {
     e.preventDefault()
-    console.log(e.target.textContent)
     setPositionBuild(Number(e.target.textContent.slice(0, 1)) - 1)
   };
 

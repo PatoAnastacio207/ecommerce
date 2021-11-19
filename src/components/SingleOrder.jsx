@@ -13,11 +13,10 @@ const SingleOrder = () => {
   const { id } = useParams();
 
   const handleChange = (status) => {
-    console.log(status)
     axios
       .put(`/api/checkout/update/${id}`, { status })
       .then(res => setOrder(res.data))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   useEffect(() => {
@@ -28,9 +27,8 @@ const SingleOrder = () => {
         axios
           .get(`/api/users/single/${data.userId}`)
           .then(({ data }) => setUserOrder(data))
-          .catch((err) => console.log(err));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, []);
 
   return (
