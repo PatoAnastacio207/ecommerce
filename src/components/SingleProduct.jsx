@@ -122,6 +122,7 @@ const SingleProduct = () => {
       <br /> <br /> <br /> <br /> <br />
       <div className="row">
         {product.reviews.map((one) => (
+          
           <div class="col-sm-4" style={{ maxWidth: "23rem" }}>
             <div class="card">
               <div class="card-body">
@@ -134,7 +135,7 @@ const SingleProduct = () => {
                   <p class="mb-0 mt-2 font-italic">
                     {" "}
                     <span class="fa fa-star checked">
-                      {one.valoration || 0}
+                    {console.log(one)}
                     </span>
                   </p>
                   <footer class="blockquote-footer pt-4 mt-4 border-top">

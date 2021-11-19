@@ -14,7 +14,8 @@ const Review = () => {
   const [valoration, setValoration] = useState(0);
   const message = useInput("");
   const history = useHistory()
-  const starsReview = {
+  console.log(valoration)
+const starsReview = {
     count: 5,
     color: "black",
     activeColor: "#ffd700",
@@ -26,6 +27,7 @@ const Review = () => {
     filledIcon: <i className="fa fa-star" />,
     onChange: (newValue) => {
       setValoration(newValue);
+ 
     },
   };
 console.log(item)
@@ -37,8 +39,8 @@ console.log(item)
         user,
         productId: item.productId,
         review: {
-          valoration: valoration.value,
-          message: message.value,
+          valoration: valoration,
+          message: message,
         },
       })
       .then(() => history.push("/myOrders"));
