@@ -75,7 +75,7 @@ const Register = () => {
                   id="floatingInput"
                   placeholder="first name"
                   required
-                  pattern="[a-zA-Z]*"
+                  pattern="[a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,}"
                   {...firstName}
                 />
                 <label for="floatingInput">Nombre</label>
@@ -91,7 +91,7 @@ const Register = () => {
                   id="floatingInput"
                   placeholder="last name"
                   required
-                  pattern="[a-zA-Z]*"
+                  pattern="[a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,}"
                   {...lastName}
                 />
                 <label for="floatingInput">Apellido</label>

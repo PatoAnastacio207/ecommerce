@@ -1,18 +1,27 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
-import { selectUser, updateData } from "../features/userSlice";
+import { updateData } from "../features/userSlice";
+import { selectCart } from "../features/cartSlice";
+import Notification from "../utils/Notification";
 
 function ProductCard({ product, admin, favs }) {
-  const user = useSelector(selectUser);
+  const cart = useSelector(selectCart);
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const urlRedirect = `/product/${product._id}`;
   const dispatch = useDispatch();
-
+  const [oneProduct, setOneProduct] = useState();
   const [deleted, setDeleted] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`/api/products/id/${product.id}`)
+      .then(({ data }) => setOneProduct(data));
+  }, [product.id]);
+console.log(oneProduct)
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -36,7 +45,10 @@ function ProductCard({ product, admin, favs }) {
     e.preventDefault();
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
-      .then(() => dispatch(add({ product, quantity: 1 })))
+      .then(() => {
+        dispatch(add({ product, quantity: 1 }));
+      })
+      .then(() => Notification.successMessage("Producto en el carrito"))
       .catch((err) => console.error(err));
   };
 
@@ -64,6 +76,11 @@ function ProductCard({ product, admin, favs }) {
               </Link>
               <p className="card-text text-muted">
                 {product.category?.name} / {product.category?.type}
+              </p>
+              <p className="card-text text-muted">
+              <span class="fa fa-star checked">
+                {oneProduct? oneProduct?.valoration:" No tenemos rating aun :("}
+                </span>
               </p>
               <div className="d-flex justify-content-between">
                 <h4>{priceFormat.format(product.price)}</h4>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useInput } from "../hooks/custom-hooks";
+
 import AdminSidebar from "./AdminSidebar";
-import { useParams } from "react-router-dom";
+import { useParams,useHistory } from "react-router-dom";
 
 const AdminProduct = ({ product }) => {
-  const productTest = useState({});
 
+const history = useHistory()
   const { id } = useParams();
 
   const [updater, setUpdater] = useState(0);
@@ -45,6 +45,7 @@ const AdminProduct = ({ product }) => {
           setUpdater(updater + 1);
           return res.data;
         })
+        .then(()=>history.push("/admin/products"))
         .catch((err) => console.error(err));
     } else {
       axios
@@ -60,10 +61,10 @@ const AdminProduct = ({ product }) => {
           },
         })
         .then((res) => res.data)
+        .then(()=>history.push("/admin/products"))
         .catch((err) => console.error(err));
     }
 
-    // window.location.reload(false)
   };
 
   useEffect(() => {

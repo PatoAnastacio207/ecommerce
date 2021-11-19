@@ -1,35 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
 
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../features/cartSlice";
-import { useHistory } from "react-router-dom";
+import Notification from "../utils/Notification";
 import { selectUser, updateData } from "../features/userSlice";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({ reviews: [] });
-  const [value, setValue] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-  const starsReview = {
-    count: 5,
-    color: "black",
-    activeColor: "#ffd700",
-    size: 24,
-    value: value ,
-    isHalf: true,
-    emptyIcon: <i className="far fa-star" />,
-    halfIcon: <i className="fa fa-star-half-alt" />,
-    filledIcon: <i className="fa fa-star" />,
-  
-  };
-
-
-
+ 
   const addFavorite = async (e) => {
     await axios.post(`/api/users/favorites/add/${product._id}`);
     const res = await axios.get("/api/auth/logged");
@@ -51,16 +35,17 @@ const SingleProduct = () => {
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   const handleCart = (e) => {
-    // e.preventDefault();
+  
     axios
       .post("/api/cart/add", { _id: product._id, quantity: 1 })
       .then(() => dispatch(add({ product, quantity: 1 })))
+      .then(() => Notification.successMessage("Producto en el carrito"))
       .catch((err) => console.error(err));
   };
 
   return (
     <div className="container">
-      {console.log(product)}
+  
       <br />
       <br />
       {product ? (
@@ -80,7 +65,12 @@ const SingleProduct = () => {
             </p>
             <p>{product.description}</p>
             <br />
-            <ReactStars {...starsReview} />
+            <p>
+              {product.reviews.map((res) => (
+                <span class="fa fa-star checked">{res.valoration}</span>
+              ))}
+            </p>
+
             <hr style={{ margin: "5px" }} />
             <h3>{priceFormat.format(product.price)}</h3>
             <Link
@@ -129,6 +119,35 @@ const SingleProduct = () => {
       ) : (
         <span></span>
       )}
+      <br /> <br /> <br /> <br /> <br />
+      <div className="row">
+        {product.reviews.map((one) => (
+          
+          <div class="col-sm-4" style={{ maxWidth: "23rem" }}>
+            <div class="card">
+              <div class="card-body">
+                <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
+                  <div class="blockquote-custom-icon bg-info shadow-1-strong">
+                    <i class="fa fa-quote-left text-white"></i>
+                  </div>
+
+                  <p class="mb-0 mt-2 font-italic">{one.message}</p>
+                  <p class="mb-0 mt-2 font-italic">
+                    {" "}
+                    <span class="fa fa-star checked">
+                    {console.log(one)}
+                    </span>
+                  </p>
+                  <footer class="blockquote-footer pt-4 mt-4 border-top">
+                    <cite title="Source Title"> {one.authorName}</cite>
+                  </footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <br />
       <br />
     </div>
   );

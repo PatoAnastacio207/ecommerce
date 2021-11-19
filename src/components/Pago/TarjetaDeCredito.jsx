@@ -58,7 +58,7 @@ const Tarjeta = () => {
         <div className="row">
           <div className="col-sm-9">
             <label for="name">Card Name</label>
-            <input type="text" className="form-control" name="name"  pattern="[a-zA-Z]*" required></input>
+            <input type="text" className="form-control" name="name"  pattern="[a-zA-Z0-9]+|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{1,}|[a-zA-Z0-9]+\s{1}[a-zA-Z0-9]{3,}\s{1}[a-zA-Z0-9]{1,}" required></input>
           </div>
         </div>
         <br />
