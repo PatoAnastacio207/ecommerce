@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Stepper, Step } from "react-form-stepper";
@@ -58,26 +58,26 @@ const parts = [
 
 const BuildYourOwn = () => {
 
-  const [build, setBuild] = useState([])
   const [positionBuild, setPositionBuild] = useState(0)
 
   const handleStep = (e) => {
     e.preventDefault()
-    setPositionBuild(Number(e.target.textContent.slice(0, 1)) - 1)
+    const nextIndex = Number(e.target.textContent.slice(0, 1)) - 1
+    console.log(e.target.textContent)
+    if (nextIndex > -1) setPositionBuild(Number(e.target.textContent.slice(0, 1)) - 1)
   };
 
   return (
     <div className="container" style={{ fontFamily: "Bebas Neue" }}>
       <div className="container border shadow-0 rounded">
       <Stepper
-        styleConfig={{ activeBgColor: "#0911e6", completedBgColor: "#040759" }}
         onClick={handleStep}
         activeStep={positionBuild}
         
       >
         {parts.map((parte) => (
-          
-          <Step label={`${parte.name}`} />
+      
+          <Step label={`${parte.name}`} completed={true} style={positionBuild > parte.idx ? {backgroundColor: "#040759"} : positionBuild === parte.idx ? {backgroundColor: "blue"} :  {backgroundColor: "gray"}} />
           
         ))}
       </Stepper>
@@ -86,7 +86,7 @@ const BuildYourOwn = () => {
         <div className="row">
           <div className="container shadow-0 col-sm-3"></div>
           <div className="container shadow-0 col-sm-6">
-            <div className="bg-image mt-5 d-flex justify-content-center">
+            <div className="bg-image d-flex justify-content-center">
               <img
                 src={parts[positionBuild].img}
                 className="img-fluid"
@@ -98,13 +98,13 @@ const BuildYourOwn = () => {
           <div className="container shadow-0 col-sm-3"></div>
         </div>
         <div className="row">
-          <div className="container mb-5 d-flex justify-content-center">
+          <div className="container d-flex justify-content-center">
             <h1 className="fw-light titleNoMain">{parts[positionBuild].name}</h1>
           </div>
         </div>
       </div>
       <div className="container">
-      <BuildList parts={parts} position={positionBuild}/>
+      <BuildList parts={parts} position={positionBuild} setPosition={setPositionBuild}/>
       </div>
     </div>
   );
