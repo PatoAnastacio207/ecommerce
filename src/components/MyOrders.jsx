@@ -2,25 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../features/userSlice";
-import {Link, Redirect} from "react-router-dom"
+import { Link, Redirect } from "react-router-dom";
 import Review from "./reviewForm";
 
 const MyOrders = () => {
   const user = useSelector(selectUser);
   const [orders, setOrders] = useState([]);
-  const [value,setValue] = useState(false)
-  const [reviewItem,setReviewItem]=useState("")
+  const [value, setValue] = useState(false);
+  const [reviewItem, setReviewItem] = useState("");
+  const [reviewId, setReviewId] = useState("");
   useEffect(() => {
     axios.get("/api/checkout/myorders").then((res) => setOrders(res.data));
   }, []);
-
-  const handleAdd=({name})=>(
-  console.log(name)
-  )
-
+  {console.log(reviewItem)}
   return (
     <div className="container col-sm-6">
-      {value? <Redirect  to={{pathname:"/myreview", state:{reviewItem}}}/>:null}
+      {value ? (
+        
+        <Redirect
+          to={{ pathname: "/myreview", state: { reviewItem, reviewId } }}
+        />
+      ) : null}
       <h2 className="fw-light titleNoMain">All my orders</h2>
       {orders.map(({ items, date, status, _id }, i) => (
         <div class="accordion" id="accordionFlushExample">
@@ -63,17 +65,25 @@ const MyOrders = () => {
                         <td>{item.price}</td>
                         <td>{item.quantity}</td>
                         <td>{date.slice(0, 10)}</td>
-                        <td><button className="btn btn-warning shadow-0" onClick={()=>{setValue(true)
-                          setReviewItem(item)}}><i className="fas fa-pen" ></i></button></td>
+                        <td>
+                          <button
+                            className="btn btn-warning shadow-0"
+                            onClick={() => {
+                              setValue(true);
+                              setReviewItem(item);
+                              setReviewId(_id)
+                            }}
+                          >
+                            <i className="fas fa-pen"></i>
+                          </button>
+                        </td>
                       </tr>
                     ))}
-                  </tbody> 
+                  </tbody>
                 </table>
               </div>
             </div>
           </div>
-
-        
         </div>
       ))}
     </div>

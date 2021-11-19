@@ -1,7 +1,7 @@
-import React, {useState}from "react";
+import React, { useState } from "react";
 import { Component } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { selectUser } from "../features/userSlice";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
@@ -11,11 +11,10 @@ const Review = () => {
   const user = useSelector(selectUser);
   const location = useLocation();
   const item = location.state.reviewItem;
-  const [valoration,setValoration] = useState(0);
+  const orderId= location.state.reviewId
+  const [valoration, setValoration] = useState(0);
   const message = useInput("");
-  console.log("=>",item.productId);
-  console.log(user);
-  console.log(valoration);
+  const history = useHistory()
   const starsReview = {
     count: 5,
     color: "black",
@@ -27,24 +26,23 @@ const Review = () => {
     halfIcon: <i className="fa fa-star-half-alt" />,
     filledIcon: <i className="fa fa-star" />,
     onChange: (newValue) => {
-    setValoration(newValue)
+      setValoration(newValue);
     },
   };
-  console.log(valoration)
-
+console.log(item)
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("/api/products/reviews/add", {
-        _id: item._id,
-        authorName: user,
+        orderId: orderId,
+        user,
         productId: item.productId,
         review: {
           valoration: valoration.value,
           message: message.value,
-        }
+        },
       })
-      .then(() => console.log("listo"))
+      .then(() => history.push("/myOrders"));
   };
 
   return (
@@ -85,7 +83,8 @@ const Review = () => {
         <br />
         <div className="row">
           <div className="col-sm-12">
-            <label for="month">Valoracion</label> <ReactStars {...starsReview} />
+            <label for="month">Valoracion</label>{" "}
+            <ReactStars {...starsReview} />
           </div>
         </div>
 
