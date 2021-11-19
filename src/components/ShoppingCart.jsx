@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import imagen1 from "../assets/imagen1.png";
 import CartProductCard from "./CartProductCard";
 import imagen from "../assets/caballoGrinder.png";
-
+import Notification from "../utils/Notification"
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { selectCart, buy } from "../features/cartSlice";
@@ -16,6 +16,10 @@ const ShoppingCart = () => {
   const user = useSelector(selectUser);
 
   const cart = useSelector(selectCart);
+
+  const emptyCartHandler = () => {
+    Notification.errorMessage("Tu carrito esta vacio")
+  }
 
   return (
     <section className="section-content padding-y">
@@ -69,14 +73,23 @@ const ShoppingCart = () => {
                 <hr />
 
                 {user ? (
-                  <Link
+                    cart.items.length ? (<Link
                     type="button"
                     class="btn  buyButton shadow-0"
                     to="/checkout"
-                  >
-                    {" "}
-                    <strong>Dummie compra</strong>
-                  </Link>
+                    >
+                      {" "}
+                      <strong>Dummie compra</strong>
+                    </Link>) : (
+                      <button
+                      type="button"
+                      class="btn  buyButton shadow-0"
+                      onClick={emptyCartHandler}
+                      >
+                      {" "}
+                      <strong>Dummie compra</strong>
+                      </button>
+                    )
                 ) : (
                   <Link
                     type="button"

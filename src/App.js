@@ -104,8 +104,7 @@ function App() {
         <Route path={"/myOrders"} component={MyOrders} />
         <Route path={"/myReview"} component={Review} />
 
-        <Route path="/404" >404</Route>
-        <Route path={"*"} ><Redirect to="/404"></Redirect></Route>
+        <Route path={"*"} >404</Route>
 
       </Switch>
         </div>

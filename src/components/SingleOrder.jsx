@@ -12,13 +12,11 @@ const SingleOrder = () => {
 
   const { id } = useParams();
 
-  const handleChange = (e) => {
+  const handleChange = (status) => {
+    console.log(status)
     axios
-      .put(`/api/checkout/update/${id}`, {status: e.target.value})
-      .then(res => {
-        console.log(res.data)
-        setOrder(res.data)
-      })
+      .put(`/api/checkout/update/${id}`, { status })
+      .then(res => setOrder(res.data))
       .catch(err => console.log(err))
   }
 
@@ -54,11 +52,11 @@ const SingleOrder = () => {
             </h4>
             {order.status === 'pending' ? (
               <>
-            <button className="btn btn-lg btn-success shadow-0 me-3" value="completed" onClick={handleChange}>
+            <button className="btn btn-lg btn-success shadow-0 me-3" value="completed" onClick={() => handleChange("completed")}>
               <i className="fas fa-check"></i>
             </button>
-            <button className="btn btn-lg btn-danger shadow-0" value="rejected" onClick={handleChange}>
-              <i className="fas fa-trash"></i>
+            <button className="btn btn-lg btn-danger shadow-0" value="rejected" onClick={() => handleChange("rejected")}>
+              <i className="fas fa-times"></i>
             </button>
             </>) : (null)}
             <br />
