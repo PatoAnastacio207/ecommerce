@@ -83,7 +83,7 @@ console.log(item)
         <br />
         <div className="row">
           <div className="col-sm-12">
-            <label for="month">Valoracion</label>{" "}
+            <label for="month" required>Valoracion</label>{" "}
             <ReactStars {...starsReview} />
           </div>
         </div>
