@@ -13,7 +13,12 @@ const Navbar = () => {
 
   const user = useSelector(selectUser);
 
+  const handleCLick = (e) => {
+    localStorage.clear()
+  }
+
   const handleLogout = () => {
+    localStorage.clear()
     axios.delete("/api/cart/clear");
     axios
       .post("/api/auth/logout")
@@ -182,7 +187,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-warning" to="/buildyourown">
+                <Link className="nav-link text-warning" to="/buildyourown" onClick={handleCLick}>
                   Build your own
                 </Link>
               </li>
