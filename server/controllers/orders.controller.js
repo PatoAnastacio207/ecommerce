@@ -1,39 +1,30 @@
 const Order = require('../models/Order')
+const User = require('../models/User')
 const transporter = require('../config/mailer')
+const { sendOrderRegistered, sendOrderRejected, sendOrderConfirmed } = require('../utils/mailSender')
 
 class OrdersController {
     static async addOrder (req, res, next) {
+        console.log(req.body.user.checkoutInfo)
         try{
-            if (req.user && req.user._id == req.body.user._id) {
+            if (req.user && req.user._id == req.body.user._id && req.body.cart.items.length > 0) {
                 // Crear orden
                 const order = new Order({
                     items: req.body.cart.items.map(item => ({
                         name: item.name,
                         price: item.price,
-                        quantity: 1,
+                        quantity: item.quantity,
                         productId: item._id
                     })),
                     status: "pending",
                     date: new Date(),
                     checkoutInfo: ({
-                        ...req.body.user.checkoutInfo
+                        ...req.user.checkoutInfo
                     }),
-                    userId: req.body.user._id,
+                    userId: req.user._id,
                     total: req.body.cart.total
                 })
-                await transporter.sendMail({
-                    from: "Order registrada!",
-                    to: req.body.user.email,
-                    subject: "Order registrada!",
-                    html:`
-                    <h3>Tu orden fue registrada con exito!</h3>
-                    <h4>Items comprados:</h4>
-                    <ul>
-                        ${order.items.map(item => `<li>${item.quantity} ${item.name}`)}
-                    </ul>
-                    total: $${order.total}
-                    `
-                })
+                await sendOrderRegistered(req.body.user.email, order)
                 await order.save()
                 return res.send(order)
             }
@@ -59,10 +50,17 @@ class OrdersController {
         }
     }
     static async updateStatus (req, res, next) {
+        console.log(req.body.status)
         try {
-            await Order.updateOne({ _id: req.params.id }, { status: req.body.status })
-            const order = await Order.findOne({ _id: req.params.id })
-            return res.send(order)
+            if (req.body.status === "completed" || req.body.status === "rejected" || req.body.status === "pending") {
+                await Order.updateOne({ _id: req.params.id }, { status: req.body.status })
+                const order = await Order.findOne({ _id: req.params.id })
+                const user = await User.findOne({ _id: order.userId })
+                req.body.status === "rejected" ? sendOrderRejected(user.email, order) : ( req.body.status === "completed" ? sendOrderConfirmed(user.email, order) : null)
+                return res.send(order)
+            } else {
+                return res.sendStatus(400)
+            }
         } catch (err) {
             return next(err)
         }

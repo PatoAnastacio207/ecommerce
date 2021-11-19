@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, login, update } from "../features/userSlice";
+import { selectUser, login, updateData } from "../features/userSlice";
 import imagen1 from "../assets/imagen1.png";
 import CartProductCard from "./CartProductCard";
 import { Link, useHistory } from "react-router-dom";
@@ -29,30 +29,28 @@ const Checkout = () => {
     axios.put(`/api/users/single/${user._id}`, {
       checkoutInfo: { address: direction.value || user?.checkoutInfo.address, phone: phone.value || user?.checkoutInfo.phone},
     })
-    .then(() => {
+    .then(({data}) => {
+      dispatch(updateData(data))
       return metodo.value === "tarjetaDeCredito"
             ? history.push("/creditcard")
-            : null
-    })
-    .then(() => {
-      return Swal.fire({
-        title: "Confirmar compra",
-        showCancelButton: true,
-        confirmButtonText: "Comprar",
-        showLoaderOnConfirm: true,
-        preConfirm: () => {
-          return axios
-            .post("/api/checkout/buycart", { user, cart })
-            .then((data) => {
-              Notification.successMessage("Dummie compra lista");
+            : Swal.fire({
+              title: "Confirmar compra",
+              showCancelButton: true,
+              confirmButtonText: "Comprar",
+              showLoaderOnConfirm: true,
+              preConfirm: () => {
+                return axios
+                  .post("/api/checkout/buycart", { user, cart })
+                  .then((data) => {
+                    Notification.successMessage("Dummie compra lista");
+                  })
+                  .then(async () => {
+                    await axios.delete("/api/cart/clear")
+                    dispatch(empty())
+                    history.push("/myProfile");
+                  })
+                }
             })
-            .then(async () => {
-              await axios.delete("/api/cart/clear")
-              dispatch(empty())
-              history.push("/myProfile");
-            })
-          }
-      })
     })
     .catch((err) => {
       Notification.errorMessage("Oops...");
