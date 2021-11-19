@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
 import { Stepper, Step } from "react-form-stepper";
 
 import BuildList from './BuildList'

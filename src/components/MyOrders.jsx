@@ -14,7 +14,7 @@ const MyOrders = () => {
   useEffect(() => {
     axios.get("/api/checkout/myorders").then((res) => setOrders(res.data));
   }, []);
-  {console.log(reviewItem)}
+
   return (
     <div className="container col-sm-6">
       {value ? (

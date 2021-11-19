@@ -23,7 +23,6 @@ const Login = () => {
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    console.log("login attempt...")
     axios
       .post("/api/auth/google")
 
@@ -36,7 +35,6 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("login attempt...")
     axios.post("/api/auth/login", {
         email: email.value,
         password: password.value,
@@ -48,7 +46,7 @@ const Login = () => {
       })
      .catch((err) => {
         Notification.errorMessage("Oops...")
-        console.log(err)
+        console.error(err)
       })
   };
 

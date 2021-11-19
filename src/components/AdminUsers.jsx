@@ -19,7 +19,7 @@ const AdminUsers = () => {
         password: password.value,
       })
       .then((res) => res.data)
-      .catch((err) => console.log(err));
+      .catch(console.error);
       window.location.reload(false);
   };
   return (
