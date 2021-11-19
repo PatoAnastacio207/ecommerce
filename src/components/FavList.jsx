@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import ProductCard from "./ProductCard";
 import imagen from "../assets/caballoGrinder.png";
-import { Link } from "react-router-dom";
+
 const FavList = () => {
   const user = useSelector(selectUser);
   const [favs, setFavs] = useState([]);
@@ -40,7 +40,7 @@ const FavList = () => {
                         >
                           Hey Dummie! Aun no tienes favoritos
                         </h1>
-                        <img src={imagen} style={{ maxWidth: "110%" }}></img>
+                        <img src={imagen} style={{ maxWidth: "110%" }} alt="Una imagen"></img>
                       </div>
                   
                     </div>

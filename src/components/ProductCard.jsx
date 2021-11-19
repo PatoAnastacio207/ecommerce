@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { add } from "../features/cartSlice";
 import { updateData } from "../features/userSlice";
-import { selectCart } from "../features/cartSlice";
+
 import Notification from "../utils/Notification";
 
 function ProductCard({ product, admin, favs }) {
-  const cart = useSelector(selectCart);
+
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
   const urlRedirect = `/product/${product._id}`;

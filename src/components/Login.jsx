@@ -3,7 +3,7 @@ import { useHistory, Link, useLocation } from "react-router-dom";
 import { useInput } from "../hooks/custom-hooks";
 import axios from "axios";
 import { useDispatch } from 'react-redux'
-import { login, selectUser } from '../features/userSlice'
+import { login } from '../features/userSlice'
 import Notification from "../utils/Notification"
 
 function useQuery() {
@@ -12,7 +12,7 @@ function useQuery() {
 
 const Login = () => {
   const dispatch = useDispatch();
-  //const { setUser } = useContext(UserContext);
+
   const history = useHistory();
   const email = useInput("email");
   const password = useInput("password");
@@ -21,17 +21,7 @@ const Login = () => {
   const redirect = query.get("buy") === "true" ? true : false 
   const url = redirect ? "/cart" : "/"
 
-  const handleGoogle = (e) => {
-    e.preventDefault();
-    axios
-      .post("/api/auth/google")
-
-      .then(res => {
-        dispatch(login(res.data))
-        Notification.successMessage("Login success")
-        history.push(url);
-      })
-  }
+  
   
   const handleSubmit = (e) => {
     e.preventDefault();

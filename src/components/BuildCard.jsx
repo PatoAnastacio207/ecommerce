@@ -1,23 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-
-const BuildCard = ({ product, position ,setPosition }) => {
+const BuildCard = ({ product, position, setPosition }) => {
   const priceOptions = { style: "currency", currency: "USD" };
   const priceFormat = new Intl.NumberFormat("en-US", priceOptions);
 
   const handleClick = () => {
     localStorage.setItem(product.category.type, JSON.stringify(product));
-    setPosition(position + 1)
-    console.log(localStorage)
+    setPosition(position + 1);
+    console.log(localStorage);
   };
-
-
 
   return (
     <>
-
       <div className="col-sm-3">
         <div
           onClick={handleClick}
@@ -25,7 +17,7 @@ const BuildCard = ({ product, position ,setPosition }) => {
           style={{ fontFamily: "Bebas Neue" }}
         >
           <div className="bg-image hover-overlay ripple ">
-            <img src={product.imgUrl} className="img-fluid" />
+            <img src={product.imgUrl} className="img-fluid" alt="Una imagen" />
 
             <div className="mask"></div>
           </div>
@@ -42,7 +34,6 @@ const BuildCard = ({ product, position ,setPosition }) => {
           </div>
         </div>
       </div>
-  
     </>
   );
 };

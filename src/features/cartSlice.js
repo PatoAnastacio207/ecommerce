@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios"
 
-const getTotal = (items) => {
-  console.log("items", items);
-  items.forEach((item) => {
-    console.log(item);
-  });
-  return 123;
-};
+
+
 
 export const cartSlice = createSlice({
   name: "cart",

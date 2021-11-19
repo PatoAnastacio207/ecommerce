@@ -11,7 +11,7 @@ const Review = () => {
   const location = useLocation();
   const item = location.state.reviewItem;
   const orderId = location.state.reviewId;
-  const [valoration, setValoration] = useState(0);
+  const [valoration, setValoration] = useState(5);
   const message = useInput("");
   const history = useHistory();
 

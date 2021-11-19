@@ -19,14 +19,7 @@ const Register = () => {
   const redirect = query.get("buy") === "true" ? true : false 
   const url = redirect ? "/login?buy=true" : "/login"
 
-  const handleGoogle = (e) => {
-    e.preventDefault();
-
-    axios.post("/api/auth/google").then(() => {
-      Notification.successMessage("Register success")
-      history.push("/login");
-    });
-  };
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
