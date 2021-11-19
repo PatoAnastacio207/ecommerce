@@ -6,6 +6,8 @@ const router = express.Router()
 
 // Devuelve todos los productos
 router.get('/', ProductsController.getAllProducts)
+// Devuelve 8 productos por pagina y el dato de cuantas paginas hay
+router.get('/paginate', ProductsController.getPaginatedProducts)
 // Devuelve un array de productos por id
 router.post('/array', ProductsController.getProductsArray)
 // Devuelve un array de productos que coinciden con la busqueda

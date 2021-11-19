@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const productSchema = new mongoose.Schema({
     name: { 
@@ -25,11 +26,13 @@ const productSchema = new mongoose.Schema({
             orderId: { type: String }
         }
     ]
-}, { 
+}, {
     versionKey: false,
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
 })
+
+productSchema.plugin(mongoosePaginate)
 
 // Devuelve el promedio de las valoraciones de un producto
 productSchema.virtual('valoration').get(function () {

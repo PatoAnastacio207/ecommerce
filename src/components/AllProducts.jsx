@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import AdminSidebar from "./AdminSidebar";
-
+import { Pagination } from 'semantic-ui-react'
 
 const AllProducts = function () {
-
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
   const [search, setSearch] = useState("")
   const [products, setProducts] = useState([]);
   const [urlAdmin, setUrlAdmin] = useState(false);
@@ -35,7 +36,6 @@ const AllProducts = function () {
       })
       .catch((error) => console.log(error));
     }
-
   }
 
   useEffect(() => {
@@ -43,16 +43,37 @@ const AllProducts = function () {
       ? setUrlAdmin(true)
       : setUrlAdmin(false);
     axios
-      .get("/api/products")
+      .get("/api/products/paginate")
       .then((res) => res.data)
-      .then((product) => {
-        setProducts(product);
+      .then((data) => {
+        console.log(data)
+        setTotalPages(data.totalPages)
+        setProducts(data.docs);
       })
       .catch((error) => console.log(error));
   }, [window.location.pathname]);
 
+  useEffect(() => {
+    axios
+      .get(`/api/products/paginate?page=${page}`)
+      .then((res) => res.data)
+      .then((data) => {
+        console.log(data)
+        setTotalPages(data.totalPages)
+        setProducts(data.docs);
+      })
+      .catch((error) => console.log(error));
+  }, [page])
+
+  const changePage = (_, {activePage}) => {
+    setPage(parseInt(activePage))
+  }
+
   return (
     <>
+    {
+      console.log(totalPages)
+    }
       <div className={urlAdmin ? "row" : "container-fluid"}>
         {urlAdmin ? (
           <>
@@ -115,16 +136,33 @@ const AllProducts = function () {
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4" >
                 {products ? (
                   products.map((data) => (
-                    <ProductCard
-                      key={data._id}
-                      product={data}
-                      admin={urlAdmin}
-                    />
+                    <>
+                      <ProductCard
+                        key={data._id}
+                        product={data}
+                        admin={urlAdmin}
+                      />
+                    </>
                   ))
                 ) : (
                   <span></span>
                 )}
               </div>
+              <br />
+              <nav aria-label="Page navigation example" className="d-flex justify-content-center">
+                <Pagination 
+                  activePage={page}
+                  ellipsisItem={null}
+                  defaultActivePage={1}
+                  firstItem={null}
+                  lastItem={null}
+                  pointing
+                  secondary
+                  siblingRange={5}
+                  totalPages={totalPages}
+                  onPageChange={changePage}
+                />
+              </nav>
             </div>
           </div>
         </main>
