@@ -3,53 +3,44 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-import { useDispatch, useSelector } from "react-redux"
-import { add } from "../features/cartSlice"
-import { useHistory } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../features/cartSlice";
+import { useHistory } from "react-router-dom";
 import { selectUser, updateData } from "../features/userSlice";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({ reviews: [] });
-
+  const [value, setValue] = useState(0);
   const { id } = useParams();
-  const dispatch = useDispatch()
-  const user = useSelector(selectUser)
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   const starsReview = {
     count: 5,
     color: "black",
     activeColor: "#ffd700",
     size: 24,
-    value: 10,
+    value: value ,
     isHalf: true,
     emptyIcon: <i className="far fa-star" />,
     halfIcon: <i className="fa fa-star-half-alt" />,
     filledIcon: <i className="fa fa-star" />,
-    onChange: newValue => {
-      console.log(`Example 2: new value is ${newValue}`);
-    }
+  
   };
 
-  const addReview = async (e) => {
-    const updatedProduct = await axios.post("/api/products/reviews/add", { user, productId: id, orderId: "6196af288ff9433d0d72c6a9", review: { valoration: 4, message: "Default message" }})
-    console.log(updatedProduct)
-  }
+
 
   const addFavorite = async (e) => {
-    await axios.post(`/api/users/favorites/add/${product._id}`)
-    const res = await axios.get("/api/auth/logged")
-    dispatch(updateData(res.data))
-  }
+    await axios.post(`/api/users/favorites/add/${product._id}`);
+    const res = await axios.get("/api/auth/logged");
+    dispatch(updateData(res.data));
+  };
 
   const removeFavorite = async (e) => {
     e.preventDefault();
-    await axios.delete(`/api/users/favorites/remove/${product._id}`)
-    const res = await axios.get("/api/auth/logged")
-    dispatch(updateData(res.data))
-  } 
-
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
+    await axios.delete(`/api/users/favorites/remove/${product._id}`);
+    const res = await axios.get("/api/auth/logged");
+    dispatch(updateData(res.data));
   };
 
   useEffect(() => {
@@ -107,16 +98,9 @@ const SingleProduct = () => {
             >
               <i className="fas fa-shopping-cart"></i>
             </button>
-            <button
-            onClick={addReview}
-            className="btn btn-dark shadow-0"
-            style={{ marginRight: "15px", fontSize: "large" }}
-            >
-              Añadir review
-            </button>
-            {
-              user ? (
-                user.favorites.indexOf(product._id) < 0 ? (
+
+            {user ? (
+              user.favorites.indexOf(product._id) < 0 ? (
                 <button
                   className="btn btn-danger shadow-0"
                   style={{ fontSize: "large" }}
@@ -124,17 +108,22 @@ const SingleProduct = () => {
                 >
                   <i className="fas fa-heart"></i>
                 </button>
-                ) : ( 
-                  <button
+              ) : (
+                <button
                   className="btn btn-danger shadow-0"
                   style={{ fontSize: "large" }}
                   onClick={removeFavorite}
-                  >
-                    <i class="fas fa-ban"></i>
-                  </button>
-                )
-              ) : <><br /><br /><p>Login to add to favorites!</p></>
-            }
+                >
+                  <i class="fas fa-ban"></i>
+                </button>
+              )
+            ) : (
+              <>
+                <br />
+                <br />
+                <p>Login to add to favorites!</p>
+              </>
+            )}
           </div>
         </div>
       ) : (
